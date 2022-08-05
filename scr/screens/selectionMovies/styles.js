@@ -1,12 +1,15 @@
 import { StyleSheet } from "react-native"
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#000'
+    container:{
+        backgroundColor:'#000', 
+        alignItems:'center',
     },
     header: {
         marginTop: 60,
+        width:"100%",
+        alignItems:'flex-start',
+        margin:8
     },
     text: {
         fontSize: 20,
@@ -38,14 +41,13 @@ const styles = StyleSheet.create({
     popularMovies: {
         fontSize: 16,
         fontWeight: '600',
-        marginTop: 20,
         color: '#FFF',
         marginTop: 30,
         marginBottom: 40
     },
-    section: {
-        marginHorizontal: 25
-    }
+   section:{
+    //backgroundColor:'grey',  
+   }
 })
 
 export default styles

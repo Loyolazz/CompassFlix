@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, FlatList} from 'react-native';
+import {View, Text, FlatList,SafeAreaView} from 'react-native';
 
 import {CardMovies} from './components/cardMovies';
 import moviesList from './data/movies';
@@ -8,7 +8,7 @@ import styles from './styles';
 
 export function SelectionMovies() {
   return (
-    <View>
+      <SafeAreaView style={styles.container}>
       <View style={styles.section}>
         <View style={styles.header}>
           <View style={styles.containerRow}>
@@ -28,12 +28,16 @@ export function SelectionMovies() {
             data={moviesList}
             keyExtractor={item => String(item.id)}
             numColumns={4}
-            renderItem={({item}) => (
-              <CardMovies text="9.8/10" source={item.image} />
+            renderItem={({item}) => ( 
+              <CardMovies 
+                text={item.nota} 
+                source={item.image} 
+                starIcon={item.starIconRed}
+              />
             )}
           />
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }

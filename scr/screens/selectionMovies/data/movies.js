@@ -12,107 +12,108 @@ import doismill from '../assets/doismill.png';
 import bacurau from '../assets/bacurau.png';
 import aquarios from '../assets/aquarios.png';
 import stars from '../assets/stars.png';
-
+import starRed from '../assets/star_red.png'
 
 const moviesList = [
   {
     id: 1,
     image: batman,
-    star: '⭐',
+    starIconRed: starRed,
     nota: '8.9/10',
   },
   {
     id: 2,
     image: spider,
-    star: '⭐',
+    starIconRed: starRed,
     nota: '8.9/10',
   },
   {
     id: 3,
     image: divertidamente,
-    star: '⭐',
+    starIconRed: starRed,
     nota: '8.9/10',
   },
 
   {
     id: 4,
     image: uncharted,
-    star: '⭐',
+    starIconRed: starRed,
     nota: '8.9/10',
   },
   {
     id: 5,
     image: tresmunicipius,
-    star: '⭐',
+    starIconRed: starRed,
     nota: '8.9/10',
   },
   {
     id: 6,
     image: homemAranha,
-    star: '⭐',
+    starIconRed: starRed,
     nota: '8.9/10',
   },
   {
     id: 7,
     image: oDiaboVestePrato,
-    star: '⭐',
+    starIconRed: starRed,
     nota: '8.9/10',
   },
   {
     id: 8,
     image: dontLook,
-    star: '⭐',
+    starIconRed: starRed,
     nota: '8.9/10',
   },
   {
     id: 9,
     image: cidadeDeDeus,
-    star: '⭐',
+    starIconRed: starRed,
     nota: '8.9/10',
   },
   {
     id: 10,
     image: cats,
-    star: '⭐',
+    starIconRed: starRed,
     nota: '8.9/10',
   },
   {
     id: 11,
     image: doismill,
-    star: '⭐',
+    starIconRed: starRed,
     nota: '8.9/10',
   },
   {
     id: 12,
     image: bacurau,
-    star: '⭐',
+    starIconRed: starRed,
     nota: '8.9/10',
   },
   {
     id: 13,
     image: aquarios,
-    star: '⭐',
+    starIconRed: starRed,
     nota: '8.9/10',
   },
   {
     id: 14,
     image: stars,
-    star: '⭐',
+    starIconRed: starRed,
     nota: '8.9/10',
   },
   {
     id: 15,
     image: stars,
-    star: '⭐',
+    starIconRed: starRed,
     nota: '8.9/10',
   },
   {
     id: 16,
     image: stars,
-    star: '⭐',
-    nota: '8.9/10',
+    starIconRed: starRed,
+    nota: '9.7/10',
   },
 
 ];
+
 
 export default moviesList;
