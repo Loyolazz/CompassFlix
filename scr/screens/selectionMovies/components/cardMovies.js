@@ -17,32 +17,32 @@ export function CardMovies({source, text, starIcon}) {
 }
 
 const styles = StyleSheet.create({
+ 
   cardMovies: {
     flexDirection: 'column',
     marginTop: 16,
-    margin:10,
-    height: 120,
-    borderRadius: 15,
-    alignItems:'center'
+    width:'100%',
+    alignItems:'center',
+    paddingHorizontal:10
   },
   containerStar: {
     marginTop: 3,
     width:'100%',
     flexDirection: 'row',
     alignItems:'center',
+    justifyContent:'flex-start'
   },
   image: {
-    height: 100,
+    borderRadius:15,
+    height: 95,
   },
   nota: {
     color: '#FFF',
     fontSize: 10, 
-    marginLeft:6
-    
+    marginLeft:6  
   },
   star: {
     height:10,
     width:10,
-   
   }
 });

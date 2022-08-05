@@ -2,14 +2,14 @@ import { StyleSheet } from "react-native"
 
 const styles = StyleSheet.create({
     container:{
+        flex:1,
         backgroundColor:'#000', 
-        alignItems:'center',
+        paddingHorizontal:15,
     },
     header: {
         marginTop: 60,
-        width:"100%",
         alignItems:'flex-start',
-        margin:8
+        marginHorizontal:10
     },
     text: {
         fontSize: 20,
@@ -45,8 +45,13 @@ const styles = StyleSheet.create({
         marginTop: 30,
         marginBottom: 40
     },
-   section:{
-    //backgroundColor:'grey',  
+    containerCardMovies:{
+        justifyContent:'space-between', 
+        alignItems:'center', 
+        flex:1
+    },
+    section:{
+    width:'100%', 
    }
 })
 

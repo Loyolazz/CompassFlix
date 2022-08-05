@@ -111,8 +111,7 @@ const moviesList = [
     image: stars,
     starIconRed: starRed,
     nota: '9.7/10',
-  },
-
+  }
 ];
 
 
