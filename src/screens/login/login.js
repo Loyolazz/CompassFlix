@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import { ImageBackground, KeyboardAvoidingView, Image, View, Text, TextInput, TouchableOpacity} from 'react-native';
-import Icon from 'react-native-vector-icons/EvilIcons';
+// import Icon from 'react-native-vector-icons/EvilIcons';
 import styles from './style_login';
 
-const App = () => {
+const Login = () => {
   return (
     <KeyboardAvoidingView style={styles.container}>
       <Image source={require('../../assets/login_imagens/bannerLogin.png')} style={styles.banner} />
@@ -12,13 +12,11 @@ const App = () => {
         <Text style={[styles.text, styles.loginText]}>Login</Text>
         <Text style={[styles.text, styles.descriptionText]}>Entre na sua conta para continuar.</Text>
         <View style={styles.inputView}>
-          <Icon size={25} color={'#ffffff80'} style={{paddingTop: 15, paddingLeft: 10}} name='user'/>
+          {/* <Icon size={25} color={'#ffffff80'} style={{paddingTop: 15, paddingLeft: 10}} name='user'/> */}
           <TextInput
           style={styles.inputText}
           placeholder='e-mail'
           autoCorrect={false}
-          value={email}
-          onChangeText={setEmail}
           placeholderTextColor={'#ffffff80'}
           autoCapitalize='none'
           keyboardType='email-address'
@@ -26,13 +24,12 @@ const App = () => {
         </View>
 
         <View style={styles.inputView}>
-          <Icon size={30} color={'#ffffff80'} style={{paddingTop: 12, paddingLeft: 10}} name='lock'/>
+          {/* <Icon size={30} color={'#ffffff80'} style={{paddingTop: 12, paddingLeft: 10}} name='lock'/> */}
           <TextInput
           style={styles.inputText}
           placeholder='senha'
           autoCorrect={false}
           secureTextEntry={true}
-          onChangeText={()=> {}}
           placeholderTextColor={'#ffffff80'}
           autoCapitalize='none'
           />
@@ -48,4 +45,4 @@ const App = () => {
   );
 }
 
-export default App;
+export default Login;

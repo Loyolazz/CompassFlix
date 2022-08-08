@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -6,17 +6,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#000'
   },
   banner: {
-    width: '100%',
+    width: Dimensions.get('window').width, 
     flex: 0.5,
+    position: 'absolute'
   },
   logo: {
     alignSelf: 'center',
     position: 'absolute',
-    top: '30%',
+    top: '25%',
   },
   textContainer: {
     position: 'absolute',
-    top: '55%',
+    top: '45%',
     alignSelf: 'center',
   },
   text: {
