@@ -76,4 +76,4 @@ const moviesDetail = () => {
   );
 };
 
-export default MoviesDetail;
+export default moviesDetail;
