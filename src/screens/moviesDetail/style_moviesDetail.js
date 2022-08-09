@@ -3,8 +3,22 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#000000'
+        backgroundColor: '#000000',
+        
     },
+    elencoView:{
+        backgroundColor: '#9C4A8B',
+        width: 65,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 20,
+        padding: 6,
+        marginBottom: 7,
+       },
+       elencoText:{
+        fontWeight: 'bold', 
+        color: '#fff' 
+       },
     bannerBack: {
         Color: 'rgba(0, 0, 0, 0.3)'
     },
@@ -12,13 +26,15 @@ const styles = StyleSheet.create({
         opacity: 0.6,
         resizeMode: 'cover',
         height: 140,
-        width: 400,
+        width: '100%',
+   
     },
     cover: {
         width: 116,
         height: 166,
         bottom: 60,
         left: 20,
+      
     },
     title: {
         color: '#FFFFFF',

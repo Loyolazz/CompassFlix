@@ -1,96 +1,78 @@
-import React,{useEffect, useState} from 'react';
-import { Text, View, Image, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Image, TouchableOpacity, FlatList, Text, ImageEditor } from 'react-native';
 import batmanBanner from '../../assets/batman/batmanBanner.jpeg'
 import batmanCover from '../../assets/batman/batmanCover.jpg'
 import robert from '../../assets/batman/robert.png'
 import styles from './style_moviesDetail'
-import Api from '../../services/api';
-import { Icon } from 'react-native-vector-icons/MaterialCommunityIcons';
-
-const apikey = 'api_key=80eb37af6714ab187d2c58f9acc83af3';
-const language = 'language=pt-BR';
+import HeaderFilm from './Components/header/header';
+import SinopseDetails from './Components/sinopse/sinopse';
+import Elenco from './Components/elenco/ElencoList';
+import Lista from './Components/lista/listaTeste'
 const MoviesDetail = () => {
-  const init = async () => {
-    const response = await Api.get(`/popular?${apikey}&${language}&page=${1}`)
-    console.log(response.data.results);
-   
-    console.log('Request success')
-  
-  };
 
-  useEffect(() => {
-    init();
-  }, [])
+  const director = 'Matt Reeves'
+  const Title = 'The Batman'
+  const Year = '2022'
+  const Duration = '172'
+  const Note = '08/10'
+  const Votes = '30k'
 
-  
-  
+  const TitleSinopse = 'Descubra a verdade'
+  const TextSinopse = 'Em seu segundo ano de combate ao crime, Batman descobre a corrupção em Gotham City que se conecta à sua própria família enquanto enfrenta um serial killer conhecido como Charada.'
   return (
 
     <View style={styles.container}>
-      <View style={styles.bannerBack}>
-        <Image style={styles.banner} source={batmanBanner} />
-        <View style={{ flexDirection: 'row' }}>
-          <Image style={styles.cover} source={batmanCover} />
-          <View style={styles.viewTitle}>
-            <Text style={styles.title}>The Batman</Text>
-            <Text style={styles.year}>2022</Text>
-          </View>
-          <Text style={styles.duration}>176 min</Text>
+
+      <HeaderFilm
+        batmanBanner={batmanBanner}
+        batmanCover={batmanCover}
+        director={director}
+        title={Title}
+        year={Year}
+        duration={Duration}
+        note={Note}
+        votes={Votes}
+      />
+      <SinopseDetails
+        titleSinopse={TitleSinopse}
+        textSinopse={TextSinopse}
+      />
+
+
+
+
+        <View style={{paddingHorizontal:20, marginBottom:10, marginTop:10}}>
+          <View style={styles.elencoView}>
+        <Text style={styles.elencoText}>Elenco</Text>
+      </View>
         </View>
-        <View style={styles.viewDirector}>
-          <Text style={styles.director}>Direção por </Text>
-          <Text style={styles.director}>Matt Reeves</Text>
-        </View>
-        <View>
-          <View>
-            <Text style={styles.imdb}>8.5/10</Text>
+      
+      {Lista.map((item) => {
+        return (
+          <View style={{
+            width: '100%',
+            paddingHorizontal: 20,
+            paddingVertical: 10,
+            marginVertical: 5,
+            alignItems: 'flex-start',
+            flexDirection: 'row'
+          }}>
+            <View style={{ width: 40, height: 40, backgroundColor: 'white', borderRadius: 50, }}>
+
+            </View>
+            <View style={{ marginLeft: 10 }}>
+              <Text style={{ color: 'white', fontWeight: 'bold' }}>{item.name}</Text>
+              <Text style={{ color: 'white', fontSize: 10 }}>{item.character}</Text>
+            </View>
+
           </View>
-          <View>
-            <Text style={styles.likes}>30K</Text>
-          </View>
-        </View>
-      </View>
-      <View style={styles.viewSinpose}>
-        <Text style={styles.sinposeTop}>
-          DESCUBRA A VERDADE.
-        </Text>
-        <Text style={styles.sinposeBottom}>
-          Em seu segundo ano de combate ao crime, Batman descobre a corrupção em Gotham City que se conecta à sua própria família enquanto enfrenta um serial killer conhecido como Charada.
-        </Text>
-      </View>
-      <View>
-        <TouchableOpacity style={styles.elencoButton}>
-          <Text style={styles.elenco}> Elenco </Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.actorView1}>
-        <Image style={styles.actorImagem} source={robert} />
-        <Image style={styles.actorImagem} source={robert} />
-        <Image style={styles.actorImagem} source={robert} />
-        <Image style={styles.actorImagem} source={robert} />
-        <Image style={styles.actorImagem} source={robert} />
-      </View>
-      <View >
-        <Text style={styles.actorName1}>Robert Partinson</Text>
-        <Text style={styles.actorPersona1}>Batman</Text>
-      </View>
-      <View>
-        <Text style={styles.actorName2}>Robert Partinson</Text>
-        <Text style={styles.actorPersona2}>Batman</Text>
-      </View>
-      <View >
-        <Text style={styles.actorName3}>Robert Partinson</Text>
-        <Text style={styles.actorPersona3}>Batman</Text>
-      </View>
-      <View>
-        <Text style={styles.actorName4}>Robert Partinson</Text>
-        <Text style={styles.actorPersona4}>Batman</Text>
-      </View>
-      <View>
-        <Text style={styles.actorName5}>Robert Partinson</Text>
-        <Text style={styles.actorPersona5}>Batman</Text>
-      </View>
+
+        )
+      })
+
+      }
     </View>
+
   );
 };
 
