@@ -1,10 +1,10 @@
-import React from 'react';
-import { SafeAreaView, ScrollView} from 'react-native'
-import { SelectionMovies } from './scr/screens/selectionMovies/selectionMovies';
+import React from "react";
+import Route from './src/routes/routes'
 
-
-export default function App () {
-  return(
-      <SelectionMovies/>
-  )
+const App = () =>{
+    return(
+            <Route/>        
+    )
 }
+
+export default App
