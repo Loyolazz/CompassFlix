@@ -3,7 +3,7 @@ import { View } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Icon } from "@rneui/themed";
 
-import SelectionMovies from '../../screens/selectionMovies/selectionMovies'
+import {SelectionMovies} from '../../screens/selectionMovies/selectionMovies'
 
 import moviesDetail from '../../screens/moviesDetail/moviesDetail'
 
@@ -14,13 +14,13 @@ const Tab = createBottomTabNavigator();
 const TabBottomRoutes = () => {
     return (
         <Tab.Navigator
-            initialRouteName="Movies"
+            initialRouteName="SelectMovies"
             screenOptions={{
                 headerShown: false, tabBarShowLabel: false, tabBarInactiveTintColor: 'rgba(48, 79, 254, 0.1)',
                 tabBarActiveTintColor: '#304FFE', tabBarStyle: { height: 70 }
             }} >
 
-            <Tab.Screen name="Movies" component={moviesDetail}
+            <Tab.Screen name="SelectionMovies" component={SelectionMovies}
                 options={{
                     tabBarIcon: ({ color }) => (
 

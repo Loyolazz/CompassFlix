@@ -4,7 +4,7 @@ import {View, Text, FlatList,SafeAreaView, ScrollView} from 'react-native';
 import {CardMovies} from './components/cardMovies';
 import moviesList from './data/movies';
 
-import styles from './styles';
+import styles from './style_selectionMovies';
 
 export function SelectionMovies() {
   return (
