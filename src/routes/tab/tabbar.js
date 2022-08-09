@@ -20,7 +20,7 @@ const TabBottomRoutes = () => {
                 tabBarActiveTintColor: '#304FFE', tabBarStyle: { height: 70 }
             }} >
 
-            <Tab.Screen name="SelectionMovies" component={SelectionMovies}
+            <Tab.Screen name="SelectionMovies" component={moviesDetail}
                 options={{
                     tabBarIcon: ({ color }) => (
 

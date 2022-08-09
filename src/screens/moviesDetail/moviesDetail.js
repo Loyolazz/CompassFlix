@@ -1,13 +1,31 @@
-import React from 'react';
+import React,{useEffect, useState} from 'react';
 import { Text, View, Image, TouchableOpacity } from 'react-native';
 import batmanBanner from '../../assets/batman/batmanBanner.jpeg'
 import batmanCover from '../../assets/batman/batmanCover.jpg'
 import robert from '../../assets/batman/robert.png'
 import styles from './style_moviesDetail'
+import Api from '../../services/api';
 import { Icon } from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const moviesDetail = () => {
+const apikey = 'api_key=80eb37af6714ab187d2c58f9acc83af3';
+const language = 'language=pt-BR';
+const MoviesDetail = () => {
+  const init = async () => {
+    const response = await Api.get(`/popular?${apikey}&${language}&page=${1}`)
+    console.log(response.data.results);
+   
+    console.log('Request success')
+  
+  };
+
+  useEffect(() => {
+    init();
+  }, [])
+
+  
+  
   return (
+
     <View style={styles.container}>
       <View style={styles.bannerBack}>
         <Image style={styles.banner} source={batmanBanner} />
@@ -76,4 +94,4 @@ const moviesDetail = () => {
   );
 };
 
-export default moviesDetail;
+export default MoviesDetail;
