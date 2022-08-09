@@ -2,8 +2,11 @@ import React, {useState} from 'react';
 import { ImageBackground, KeyboardAvoidingView, Image, View, Text, TextInput, TouchableOpacity} from 'react-native';
 // import Icon from 'react-native-vector-icons/EvilIcons';
 import styles from './style_login';
+import { useNavigation } from '@react-navigation/native';
 
 const Login = () => {
+  const navigation = useNavigation()
+
   return (
     <KeyboardAvoidingView style={styles.container}>
       <Image source={require('../../assets/login_imagens/bannerLogin.png')} style={styles.banner} />
@@ -36,7 +39,7 @@ const Login = () => {
         </View>
         <TouchableOpacity
         style={styles.button}
-        onPress={() => {}}>
+        onPress={() => {navigation.navigate('Tab')}}>
           <Text style={styles.buttonText}>Entrar</Text>
         </TouchableOpacity>
       </View>

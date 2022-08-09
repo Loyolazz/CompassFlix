@@ -1,8 +1,8 @@
 import React from 'react';
 import { Text, View, Image, TouchableOpacity } from 'react-native';
-import batmanBanner from './src/assets/batman/batmanBanner.jpeg'
-import batmanCover from './src/assets/batman/batmanCover.jpg'
-import robert from './src/assets/batman/robert.png'
+import batmanBanner from '../../assets/batman/batmanBanner.jpeg'
+import batmanCover from '../../assets/batman/batmanCover.jpg'
+import robert from '../../assets/batman/robert.png'
 import styles from './style_moviesDetail'
 import { Icon } from 'react-native-vector-icons/MaterialCommunityIcons';
 
