@@ -32,7 +32,7 @@ const MoviesDetail = ({ route, navigation }) => {
     const response = await Api.get(`/${id}?${apikey}&${language}`)
     console.log(response)
     setDetails(response.data)
-    console.log('Request Details')
+    console.log('Request Details...')
   }
   useEffect(() => {
     Details();
