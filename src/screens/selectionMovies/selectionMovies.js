@@ -34,7 +34,7 @@ export function SelectionMovies({navigation}) {
 
         <FlatList
           data={listApi}
-          keyExtractor={item => String(item.id)}
+          keyExtractor={(item, index) => `${index}`}
           numColumns={4}
           renderItem={({ item }) => {
 
@@ -45,10 +45,11 @@ export function SelectionMovies({navigation}) {
               <View style={styles.containerCardMovies}>
                 <TouchableOpacity
                   style={{ width: '100%', alignItems: "center" }}
-                  // onPress={() => {
-                  //   setSelectedId(id)
-                  //   navigation.navigate('', { item })
-                  // }}
+                  onPress={() => {
+                    setSelectedId(id)
+                    console.log('trocou')
+                    navigation.navigate('Tab', { item })
+                  }}
                 >
                   <CardMovies
                     text={nota}
