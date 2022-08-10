@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   inputText: {
+    width: '100%',
     fontFamily: 'OpenSans-SemiBold',
     color: '#ffffff80',
     fontWeight: 'bold',
