@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {View, FlatList} from 'react-native';
-import CardMovies from '../../Components/selectMoviesComp/cards/cardMovies';
-import Load from '../../Components/Load';
-import Loading from '../../Components/Loading';
-import Header from '../../Components/selectMoviesComp/header/header';
+import CardMovies from '../../components/selectMoviesComp/cards/cardMovies'
+import Load from '../../components/Load'
+import Loading from '../../components/Loading'
+import HeaderFilm from '../../components/selectMoviesComp/header/header'
 import styles from './style_selectionMovies';
 import { getMovies } from '../../services/api';
 
@@ -34,7 +34,7 @@ export function SelectionMovies({navigation}) {
   return movies ? (
     <View style={styles.container}>
       <View style={styles.section}>
-        <Header nameUser={nameUser} />
+        <HeaderFilm nameUser={nameUser} />
       </View>
 
       <FlatList
@@ -59,13 +59,13 @@ export function SelectionMovies({navigation}) {
             onPress={() => {
               setSelectedId(id)
               console.log('trocou')
-              navigation.navigate('Tab', { item })
+              navigation.navigate('MoviesDetail', { item })
             }}
           />
   )}}
       />
     </View>
   ) : (
-    <Load loa />
+    <Load />
   );
 }

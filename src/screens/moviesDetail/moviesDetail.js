@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { View, TouchableOpacity, Text, ImageBackground } from 'react-native';
 
 import styles from './style_moviesDetail'
-import HeaderFilm from '../../Components/selectMoviesComp/header/header';
 import SinopseDetails from './Components/sinopse/sinopse';
 import { ViewElenco } from './Components/elenco';
 import Header from './Components/header2/index';
@@ -10,7 +9,6 @@ import Api from '../../services/api'
 import BtnGoback from '../../../node_modules/react-native-vector-icons/Ionicons'
 const apikey = 'api_key=80eb37af6714ab187d2c58f9acc83af3';
 const language = 'language=pt-BR';
-import Loading from '../../Components/Loading';
 
 const MoviesDetail = ({ route, navigation }) => {
   const [details, setDetails] = useState({})
@@ -27,7 +25,7 @@ const MoviesDetail = ({ route, navigation }) => {
 
     setLoad(true);
 
-    const response = await Api.get(`/${id}/credits?${apikey}&${language}`)
+    const response = await Api.get(`/movie/${id}/credits?${apikey}&${language}`)
     console.log(response)
     console.log('Request DetailsCredits')
     setDetailsCredits(response.data)
@@ -44,7 +42,7 @@ const MoviesDetail = ({ route, navigation }) => {
     }
 
     setLoad(true);
-    const response = await Api.get(`/${id}?${apikey}&${language}`)
+    const response = await Api.get(`/movie/${id}?${apikey}&${language}`)
     console.log(response)
     setDetails(response.data)
     console.log('Request Details...')
@@ -60,7 +58,7 @@ const MoviesDetail = ({ route, navigation }) => {
   ////////////// Details ////////////////
   const director = 'diretor'
   const Title = details.title
-  const Year = details.release_date
+  const Year = `${String(details.release_date).substring(0,4)}`
   const Duration = `${details.runtime} min`
   const Note = `${details.vote_average?.toFixed(1)}/10`
   const Votes = details.vote_count
@@ -70,7 +68,7 @@ const MoviesDetail = ({ route, navigation }) => {
   const TextSinopse = details.overview
   ////////////// Credits ////////////////
 
-  return details && detailsCredits ? (
+  return (
 
     <View style={styles.container}>
       <ImageBackground
@@ -79,7 +77,7 @@ const MoviesDetail = ({ route, navigation }) => {
       >
         <TouchableOpacity
           onPress={() =>
-            navigation.navigate('selectionMovies')}
+            navigation.navigate('SelectionMovies')}
           style={styles.btnGoBack}>
 
           < BtnGoback name='md-arrow-back' size={23} color={'#000'} />
@@ -129,8 +127,6 @@ const MoviesDetail = ({ route, navigation }) => {
       }
     </View>
 
-  ) : (
-    <Loading load={load}/>
   )
 };
 
