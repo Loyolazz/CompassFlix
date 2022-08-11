@@ -1,49 +1,49 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, } from 'react-native';
-import star from './img/star_red.png'
+import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
+import star from '../../../assets/star_red.png'
 
-export function CardMovies({ source, text, onpress }) {
+const CardMovies = ({text, poster_path, onPress}) => {
   return (
-    <View style={styles.cardMovies}>
-
-      <Image style={styles.image} source={{ uri: source }} />
-
-      <View style={styles.containerStar}>
-        <Image style={styles.star} source={star} />
-        <Text style={styles.nota}>{text}</Text>
+    <View style={styles.container}>
+      <TouchableOpacity onPress={onPress}>
+        <Image
+          style={styles.image}
+          source={{uri: `http://image.tmdb.org/t/p/w185/${poster_path}`}}
+        />
+      </TouchableOpacity>
+      <View style={styles.containerRow}>
+        <Image source={star} style={styles.star} />
+        <Text style={styles.text}>{text}/10</Text>
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
-
-  cardMovies: {
+  container: {
     flexDirection: 'column',
-    marginTop: 16,
-    width: '80%',
-    justifyContent: 'flex-end'
-  },
-  containerStar: {
-    marginTop: 3,
-    width: '100%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    //backgroundColor:'blue'
-
   },
   image: {
-    borderRadius: 15,
+    width: 76,
     height: 95,
+    borderRadius: 10,
+    marginEnd: 16,
   },
-  nota: {
-    color: '#FFF',
+  containerRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginLeft: 5,
+    marginBottom: 28,
+  },
+  text: {
     fontSize: 10,
-    marginLeft: 6
+    color: '#fff',
+    marginLeft: 4,
   },
   star: {
-    height: 10,
     width: 10,
-  }
+    height: 10,
+  },
 });
+
+export default CardMovies;
