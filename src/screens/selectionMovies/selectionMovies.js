@@ -1,67 +1,71 @@
-import React, { useState, useEffect } from 'react';
-import { View, FlatList, TouchableOpacity} from 'react-native';
-import { CardMovies } from '../../Components/selectMoviesComp/cards/cardMovies';
-import Header from '../../Components/selectMoviesComp/header/header'
-import api from '../../services/api';
+import React, {useState, useEffect} from 'react';
+import {View, FlatList} from 'react-native';
+import CardMovies from '../../Components/selectMoviesComp/cards/cardMovies';
+import Load from '../../Components/Load';
+import Loading from '../../Components/Loading';
+import Header from '../../Components/selectMoviesComp/header/header';
 import styles from './style_selectionMovies';
+import { getMovies } from '../../services/api';
 
-const apikey =  'api_key=80eb37af6714ab187d2c58f9acc83af3';
-const language = 'language=pt-BR';
-const keyApiGet =  `/popular?${apikey}&${language}&page=${1}`
 
 export function SelectionMovies({navigation}) {
+  const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
   const [selectedId, setSelectedId] = useState(null);
-  const [listApi, setListApi] = useState([]);
-  const nameUser = 'John'
 
-  const init = async () => {
-    const response = await api.get(keyApiGet)
-    console.log(response);
-    setListApi(response.data.results);
-    console.log('Request success')
+  const nameUser = 'John';
+
+  const getResponseMovies = async () => {
+    if (loading) {
+      return;
+    }
+    setLoading(true);
+
+    const response = await getMovies(page);
+    setMovies([...movies, ...response.data.results]);
+    setPage(page + 1);
+    setLoading(false);
   };
 
   useEffect(() => {
-    init();
-  }, [])
-
-  return (
-
+    getResponseMovies();
+  }, []);
+  return movies ? (
     <View style={styles.container}>
       <View style={styles.section}>
-
         <Header nameUser={nameUser} />
-
-        <FlatList
-          data={listApi}
-          keyExtractor={(item, index) => `${index}`}
-          numColumns={4}
-          renderItem={({ item }) => {
-
-            const uri = `https://image.tmdb.org/t/p/w342/${item.poster_path}`
-            const nota = `${item.vote_average}/10`
-            const id = `${item.id}`
-            return (
-              <View style={styles.containerCardMovies}>
-                <TouchableOpacity
-                  style={{ width: '100%', alignItems: "center" }}
-                  onPress={() => {
-                    setSelectedId(id)
-                    console.log('trocou')
-                    navigation.navigate('Tab', { item })
-                  }}
-                >
-                  <CardMovies
-                    text={nota}
-                    source={uri}
-                    starIcon={item.starIconRed}
-                  />
-                </TouchableOpacity>
-              </View>
-            )}}
-        />
       </View>
-    </View>
 
+      <FlatList
+        numColumns={4}
+        contentContainerStyle={{
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+        data={movies}
+        keyExtractor={(item, index) => `${index}`}
+        onEndReached={getResponseMovies}
+        onEndReachedThreshold={0.1}
+        ListFooterComponent={<Loading load={loading} />}
+
+
+        renderItem={({item}) => {
+          const id = `${item.id}`
+          return(
+          <CardMovies
+            text={`${item.vote_average}`}
+            poster_path={item.poster_path}
+            onPress={() => {
+              setSelectedId(id)
+              console.log('trocou')
+              navigation.navigate('Tab', { item })
+            }}
+          />
+  )}}
+      />
+    </View>
+  ) : (
+    <Load loa />
   );
 }

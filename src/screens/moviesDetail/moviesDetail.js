@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, TouchableOpacity, Text, ImageBackground } from 'react-native';
 
 import styles from './style_moviesDetail'
-import HeaderFilm from './Components/header/header';
+import HeaderFilm from '../../Components/selectMoviesComp/header/header';
 import SinopseDetails from './Components/sinopse/sinopse';
 import { ViewElenco } from './Components/elenco';
 import Header from './Components/header2/index';
@@ -10,29 +10,45 @@ import Api from '../../services/api'
 import BtnGoback from '../../../node_modules/react-native-vector-icons/Ionicons'
 const apikey = 'api_key=80eb37af6714ab187d2c58f9acc83af3';
 const language = 'language=pt-BR';
+import Loading from '../../Components/Loading';
 
 const MoviesDetail = ({ route, navigation }) => {
   const [details, setDetails] = useState({})
   const [detailsCredits, setDetailsCredits] = useState([])
+  const [load, setLoad] = useState(false);
 
   const { item } = route?.params || {};
   const id = `${item.id}`
 
   const DetailsCredits = async () => {
+    if (load) {
+      return;
+    }
+
+    setLoad(true);
+
     const response = await Api.get(`/${id}/credits?${apikey}&${language}`)
     console.log(response)
     console.log('Request DetailsCredits')
     setDetailsCredits(response.data)
+    setLoad(false);
 
   }
   useEffect(() => {
     DetailsCredits();
   }, [])
   const Details = async () => {
+
+    if (load) {
+      return;
+    }
+
+    setLoad(true);
     const response = await Api.get(`/${id}?${apikey}&${language}`)
     console.log(response)
     setDetails(response.data)
     console.log('Request Details...')
+    setLoad(false);
   }
   useEffect(() => {
     Details();
@@ -46,7 +62,7 @@ const MoviesDetail = ({ route, navigation }) => {
   const Title = details.title
   const Year = details.release_date
   const Duration = `${details.runtime} min`
-  const Note = `${details.vote_average}/10`
+  const Note = `${details.vote_average?.toFixed(1)}/10`
   const Votes = details.vote_count
   const Poster = `https://image.tmdb.org/t/p/w342/${details.poster_path}`
   const Banner = `https://image.tmdb.org/t/p/w342/${details.backdrop_path}`
@@ -54,7 +70,7 @@ const MoviesDetail = ({ route, navigation }) => {
   const TextSinopse = details.overview
   ////////////// Credits ////////////////
 
-  return (
+  return details && detailsCredits ? (
 
     <View style={styles.container}>
       <ImageBackground
@@ -66,7 +82,7 @@ const MoviesDetail = ({ route, navigation }) => {
             navigation.navigate('selectionMovies')}
           style={styles.btnGoBack}>
 
-          < BtnGoback name='arrow-left' size={23} color={'#000'} />
+          < BtnGoback name='md-arrow-back' size={23} color={'#000'} />
         </TouchableOpacity>
 
       </ImageBackground>
@@ -113,7 +129,9 @@ const MoviesDetail = ({ route, navigation }) => {
       }
     </View>
 
-  );
+  ) : (
+    <Loading load={load}/>
+  )
 };
 
 export default MoviesDetail;
