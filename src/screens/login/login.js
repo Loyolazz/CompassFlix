@@ -1,6 +1,5 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {
-  ImageBackground,
   KeyboardAvoidingView,
   Image,
   View,
@@ -13,68 +12,45 @@ import Icon from 'react-native-vector-icons/EvilIcons';
 import styles from './style_login';
 import {useNavigation} from '@react-navigation/native';
 
-import Api from '../../services/api';
-import {apiKey} from '../../services/api';
-import {getTokenAuth} from '../../services/api';
-import Loading from '../../components/Loading';
+import {Context} from '../../context';
+
+import {getToken, validateToken} from '../../services/api';
+
 
 const Login = () => {
-  const [sessionId, setSessionId] = useState();
-  const [key, setKey] = useState();
   const [email, setEmail] = useState('');
   const [password, SetPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [token, setToken] = useState();
+  const {setId} = useContext(Context);
 
-  const emailValidator =
-    /.[a-zA-Z0-9](_(?!(\.|_))|\.(?!(_|\.))|[a-zA-Z0-9]){6,18}[a-zA-Z0-9]/g;
-  const passwordValidator = /.{6,}/g;
+
+  const validadeUser = "^ [A-Za-z] \\ w {5, 29} $"
 
   useEffect(() => {
-    getTokenAuth()
-      .then(res => {
-        setKey(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    const getResponseToken = async () => {
+      const response = await getToken();
+      setToken(response.data.request_token);
+    };
+    getResponseToken();
   }, []);
 
   const handleSignin = async () => {
-    if (!email || !password) {
-      return Alert.alert('Atenção!', 'Preencha todos os campos');
+
+    if(!email || !password) {
+      Alert.alert('Atenção', 'Preencha todos os campos');
+    } 
+
+    if (email && password !== '') {
+      const response = await validateToken(email, password, token);
+      if (response) {
+        const session_id = response.data.session_id;
+        setId(session_id)
+        navigation.replace('TabBottomRoutes');
+      }
+    } else {
+      console.log('error');
     }
-
-    if (emailValidator.test(email) === false) {
-      return Alert.alert('Atenção!', 'A formatação dos campos está errada');
-    }
-
-    if (passwordValidator.test(password) === false) {
-      return Alert.alert('Atenção!', 'A formatação dos campos está errada');
-    }
-
-    setLoading(true);
-
-    await Api.post(
-      `/authentication/token/validate_with_login?api_key=${apiKey}`,
-      {
-        username: email,
-        password: password,
-        request_token: key,
-      },
-    )
-      .then(response => console.log(response))
-      .catch(err => alert('Usuario ou senha invalidos'));
-    await Api.post(`/authentication/session/new?api_key=${apiKey}`, {
-      request_token: key,
-    })
-      .then(response => {
-        setSessionId(response.data.session_id),
-          navigation.replace('TabBottomRoutes');
-        setLoading(false);
-        console.log(response.data.session_id);
-      })
-      .catch(err => alert('Usuario ou senha invalidos'))
-      .finally(() => setLoading(false));
   };
 
   const navigation = useNavigation();
@@ -90,7 +66,6 @@ const Login = () => {
         style={styles.logo}
       />
 
-      <Loading visible={loading} />
       <View style={styles.textContainer}>
         <Text style={[styles.text, styles.loginText]}>Login</Text>
         <Text style={[styles.text, styles.descriptionText]}>
@@ -131,7 +106,7 @@ const Login = () => {
             onChangeText={SetPassword}
           />
         </View>
-        <TouchableOpacity style={styles.button} onPress={() => handleSignin()}>
+        <TouchableOpacity style={styles.button} onPress={handleSignin}>
           <Text style={styles.buttonText}>Entrar</Text>
         </TouchableOpacity>
       </View>
