@@ -1,9 +1,13 @@
 import React from "react";
 import Route from './src/routes/routes'
-
-const App = () =>{
-    return(
-            <Route/>        
+import { View } from "react-native";
+import { SelectionMovies } from "./src/screens/selectionMovies/selectionMovies";
+const App = () => {
+    return (
+   
+       <Route/>
+    
+        
     )
 }
 

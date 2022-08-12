@@ -3,12 +3,13 @@ import {StyleSheet, Dimensions} from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000'
+    backgroundColor: '#000',
+
   },
   banner: {
     width: Dimensions.get('window').width, 
-    flex: 0.5,
-    position: 'absolute'
+    height:480
+   
   },
   logo: {
     alignSelf: 'center',
@@ -36,10 +37,12 @@ const styles = StyleSheet.create({
   },
   inputView: {
     backgroundColor: 'rgba(196, 196, 196, 0.35)',
-    width: 243,
+    width: '80%',
     borderRadius: 30,
     marginBottom: 14,
     flexDirection: 'row',
+    height:45,
+    alignSelf:'center'
   },
   inputText: {
     width: '100%',
@@ -48,6 +51,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   button: {
+    marginTop:20,
     alignSelf: 'center',
     backgroundColor: '#E9A6A6',
     padding: 10,

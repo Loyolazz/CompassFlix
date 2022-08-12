@@ -25,7 +25,7 @@ export function Splash({navigation}) {
         source={require('../../assets/splach.json')}
         autoPlay
         loop={false}
-        speed={2.5}
+        speed={3.5}
         autoSize={true}
         style={{height: 250}}
         onAnimationFinish={() => FinashSplach()}

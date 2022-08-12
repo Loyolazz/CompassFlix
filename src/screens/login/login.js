@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   ImageBackground,
   KeyboardAvoidingView,
@@ -9,14 +9,15 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
+import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import styles from './style_login';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 import Api from '../../services/api';
-import {apiKey} from '../../services/api';
-import {getTokenAuth} from '../../services/api';
-import Loading from '../../components/Loading';
+import { apiKey } from '../../services/api';
+import { getTokenAuth } from '../../services/api';
+import Loading from '../../Components/Loading/index';
 
 const Login = () => {
   const [sessionId, setSessionId] = useState();
@@ -85,55 +86,75 @@ const Login = () => {
         source={require('../../assets/login_imagens/bannerLogin.png')}
         style={styles.banner}
       />
-      <Image
+      <Animatable.Image
+        animation='zoomInUp'
+        duration={2000}
         source={require('../../assets/login_imagens/logo.png')}
         style={styles.logo}
       />
 
-      <Loading visible={loading} />
+      {/* <Loading visible={loading} /> */}
       <View style={styles.textContainer}>
-        <Text style={[styles.text, styles.loginText]}>Login</Text>
-        <Text style={[styles.text, styles.descriptionText]}>
+        <Animatable.Text
+          animation='fadeInUp'
+          duration={1000}
+          style={[styles.text, styles.loginText]}>Login</Animatable.Text>
+        <Animatable.Text
+          animation='fadeInUp'
+          duration={1000}
+          style={[styles.text, styles.descriptionText]}>
           Entre na sua conta para continuar.
-        </Text>
-        <View style={styles.inputView}>
-          <Icon
-            size={25}
-            color={'#ffffff80'}
-            style={{paddingTop: 15, paddingLeft: 10}}
-            name="user"
-          />
-          <TextInput
-            style={styles.inputText}
-            placeholder="e-mail"
-            autoCorrect={false}
-            placeholderTextColor={'#ffffff80'}
-            autoCapitalize="none"
-            keyboardType="email-address"
-            onChangeText={setEmail}
-          />
-        </View>
+        </Animatable.Text>
 
-        <View style={styles.inputView}>
-          <Icon
-            size={30}
-            color={'#ffffff80'}
-            style={{paddingTop: 12, paddingLeft: 10}}
-            name="lock"
-          />
-          <TextInput
-            style={styles.inputText}
-            placeholder="senha"
-            autoCorrect={false}
-            secureTextEntry={true}
-            placeholderTextColor={'#ffffff80'}
-            autoCapitalize="none"
-            onChangeText={SetPassword}
-          />
+        <View>
+          <Animatable.View
+            style={styles.inputView}
+            animation='bounceInLeft'
+            duration={2500}
+          >
+            <Icon
+              size={25}
+              color={'#ffffff80'}
+              style={{ paddingTop: 15, paddingLeft: 10 }}
+              name="user"
+            />
+            <TextInput
+              style={styles.inputText}
+              placeholder="e-mail"
+              autoCorrect={false}
+              placeholderTextColor={'#ffffff80'}
+              autoCapitalize="none"
+              keyboardType="email-address"
+              onChangeText={setEmail}
+            />
+          </Animatable.View>
+
+          <Animatable.View
+            style={styles.inputView}
+            animation='bounceInRight'
+            //iterationCount={2}
+            duration={2500}
+          >
+            <Icon
+              size={30}
+              color={'#ffffff80'}
+              style={{ paddingTop: 12, paddingLeft: 10 }}
+              name="lock"
+            />
+            <TextInput
+              style={styles.inputText}
+              placeholder="senha"
+              autoCorrect={false}
+              secureTextEntry={true}
+              placeholderTextColor={'#ffffff80'}
+              autoCapitalize="none"
+              onChangeText={SetPassword}
+            />
+          </Animatable.View>
+          <TouchableOpacity style={styles.button} onPress={() => handleSignin()}>
+            <Text style={styles.buttonText}>Entrar</Text>
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity style={styles.button} onPress={() => handleSignin()}>
-          <Text style={styles.buttonText}>Entrar</Text>
-        </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
   );

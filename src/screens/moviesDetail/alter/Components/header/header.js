@@ -1,12 +1,12 @@
 import React from "react"
-import { View, Text,Image } from "react-native"
+import { View, Text, Image } from "react-native"
 
 import styles from "./styles"
 
-export default function HeaderDetails({batmanBanner, batmanCover, title, year, duration, note, director, votes}) {
-    return(
-       
-              <View style={styles.bannerBack}>
+export default function HeaderDetails({ batmanBanner, batmanCover, title, year, duration, note, director, votes }) {
+    return (
+
+        <View style={styles.bannerBack}>
             <Image style={styles.banner} source={batmanBanner} />
             <View style={{ flexDirection: 'row' }}>
                 <Image style={styles.cover} source={batmanCover} />
@@ -29,9 +29,9 @@ export default function HeaderDetails({batmanBanner, batmanCover, title, year, d
                 </View>
             </View>
         </View>
-      
-      
+
+
     )
-        
-   
+
+
 }

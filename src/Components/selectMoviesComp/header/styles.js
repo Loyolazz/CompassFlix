@@ -3,9 +3,11 @@ import { StyleSheet } from "react-native"
 const styles = StyleSheet.create({
    
     header: {
+        width:'100%',
         marginTop: 35,
         alignItems:'flex-start',
-        marginHorizontal:10,
+        paddingHorizontal:13,
+
     },
     text: {
         fontSize: 20,

@@ -26,10 +26,10 @@ export default StyleSheet.create({
     containerInfoFilm: {
         width: '50%',
         height: '50%',
-        paddingVertical: 10,
-        paddingHorizontal: 10,
+        paddingVertical: 5,
+        paddingHorizontal: 5,
         flexDirection: 'column',
-        marginLeft:10
+        marginLeft:10,
     },
     containerTitleFilm:{
         flexDirection:'row', 
@@ -48,21 +48,24 @@ export default StyleSheet.create({
     },
     containerIconAndNote:{
         flexDirection: 'row', 
-        marginTop: 25 
+        marginTop: 10,
+ 
     },
     containerYearAndDuration:{
         flexDirection:'row', 
         justifyContent:'space-between', 
-        width:'70%', 
+        width:'60%', 
         marginLeft:7, 
         alignItems:'center',
-        height:50 ,   
-        paddingHorizontal:10
+        height:20 ,   
+        paddingHorizontal:5,
+        marginRight:20,
+        backgroundColor:'red'
     },
     textYear:{
         color:'#fff', 
-        fontSize:12,
-        marginRight:13
+        fontSize:14,
+        marginRight:20
     },
     textDurantion:{
         color:'#fff', 

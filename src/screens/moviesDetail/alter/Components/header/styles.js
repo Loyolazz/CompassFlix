@@ -6,7 +6,8 @@ const styles = StyleSheet.create({
         Color: 'rgba(0, 0, 0, 0.3)', 
         width:'100%',
         height:'30%',
-        marginBottom:10
+        marginBottom:10,
+        backgroundColor:'red'
     },
     banner: {
         opacity: 0.6,
@@ -19,7 +20,8 @@ const styles = StyleSheet.create({
         height: 166,
         bottom: 50,
         left: 20,
-        borderRadius:10
+        borderRadius:10,
+        backgroundColor:'red'
     },
     title: {
         color: '#FFFFFF',
@@ -44,13 +46,15 @@ const styles = StyleSheet.create({
     viewDirector: {
         flexDirection: 'row',
         paddingLeft: 146,
-        bottom: 130
+        bottom: 130,
+        backgroundColor:'red'
     },
     imdb: {
         color: '#E9A6A6',
         fontSize: 32,
         paddingLeft: 149,
-        bottom: 115
+        bottom: 10,
+        backgroundColor:'red'
     },
     likes: {
         color: '#FFFFFF',

@@ -77,7 +77,7 @@ const MoviesDetail = ({ route, navigation }) => {
       >
         <TouchableOpacity
           onPress={() =>
-            navigation.navigate('SelectionMovies')}
+            navigation.navigate('TabBottomRoutes')}
           style={styles.btnGoBack}>
 
           < BtnGoback name='md-arrow-back' size={23} color={'#000'} />

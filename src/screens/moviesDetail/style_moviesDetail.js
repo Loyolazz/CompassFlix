@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
         left: 18
     },
     
+    
 })
 
 export default styles

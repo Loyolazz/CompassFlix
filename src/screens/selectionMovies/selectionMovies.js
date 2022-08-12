@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {View, FlatList} from 'react-native';
-import CardMovies from '../../components/selectMoviesComp/cards/cardMovies'
-import Load from '../../components/Load'
-import Loading from '../../components/Loading'
-import HeaderFilm from '../../components/selectMoviesComp/header/header'
+import CardMovies from '../../Components/selectMoviesComp/cards/cardMovies'
+import Load from '../../Components/Load/index'
+import Loading from '../../Components/Loading'
+import HeaderFilm from '../../Components/selectMoviesComp/header/header'
 import styles from './style_selectionMovies';
 import { getMovies } from '../../services/api';
 
@@ -53,6 +53,7 @@ export function SelectionMovies({navigation}) {
         renderItem={({item}) => {
           const id = `${item.id}`
           return(
+           
           <CardMovies
             text={`${item.vote_average}`}
             poster_path={item.poster_path}
