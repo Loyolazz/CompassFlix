@@ -36,6 +36,13 @@ export default StyleSheet.create({
         alignItems:'center',
         //paddingHorizontal:20
     },
+    titleFilm:{
+        height: 40 , 
+        alignItems:'flex-start', 
+        flexDirection:'column',  
+        justifyContent:'center', 
+        paddingHorizontal:10
+    },
     titleFilmView: {
         fontSize: 15,
         fontWeight: 'bold',
@@ -48,16 +55,16 @@ export default StyleSheet.create({
     },
     containerIconAndNote:{
         flexDirection: 'row', 
-        marginTop: 25 
+        marginTop: 13,
+        paddingHorizontal:10
     },
     containerYearAndDuration:{
         flexDirection:'row', 
         justifyContent:'space-between', 
-        width:'70%', 
-        marginLeft:7, 
+        marginRight:20, 
         alignItems:'center',
-        height:50 ,   
-        paddingHorizontal:10
+        height:40 ,   
+        paddingHorizontal:10,
     },
     textYear:{
         color:'#fff', 

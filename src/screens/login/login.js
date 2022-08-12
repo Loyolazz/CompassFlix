@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   KeyboardAvoidingView,
   Image,
@@ -8,13 +8,14 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
+import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import styles from './style_login';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
-import {Context} from '../../context';
+import { Context } from '../../context';
 
-import {getToken, validateToken} from '../../services/api';
+import { getToken, validateToken } from '../../services/api';
 
 
 const Login = () => {
@@ -22,7 +23,7 @@ const Login = () => {
   const [password, SetPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [token, setToken] = useState();
-  const {setId} = useContext(Context);
+  const { setId } = useContext(Context);
 
 
   const validadeUser = "^ [A-Za-z] \\ w {5, 29} $"
@@ -37,9 +38,9 @@ const Login = () => {
 
   const handleSignin = async () => {
 
-    if(!email || !password) {
+    if (!email || !password) {
       Alert.alert('Atenção', 'Preencha todos os campos');
-    } 
+    }
 
     if (email && password !== '') {
       const response = await validateToken(email, password, token);
@@ -61,50 +62,66 @@ const Login = () => {
         source={require('../../assets/login_imagens/bannerLogin.png')}
         style={styles.banner}
       />
-      <Image
+      <Animatable.Image
+        animation='zoomInUp'
+        duration={1000}
         source={require('../../assets/login_imagens/logo.png')}
         style={styles.logo}
       />
 
       <View style={styles.textContainer}>
-        <Text style={[styles.text, styles.loginText]}>Login</Text>
-        <Text style={[styles.text, styles.descriptionText]}>
+        <Animatable.Text 
+        animation='fadeInUp'
+        duration={1000}
+        style={[styles.text, styles.loginText]}>Login</Animatable.Text>
+        <Animatable.Text 
+        animation='fadeInUp'
+        duration={1000} 
+        style={[styles.text, styles.descriptionText]}>
           Entre na sua conta para continuar.
-        </Text>
-        <View style={styles.inputView}>
-          <Icon
-            size={25}
-            color={'#ffffff80'}
-            style={{paddingTop: 15, paddingLeft: 10}}
-            name="user"
-          />
-          <TextInput
-            style={styles.inputText}
-            placeholder="e-mail"
-            autoCorrect={false}
-            placeholderTextColor={'#ffffff80'}
-            autoCapitalize="none"
-            keyboardType="email-address"
-            onChangeText={setEmail}
-          />
-        </View>
+        </Animatable.Text>
+        <View style={styles.ViewInput}>
+          <Animatable.View
+            animation='fadeInLeft'
+            duration={1000}
+            style={styles.inputView}>
+            <Icon
+              size={25}
+              color={'#ffffff80'}
+              style={{ paddingTop: 10, paddingLeft: 10 }}
+              name="user"
+            />
+            <TextInput
+              style={styles.inputText}
+              placeholder="usuário"
+              autoCorrect={false}
+              placeholderTextColor={'#ffffff80'}
+              autoCapitalize="none"
+              keyboardType="email-address"
+              onChangeText={setEmail}
+            />
+          </Animatable.View>
 
-        <View style={styles.inputView}>
-          <Icon
-            size={30}
-            color={'#ffffff80'}
-            style={{paddingTop: 12, paddingLeft: 10}}
-            name="lock"
-          />
-          <TextInput
-            style={styles.inputText}
-            placeholder="senha"
-            autoCorrect={false}
-            secureTextEntry={true}
-            placeholderTextColor={'#ffffff80'}
-            autoCapitalize="none"
-            onChangeText={SetPassword}
-          />
+          <Animatable.View
+            animation='fadeInRight'
+            duration={1000}
+            style={styles.inputView}>
+            <Icon
+              size={30}
+              color={'#ffffff80'}
+              style={{ paddingTop: 10, paddingLeft: 10 }}
+              name="lock"
+            />
+            <TextInput
+              style={styles.inputText}
+              placeholder="senha"
+              autoCorrect={false}
+              secureTextEntry={true}
+              placeholderTextColor={'#ffffff80'}
+              autoCapitalize="none"
+              onChangeText={SetPassword}
+            />
+          </Animatable.View>
         </View>
         <TouchableOpacity style={styles.button} onPress={handleSignin}>
           <Text style={styles.buttonText}>Entrar</Text>

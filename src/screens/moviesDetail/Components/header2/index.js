@@ -16,9 +16,9 @@ export default function Header({ Cartaz, Director, Nota, Votes, Year, Duration, 
             <View style={styles.containerInfoFilm}>
 
                 <View style={styles.containerTitleFilm}>
-                    <View style={{ width: '70%', height: 50 , alignItems:'flex-start', flexDirection:'column', }}>
+                    <View style={styles.titleFilm}>
                         <Text style={styles.titleFilmView}>{TitleFilm}</Text>
-                        <Text style={styles.directorName}>Direção por <Text style={{ fontWeight: 'bold' }}>{Director}</Text></Text>
+                       
                     </View>
 
                     <View style={styles.containerYearAndDuration}>
@@ -26,7 +26,9 @@ export default function Header({ Cartaz, Director, Nota, Votes, Year, Duration, 
                         <Text style={styles.textDurantion}>{Duration}</Text>
                     </View>
                 </View>
-
+                 <View style={{ paddingHorizontal:10}}>
+                 <Text style={styles.directorName}>Direção por <Text style={{ fontWeight: 'bold' }}>{Director}</Text></Text>
+                 </View>
                 <View style={styles.containerIconAndNote}>
                     <Text style={styles.styleNota}>{Nota}</Text>
                     <View style={styles.heart}>

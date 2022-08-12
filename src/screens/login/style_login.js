@@ -7,7 +7,8 @@ const styles = StyleSheet.create({
   },
   banner: {
     width: Dimensions.get('window').width, 
-    height:480
+    height:480,
+    marginTop:-60
   },
   logo: {
     alignSelf: 'center',
@@ -18,6 +19,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: '45%',
     alignSelf: 'center',
+    marginBottom:30
   },
   text: {
     color: '#fff',
@@ -26,7 +28,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     alignSelf: 'center',
-    paddingBottom: 10,
+    paddingBottom: 8,
+    paddingTop:30
   },
   descriptionText: {
     fontSize: 13,
@@ -35,10 +38,17 @@ const styles = StyleSheet.create({
   },
   inputView: {
     backgroundColor: 'rgba(196, 196, 196, 0.35)',
-    width: 243,
+    width: '75%',
     borderRadius: 30,
     marginBottom: 14,
     flexDirection: 'row',
+    height:40,
+    
+  },
+  ViewInput:{  
+    alignItems:'center',
+    marginTop:10,
+    marginBottom:10
   },
   inputText: {
     width: '100%',
@@ -52,6 +62,7 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingHorizontal: 30,
     borderRadius: 30,
+    marginTop:20,
   },
   buttonText: {
     fontFamily: 'OpenSans-Bold',

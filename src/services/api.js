@@ -18,7 +18,7 @@ export const getToken = async () => {
   return Api
     .get(`/authentication/token/new?api_key=${apiKey}`)
     .catch(error => {
-      console.warn('Deu pauuu');
+      console.log(err);
     });
 };
 
@@ -35,11 +35,11 @@ export const validateToken = async (email, password, token) => {
           request_token: response.data.request_token,
         })
         .catch(error => {
-          Alert.alert('Atenção!!', 'Email ou senha inválidos');
+          Alert.alert('Atenção!', 'Usuário  ou senha inválidos');
         }),
     )
     .catch(error => {
-      Alert.alert('Atenção!!', 'Email ou senha inválidos');
+      Alert.alert('Atenção!', 'Usuário ou senha inválidos');
     });
 };
 
