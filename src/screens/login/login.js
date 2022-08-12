@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
+import Eye from '../../../node_modules/react-native-vector-icons/Entypo'
 import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import styles from './style_login';
@@ -22,6 +23,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, SetPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [secureTextEntryIcon, setSecureTextEntryIcon] = useState(true)
   const [token, setToken] = useState();
   const { setId } = useContext(Context);
 
@@ -100,6 +102,7 @@ const Login = () => {
               keyboardType="email-address"
               onChangeText={setEmail}
             />
+             
           </Animatable.View>
 
           <Animatable.View
@@ -116,11 +119,21 @@ const Login = () => {
               style={styles.inputText}
               placeholder="senha"
               autoCorrect={false}
-              secureTextEntry={true}
+              value={secureTextEntryIcon}
+              secureTextEntry={secureTextEntryIcon}
               placeholderTextColor={'#ffffff80'}
               autoCapitalize="none"
-              onChangeText={SetPassword}
+              onChangeText={value => SetPassword(value)}
             />
+            <View style={{ position: 'absolute', marginLeft: 230, marginTop: 8}}>
+                    <TouchableOpacity
+                    onPress={() => setSecureTextEntryIcon(!secureTextEntryIcon)}
+                    >
+                        {secureTextEntryIcon == true ? <Eye name='eye-with-line' color={'#ffffff80'} size={23} /> : <Eye name='eye' color={'#ffffff80'} size={23} />}
+
+
+                    </TouchableOpacity>
+                </View>
           </Animatable.View>
         </View>
         <TouchableOpacity style={styles.button} onPress={handleSignin}>
