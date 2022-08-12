@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native"
 const styles = StyleSheet.create({
    
     header: {
-        marginTop: 35,
+        marginTop: 50,
         alignItems:'flex-start',
         marginHorizontal:10,
     },
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         color: '#FFF',
         marginTop: 30,
-        marginBottom: 20
+        marginBottom: 40
     }
 })
 

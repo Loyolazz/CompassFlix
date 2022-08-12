@@ -6,7 +6,7 @@ export default function HeaderFilm({nameUser}){
     return (
         <View style={styles.header}>
             <View style={styles.containerRow}>
-                <Text style={styles.title}>Ola,</Text>
+                <Text style={styles.title}>Olá,</Text>
                 <Text style={styles.label}>{nameUser}</Text>
                 <Text style={styles.title}>!</Text>
             </View>
