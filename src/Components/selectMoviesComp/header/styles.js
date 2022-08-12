@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
     header: {
         marginTop: 50,
         alignItems:'flex-start',
-        marginHorizontal:10,
+        paddingHorizontal:10,
     },
     text: {
         fontSize: 20,

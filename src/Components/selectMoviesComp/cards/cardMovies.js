@@ -22,19 +22,20 @@ const CardMovies = ({text, poster_path, onPress}) => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
-    paddingHorizontal:13,
+    flex:1,
     justifyContent:'center',
+ 
+    alignItems: 'center',
   },
   image: {
     width: 76,
     height: 95,
     borderRadius: 10,
-
   },
   containerRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginLeft: 5,
+    marginRight: 30,
     marginBottom: 28,
   },
   text: {

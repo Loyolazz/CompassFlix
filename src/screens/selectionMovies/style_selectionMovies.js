@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
     container:{
         flex:1,
         backgroundColor:'#000', 
-        paddingHorizontal:15,
+        paddingHorizontal:10,
     },
     header: {
         marginTop: 60,
@@ -48,10 +48,13 @@ const styles = StyleSheet.create({
     containerCardMovies:{
         justifyContent:'space-between', 
         alignItems:'center', 
-        flex:1
+        flex:1,
+         backgroundColor:'blue'
     },
     section:{
     width:'100%', 
+    paddingHorizontal:10,
+
    }
 })
 

@@ -4,7 +4,7 @@ import { Image, Text, View } from "react-native";
 import HeartIcon from "react-native-vector-icons/FontAwesome";
 import styles from "./styles";
 
-export default function Header({ Cartaz, Director, Nota, Votes, Year, Duration, TitleFilm }) {
+export  function HeaderDetails({ Cartaz, Director, Nota, Votes, Year, Duration, TitleFilm }) {
     return (
         <View style={styles.containerCartazAndTitle}>
             <View style={styles.styleViewCartaz}>

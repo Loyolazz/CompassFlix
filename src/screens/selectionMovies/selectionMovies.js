@@ -44,10 +44,7 @@ export function SelectionMovies({navigation}) {
 
       <FlatList
         numColumns={4}
-        contentContainerStyle={{
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
+       
         data={movies}
         keyExtractor={(item, index) => `${index}`}
         onEndReached={getResponseMovies}

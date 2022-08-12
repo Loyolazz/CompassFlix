@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, Image } from "react-native";
 import styles from "./styles";
 import * as Animatable from 'react-native-animatable';
-export  function ViewElenco({profile, name, character}){
+export function ViewElenco({profile, name, character}){
 
     return(
         
