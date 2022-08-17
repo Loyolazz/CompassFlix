@@ -2,9 +2,15 @@ import React from 'react';
 import {View, Image} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Icon} from '@rneui/themed';
+import Profile from '../../screens/Profile/profile';
+import SelectionSeries from '../../screens/selectionSeries/selectionSeleries';
 
 import {SelectionMovies} from '../../screens/selectionMovies/selectionMovies';
-import iconHome from '../../assets/iconHome.png';
+import iconMovies from '../../assets/iconsTabBar/iconMovies.png';
+import iconMovieFocused from '../../assets/iconsTabBar/iconMovieFocused.png';
+
+import ButtonSeries from '../../Components/Tabbuttons/ButtonSeries';
+import ButtonUser from '../../Components/Tabbuttons/ButtonUser';
 
 const Tab = createBottomTabNavigator();
 
@@ -19,19 +25,35 @@ const TabBottomRoutes = () => {
         tabBarStyle: {height: 50, backgroundColor: '#454545'},
       }}>
       <Tab.Screen
+        name="SelectionSeries"
+        component={SelectionSeries}
+        options={{
+          tabBarIcon: ({color, focused}) => (
+            <ButtonSeries focused={focused} color={color} />
+          ),
+        }}
+      />
+
+      <Tab.Screen
         name="SelectionMovies"
         component={SelectionMovies}
         options={{
-          tabBarIcon: ({color}) => (
-            <View
-              style={{
-                paddingHorizontal: 5,
-                paddingVertical: 5,
-                borderRadius: 80,
-                color,
-              }}>
-              <Image source={iconHome} />
-            </View>
+          tabBarIcon: ({focused}) => {
+            if (focused) {
+              return <Image source={iconMovieFocused} />;
+            } else {
+              return <Image source={iconMovies} />;
+            }
+          },
+        }}
+      />
+
+      <Tab.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          tabBarIcon: ({color, focused}) => (
+            <ButtonUser focused={focused} color={color} />
           ),
         }}
       />
