@@ -127,7 +127,7 @@ export default StyleSheet.create({
     styleItem: {
         width: 70, 
         height: 100, 
-        backgroundColor: 'grey', 
+        backgroundColor: '#03bb85', 
         justifyContent: 'center', 
         alignItems: 'center', 
         borderRadius: 10 
