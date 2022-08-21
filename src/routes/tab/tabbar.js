@@ -3,7 +3,7 @@ import {View, Image} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Icon} from '@rneui/themed';
 import Profile from '../../screens/Profile/profile';
-import SelectionSeries from '../../screens/selectionSeries/selectionSeleries';
+import {SelectionSeries} from '../../screens/selectionSeries/selectionSeleries';
 
 import {SelectionMovies} from '../../screens/selectionMovies/selectionMovies';
 import iconMovies from '../../assets/iconsTabBar/iconMovies.png';
