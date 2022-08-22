@@ -50,5 +50,13 @@ export const getAccount = async session_id => {
       console.log(error);
     });
 };
-
+export const getFavoriteSeries = async (sessionId, id) => {
+  return Api.get(`
+    /account/${id}/favorite/tv?api_key=${apiKey}&session_id=${sessionId}
+  `
+  )
+  .catch(error => {
+    console.log('error',error)
+  })
+}
 export default Api;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
+//import { NavigationContainer } from '@react-navigation/native';
 import SeriesFavorites from '../../screens/Profile/subScreenProfile/SeriesFavorites/index';
 import MoviesFavorites from '../../screens/Profile/subScreenProfile/MoviesFavorites/index';
 import EvaluationSeries from '../../screens/Profile/subScreenProfile/evaluationSeries/index';
@@ -9,7 +9,7 @@ import Profile from '../../screens/Profile/profile';
 const Stack = createStackNavigator();
 export default function RoutesProfile() {
   return (
-    <NavigationContainer>
+ 
       <Stack.Navigator initialRouteName='Profile'>
         <Stack.Screen
           options={{
@@ -57,6 +57,8 @@ export default function RoutesProfile() {
           component={EvaluationMovies}
         />
       </Stack.Navigator>
-    </NavigationContainer>
+ 
+
+
   );
 }

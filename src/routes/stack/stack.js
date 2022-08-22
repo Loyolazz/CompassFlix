@@ -4,7 +4,7 @@ import Login from '../../screens/login/login';
 import TabBottomRoutes from '../tab/tabbar';
 import {SelectionMovies} from '../../screens/selectionMovies/selectionMovies';
 import {Splash} from '../../screens/Splash';
-
+import Profile from '../../screens/Profile/profile';
 import MoviesDetail from '../../screens/moviesDetail/moviesDetail';
 const {Navigator, Screen} = createNativeStackNavigator();
 

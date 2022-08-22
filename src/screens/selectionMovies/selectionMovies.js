@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
-import {View, FlatList, Text} from 'react-native';
+import {View, FlatList, Image} from 'react-native';
 import CardMovies from '../../Components/selectMoviesComp/cards/cardMovies';
 import Load from '../../Components/Load';
 import Loading from '../../Components/Loading';
@@ -14,7 +14,7 @@ export function SelectionMovies({navigation}) {
   const [page, setPage] = useState(1);
   const [selectedId, setSelectedId] = useState(null);
   const [selected, setSelected] = useState();
-  const {id} = useContext(Context);
+  const {sessionId} = useContext(Context);
 
   const getResponseMovies = async () => {
 
@@ -26,11 +26,11 @@ export function SelectionMovies({navigation}) {
 
   useEffect(() => {
     const getResponseAccount = async () => {
-      const response = await getAccount(id);
-      setSelected(response.data.name);
+      const response = await getAccount(sessionId);
+      setSelected(response.data);
     };
     getResponseAccount();
-  }, [id]);
+  }, [sessionId]);
 
   useEffect(() => {
     getResponseMovies();
@@ -39,7 +39,16 @@ export function SelectionMovies({navigation}) {
   return movies && selected ? (
     <View style={styles.container}>
       <View style={styles.section}>
-        <HeaderFilm nameUser={selected} />
+        <HeaderFilm nameUser={selected.name} />
+        <Image
+                source={{
+                  uri: `http://image.tmdb.org/t/p/original/${selected?.avatar?.tmdb?.avatar_path}`,
+                }}
+                style={{
+                  width: 100,
+                  height: 100,
+                }}
+              />
       </View>
 
       <FlatList

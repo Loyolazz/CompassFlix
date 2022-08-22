@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import styles from './styles';
-export default function SerieList({navigation, onPressFavorite, onPressEvaluation}) {
+export default function SerieList({navigation, onPressFavorite, onPressEvaluation, nameUser}) {
  
     const DATA = [
         { id: 'a' },
@@ -23,7 +23,7 @@ export default function SerieList({navigation, onPressFavorite, onPressEvaluatio
 
             <View style={styles.headerFavorites}>
                 <View style={styles.viewTextFavorites}>
-                    <Text style={styles.textFavorites}>Séries favoritas de John</Text>
+                    <Text style={styles.textFavorites}>Séries favoritas de {nameUser}</Text>
                     <TouchableOpacity onPress={onPressFavorite}>
                         <Text style={styles.textViewAll}>Ver tudo</Text>
                     </TouchableOpacity>
@@ -39,7 +39,7 @@ export default function SerieList({navigation, onPressFavorite, onPressEvaluatio
             </View>
             <View style={styles.headerEvaluation}>
                 <View style={styles.viewTextEvaluation}>
-                    <Text style={styles.textEvaluation}>Avaliações de séries recentes de John</Text>
+                    <Text style={styles.textEvaluation}>Avaliações de séries recentes de {nameUser}</Text>
                     <TouchableOpacity onPress={onPressEvaluation}>
                         <Text style={styles.textViewAll}>Ver tudo</Text>
                     </TouchableOpacity>

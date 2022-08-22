@@ -25,7 +25,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [secureTextEntryIcon, setSecureTextEntryIcon] = useState(true)
   const [token, setToken] = useState();
-  const { setId } = useContext(Context);
+  const { setSessionId } = useContext(Context);
 
 
   const validadeUser = "^ [A-Za-z] \\ w {5, 29} $"
@@ -48,7 +48,8 @@ const Login = () => {
       const response = await validateToken(email, password, token);
       if (response) {
         const session_id = response.data.session_id;
-        setId(session_id)
+        setSessionId(session_id)
+        console.log(session_id)
         navigation.replace('TabBottomRoutes');
       }
     } else {
@@ -72,14 +73,14 @@ const Login = () => {
       />
 
       <View style={styles.textContainer}>
-        <Animatable.Text 
-        animation='fadeInUp'
-        duration={1000}
-        style={[styles.text, styles.loginText]}>Login</Animatable.Text>
-        <Animatable.Text 
-        animation='fadeInUp'
-        duration={1000} 
-        style={[styles.text, styles.descriptionText]}>
+        <Animatable.Text
+          animation='fadeInUp'
+          duration={1000}
+          style={[styles.text, styles.loginText]}>Login</Animatable.Text>
+        <Animatable.Text
+          animation='fadeInUp'
+          duration={1000}
+          style={[styles.text, styles.descriptionText]}>
           Entre na sua conta para continuar.
         </Animatable.Text>
         <View style={styles.ViewInput}>
@@ -102,7 +103,7 @@ const Login = () => {
               keyboardType="email-address"
               onChangeText={setEmail}
             />
-             
+
           </Animatable.View>
 
           <Animatable.View
@@ -125,15 +126,15 @@ const Login = () => {
               autoCapitalize="none"
               onChangeText={value => SetPassword(value)}
             />
-            <View style={{ position: 'absolute', marginLeft: 230, marginTop: 8}}>
-                    <TouchableOpacity
-                    onPress={() => setSecureTextEntryIcon(!secureTextEntryIcon)}
-                    >
-                        {secureTextEntryIcon == true ? <Eye name='eye-with-line' color={'#ffffff80'} size={23} /> : <Eye name='eye' color={'#ffffff80'} size={23} />}
+            <View style={{ position: 'absolute', marginLeft: 230, marginTop: 8 }}>
+              <TouchableOpacity
+                onPress={() => setSecureTextEntryIcon(!secureTextEntryIcon)}
+              >
+                {secureTextEntryIcon == true ? <Eye name='eye-with-line' color={'#ffffff80'} size={23} /> : <Eye name='eye' color={'#ffffff80'} size={23} />}
 
 
-                    </TouchableOpacity>
-                </View>
+              </TouchableOpacity>
+            </View>
           </Animatable.View>
         </View>
         <TouchableOpacity style={styles.button} onPress={handleSignin}>

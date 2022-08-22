@@ -23,7 +23,7 @@ export default StyleSheet.create({
         color: '#fff'
     },
     viweEvaluation: {
-        marginTop: 50,
+        marginTop: 20,
         width: '100%',
         alignItems: 'center'
     },
