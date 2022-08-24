@@ -4,7 +4,7 @@ import { Alert } from 'react-native';
 export const apiKey = 'ecd878f5eb6f5ca388735c699adaff80';
 
 const Api = axios.create({
-  baseURL: `https://api.themoviedb.org/3`,
+  baseURL: `https://api.themoviedb.org/3`
 });
 
 export const getMovies = async page => {
@@ -50,9 +50,9 @@ export const getAccount = async session_id => {
       console.log(error);
     });
 };
-export const getFavoriteSeries = async (sessionId, id) => {
+export const getFavoriteSeries = async ( id, sessionId) => {
   return Api.get(`
-    /account/${id}/favorite/tv?api_key=${apiKey}&session_id=${sessionId}
+    /account/${id}/favorite/movies?api_key=${apiKey}&session_id=${sessionId}
   `
   )
   .catch(error => {

@@ -1,66 +1,70 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import styles from './styles';
-import { getAccount, getFavoriteSeries } from '../../../services/api';
+import { getAccount, getFavoriteSeries, apiKey } from '../../../services/api';
 import { Context } from '../../../context';
-export default function MoviesList({ navigation, onPressFavorite, onPressEvaluation, nameUser }) {
+import Api from '../../../services/api';
+import star_red from '../../../assets/star_red.png'
 
+
+export default function MoviesList({ navigation, onPressFavorite, onPressEvaluation, nameUser, onPressDetails }) {
+    
     const [idUser, setIdUser] = useState([])
-    const [session, setSession] = useState([])
+    const [idItem, setIdItem] = useState(null)
+    const [moviesListFavorite, setMovieListFavorite] = useState([])
+    const [moviesListFavoriteEvaluation, setMovieListFavoriteEvaluation] = useState([])
+ 
+const { sessionId } = useContext(Context)
 
-    //const apikey = 'api_key=80eb37af6714ab187d2c58f9acc83af3';
-    const { sessionId } = useContext(Context)
+   
 
     useEffect(() => {
-        const getResponseMoviesFavorites = async () => {
+        const getResponseIdUser = async () => {
             const response = await getAccount(sessionId);
             setIdUser(response.data.id)
-            console.log(response.data.id)
         };
-        getResponseMoviesFavorites();
+        getResponseIdUser();
     }, [sessionId]);
 
     useEffect(() => {
-        const getResponseFavoritesSeries = async () => {
-            const response = await getFavoriteSeries(sessionId,idUser )
-            setSession(response.data.total_results)
-            console.log(response.data)
-        }
-        getResponseFavoritesSeries();
-    }, [sessionId, idUser]);
-     
-    //const apiKeyGet = `https://api.themoviedb.org/3/account/${idUser}/favorite/movies?api_key=${apikey}&session_id=ca87d64f641171d2bd7b6b2ce35ea2316b525ac0`
+        const init = async () => {
+            const response = await Api.get(`/account/${idUser}/favorite/movies?api_key=${apiKey}&session_id=${sessionId}`)
+            setMovieListFavorite(response.data.results);
+            
+        };
+        init();
+    }, [idUser, apiKey, sessionId])
 
-    const DATA = [
-        { id: '1' },
-        { id: '2' },
-        { id: '3' },
-        { id: '4' },
-        { id: '5' },
-    ]
-    const DATA2 = [
-        { id: '1' },
-        { id: '2' },
-        { id: '3' },
-        { id: '4' },
-        { id: '5' },
-    ]
+    useEffect(() => {
+        const EvaluationMovies = async () => {
+            const response = await Api.get(`/account/${idUser}/rated/movies?api_key=${apiKey}&session_id=${sessionId}`)
+            setMovieListFavoriteEvaluation(response.data.results);
+            console.log(response.data.results);
+        };
+        EvaluationMovies();
+    }, [idUser, apiKey, sessionId])
+
+    const idMovie = `${moviesListFavorite.id}`
     return (
         <View style={{ width: '100%', }}>
 
             <View style={styles.headerFavorites}>
                 <View style={styles.viewTextFavorites}>
-                    <Text style={styles.textFavorites}>Filmes favoritas de {nameUser}</Text>
+                    <Text style={styles.textFavorites}>Filmes favoritos de {nameUser}</Text>
                     <TouchableOpacity onPress={onPressFavorite}>
                         <Text style={styles.textViewAll}>Ver tudo</Text>
-                        <Text style={styles.textViewAll}>{session}</Text>
+
                     </TouchableOpacity>
 
                 </View>
                 <View style={styles.viewListFavorites}>
-                    {DATA.map((item, i) => i < 4 ?
-                        <TouchableOpacity key={i} style={styles.styleItem}>
-                            <Text>{item.id}</Text>
+                    {moviesListFavorite.map((item, i) => i < 4 ?
+                        <TouchableOpacity key={i}   onPress={() => {
+                            setIdItem(item.id)
+                            navigation.navigate('MoviesDetail', {item});
+                          }}>
+                            <Image source={{ uri: `https://image.tmdb.org/t/p/original/${item.poster_path}` }} style={styles.styleItem} />
+                        <Text>{}</Text>
                         </TouchableOpacity> : null)
                     }
                 </View>
@@ -75,10 +79,21 @@ export default function MoviesList({ navigation, onPressFavorite, onPressEvaluat
                     </TouchableOpacity>
                 </View>
                 <View style={styles.viewListEvaluation}>
-                    {DATA2.map((item, i) => i < 5 ?
-                        <TouchableOpacity key={i} style={styles.styleItem}>
-                            <Text>{item.id}</Text>
-                        </TouchableOpacity> : null)
+
+                    {moviesListFavoriteEvaluation.map((item, i) => i < 5 ?
+
+                        <View key={i}>
+                            <TouchableOpacity  >
+                                <Image source={{ uri: `https://image.tmdb.org/t/p/original/${item.poster_path}` }} style={styles.styleItem} />
+
+                            </TouchableOpacity>
+                            <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
+                                <Image source={star_red} style={{ width: 10, height: 10, marginRight: 8 }} />
+                                <Text style={{ color: "#fff", fontSize: 13 }}>{item.vote_average?.toFixed(1)}/10</Text>
+                            </View>
+
+                        </View>
+                        : null)
                     }
                 </View>
 

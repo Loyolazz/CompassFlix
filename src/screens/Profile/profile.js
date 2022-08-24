@@ -8,24 +8,28 @@ import MoviesList from '../../Components/ProfileComp/MoviesList/moviesList';
 import SeriesList from '../../Components/ProfileComp/SerieList/serieList';
 import { Context } from '../../context'
 import { getAccount } from '../../services/api';
-
+import Api from '../../services/api';
 export default function Profile({ navigation }) {
-  const [nameUser, setNameUser] = useState('')
+  const [dataUser, setDataUser] = useState('')
+  const [evaluationMovies, setEvaluationMovies] = useState([])
+  const [evaluationSeries, setEvaluationSeries] = useState([])
   const [avatar, setAvatar] = useState('')
+  const apikey = 'ecd878f5eb6f5ca388735c699adaff80';
   const [colorBtn, setColorBtn] = useState({
     moviesButton: "#9C4A8B",
     seriesButton: "#474A51"
   });
   const MoviesListDeafult = (
     <MoviesList
-      nameUser={nameUser.name}
+      nameUser={dataUser.name}
+      onPressDetails={() => navigation.navigate('MoviesDetail')}
       onPressFavorite={() => navigation.navigate('MoviesFavorites')}
       onPressEvaluation={() => navigation.navigate('EvaluationMovies')}
     />
   );
   const SeriesListDeafult = (
     <SeriesList
-      nameUser={nameUser.name}
+      nameUser={dataUser.name}
       onPressFavorite={() => navigation.navigate('SeriesFavorites')}
       onPressEvaluation={() => navigation.navigate('EvaluationSeries')}
     />
@@ -36,14 +40,26 @@ export default function Profile({ navigation }) {
   useEffect(() => {
     const getResponseAccount = async () => {
       const response = await getAccount(sessionId);
-      setNameUser(response.data);
-      console.log(response.data);
+      setDataUser(response.data);
     };
     getResponseAccount();
   }, [sessionId]);
 
-  //const uri = `http://image.tmdb.org/t/p/original/${nameUser?.avatar?.tmdb?.avatar_path}`
+  useEffect(() => {
+    const EvaluationMovies = async () => {
+      const response = await Api.get(`/account/${dataUser}/rated/movies?api_key=${apikey}&session_id=${sessionId}`)
+      setEvaluationMovies(response.data.total_results);
+    };
+    EvaluationMovies();
+  }, [dataUser, apikey, sessionId])
 
+  useEffect(() => {
+    const EvaluationSeries = async () => {
+      const response = await Api.get(`/account/${dataUser}/rated/tv?api_key=${apikey}&session_id=${sessionId}`)
+      setEvaluationSeries(response.data.total_results);
+    };
+    EvaluationSeries();
+  }, [dataUser, apikey, sessionId])
 
   function MoviesListPress() {
     setListView(MoviesListDeafult);
@@ -53,24 +69,16 @@ export default function Profile({ navigation }) {
     setListView(SeriesListDeafult);
     setColorBtn({ moviesButton: "#474A51", seriesButton: "#9C4A8B" })
   }
+  const totalEvaluationNumber = evaluationSeries + evaluationMovies
   return (
     <View style={styles.container}>
       <HeaderProfile
-        nameUser={nameUser.name}
-        textEvaluation={'Avaliação'}
-        numberEvaluation={30}
-        photoUser={`http://image.tmdb.org/t/p/original/${nameUser?.avatar?.tmdb?.avatar_path}`}
+        nameUser={dataUser.name}
+        textEvaluation={'Avaliações'}
+        numberEvaluation={totalEvaluationNumber}
+        photoUser={`http://image.tmdb.org/t/p/original/${dataUser?.avatar?.tmdb?.avatar_path}`}
         LogOut={() => navigation.navigate('Login')}
       />
-{/* <Image
-                source={{
-                  uri: `http://image.tmdb.org/t/p/original/${nameUser?.avatar?.tmdb?.avatar_path}`,
-                }}
-                style={{
-                  width: 100,
-                  height: 100,
-                }}
-              /> */}
 
       <View style={styles.containerFavoritesAndEvaluation}>
         <View style={styles.containerIcons}>
@@ -93,10 +101,13 @@ export default function Profile({ navigation }) {
             </TouchableOpacity>
           </View>
         </View>
-        <View>{listView}
+        <View>
+
+          <Text style={{ color: '#fff' }}>{evaluationMovies.total_results}</Text>
+          {listView}
 
         </View>
-       
+
       </View>
     </View>
   );
