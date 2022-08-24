@@ -53,18 +53,16 @@ const { sessionId } = useContext(Context)
                     <Text style={styles.textFavorites}>Filmes favoritos de {nameUser}</Text>
                     <TouchableOpacity onPress={onPressFavorite}>
                         <Text style={styles.textViewAll}>Ver tudo</Text>
-
                     </TouchableOpacity>
-
                 </View>
                 <View style={styles.viewListFavorites}>
                     {moviesListFavorite.map((item, i) => i < 4 ?
                         <TouchableOpacity key={i}   onPress={() => {
-                            setIdItem(item.id)
+                            setIdItem(item.id),
                             navigation.navigate('MoviesDetail', {item});
                           }}>
                             <Image source={{ uri: `https://image.tmdb.org/t/p/original/${item.poster_path}` }} style={styles.styleItem} />
-                        <Text>{}</Text>
+                        <Text style={{color:'red'}}>{item.id}</Text>
                         </TouchableOpacity> : null)
                     }
                 </View>
@@ -78,6 +76,7 @@ const { sessionId } = useContext(Context)
                         <Text style={styles.textViewAll}>Ver tudo</Text>
                     </TouchableOpacity>
                 </View>
+                
                 <View style={styles.viewListEvaluation}>
 
                     {moviesListFavoriteEvaluation.map((item, i) => i < 5 ?

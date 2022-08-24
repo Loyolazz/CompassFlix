@@ -89,8 +89,9 @@ export default StyleSheet.create({
     },
     headerFavorites: {
         width: '100%',
-        height: 180,
-        alignItems: 'center'
+        height: 160,
+        alignItems: 'center',
+        marginTop:-20
     },
     viewTextFavorites: {
         width: '100%',
@@ -100,7 +101,8 @@ export default StyleSheet.create({
     },
     textFavorites: {
         color: '#fff',
-        marginTop: 10
+        marginTop: 10,
+        marginBottom: 10
     },
     textEvaluation: {
         color: '#fff',
@@ -115,7 +117,8 @@ export default StyleSheet.create({
         width: '80%',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginTop: 20
+        marginTop: 10,
+        marginBottom:30
     },
     viewListEvaluation: {
         flexDirection: 'row',

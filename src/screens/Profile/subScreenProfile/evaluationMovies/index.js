@@ -5,7 +5,7 @@ import BtnGoBack from '../../../../Components/ProfileComp/btnGoBack/btn';
 import { Context } from '../../../../context';
 import { getAccount, apiKey } from '../../../../services/api';
 import Api from '../../../../services/api';
-
+import star_red from '../../../../assets/star_red.png'
 export default function EvaluationMovies({ navigation }) {
 
   const [nameUser, setNameUser] = useState([])
@@ -40,9 +40,7 @@ export default function EvaluationMovies({ navigation }) {
       </View>
       <View style={styles.viewText}>
         <Text style={styles.title}>Avaliações de filmes recentes de <Text style={{ color: '#E9A6A6' }}>{nameUser}</Text>!</Text>
-        <Text style={styles.title}>{apiKey}</Text>
-        <Text style={styles.title}>{idUser}</Text>
-        <Text style={styles.title}>{sessionId}</Text>
+  
       </View>
 
       <FlatList
@@ -73,7 +71,11 @@ export default function EvaluationMovies({ navigation }) {
               flexDirection: 'row',
               marginTop: 5,
               alignItems: 'center'}} />
+              <View>
+               <Image source={star_red} style={{ width: 10, height: 10, marginRight: 8 }} />
+                <Text style={{ color: "#fff", fontSize: 13 }}>{item.vote_average?.toFixed(1)}/10</Text>
               {/* <Text>{item.id}</Text> */}
+              </View>
             </View></View>
 
 

@@ -1,34 +1,36 @@
 import React,{useState,useContext,useEffect} from 'react';
-import { View, Text,FlatList } from 'react-native';
+import { View, Text,FlatList,Image,TouchableOpacity } from 'react-native';
 import styles from './styles';
 import BtnGoBack from '../../../../Components/ProfileComp/btnGoBack/btn';
 import { Context } from '../../../../context';
-import { getAccount } from '../../../../services/api';
+import { getAccount, apiKey } from '../../../../services/api';
+import Api from '../../../../services/api';
 
 export default function MoviesFavorites({navigation}) {
-  
-  const DATA = [
-    { id: '1' },
-    { id: '2' },
-    { id: '3' },
-    { id: '4' },
-    { id: '5' },
-    { id: '6' },
-    { id: '7' },
-    { id: '8' },
-    { id: '9' },
-    { id: '10' },
-    { id: '11' },
-    { id: '12' },
-    { id: '13' },
-    { id: '14' },
-    { id: '15' },
-    { id: '16' },
-    { id: '17' },
-
-  ]
-  const [nameUser, setNameUser] = useState('')
+  const [nameUser, setNameUser] = useState([])
+  const [idUser, setIdUser] = useState([])
+  const [idItem, setIdItem] = useState(null)
   const { sessionId } = useContext(Context)
+  const [moviesListFavoriteEvaluation, setMovieListFavoriteEvaluation] = useState([])
+
+  useEffect(() => {
+    const getResponseAccount = async () => {
+      const response = await getAccount(sessionId);
+      setNameUser(response.data.name);
+      setIdUser(response.data.id)
+    };
+    getResponseAccount();
+  }, []);
+
+    useEffect(() => {
+      const EvaluationMovies = async () => {
+          const response = await Api.get(`/account/${idUser}/favorite/movies?api_key=${apiKey}&session_id=${sessionId}`)
+          setMovieListFavoriteEvaluation(response.data.results);
+          console.log(response.data.results)
+      };
+      EvaluationMovies();
+  }, [idUser, apiKey, sessionId])
+  
   useEffect(() => {
     const getResponseAccount = async () => {
       const response = await getAccount(sessionId);
@@ -37,6 +39,7 @@ export default function MoviesFavorites({navigation}) {
     };
     getResponseAccount();
   }, [sessionId]);
+
   return (
    
      <View style={styles.container}>
@@ -49,7 +52,7 @@ export default function MoviesFavorites({navigation}) {
 
      <FlatList
        numColumns={4}
-       data={DATA}
+       data={moviesListFavoriteEvaluation}
 
        keyExtractor={(item) => item.id}
        renderItem={({ item }) =>
@@ -62,17 +65,17 @@ export default function MoviesFavorites({navigation}) {
           paddingHorizontal: 10,
           marginTop: 5,
          }}>
-           <View style={{
-             width: 76,
-             height: 95,
-             borderRadius: 20,
-             backgroundColor: '#fff',
-             flexDirection: 'row',
-             marginTop: 5,
-             alignItems: 'center'
-           }}>
-             <Text>{item.id}</Text>
-           </View></View>
+           <TouchableOpacity onPress={() => {
+            setIdItem(item.id),
+              navigation.navigate('MoviesDetail', { item });
+          }}>
+               <Image source={{ uri: `https://image.tmdb.org/t/p/original/${item.poster_path}` }} style={{  width: 76,
+              height: 95,
+              borderRadius: 20,
+              flexDirection: 'row',
+              marginTop: 5,
+              alignItems: 'center'}} />
+           </TouchableOpacity></View>
 
 
        }
