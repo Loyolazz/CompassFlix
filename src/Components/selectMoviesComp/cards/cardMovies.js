@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
 import star from '../../../assets/star_red.png'
 
-const CardMovies = ({text, poster_path, onPress}) => {
+const CardMovies = memo(({text, poster_path, onPress}) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={onPress}>
@@ -17,7 +17,7 @@ const CardMovies = ({text, poster_path, onPress}) => {
       </View>
     </View>
   );
-};
+});
 
 const styles = StyleSheet.create({
   container: {
