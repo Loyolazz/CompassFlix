@@ -3,6 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Login from '../../screens/login/login';
 import TabBottomRoutes from '../tab/tabbar';
 import {SelectionMovies} from '../../screens/selectionMovies/selectionMovies';
+import SeriesDetail from '../../screens/seriesDetail';
 import {Splash} from '../../screens/Splash';
 
 import MoviesDetail from '../../screens/moviesDetail/moviesDetail';
@@ -17,6 +18,7 @@ const Stack = () => {
       <Screen name="SelectionMovies" component={SelectionMovies} />
 
       <Screen name="MoviesDetail" component={MoviesDetail} />
+      <Screen name="SeriesDetail" component={SeriesDetail} />
     </Navigator>
   );
 };
