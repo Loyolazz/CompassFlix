@@ -23,7 +23,7 @@ export default StyleSheet.create({
         color: '#fff'
     },
     viweEvaluation: {
-        marginTop: 50,
+        marginTop: 20,
         width: '100%',
         alignItems: 'center'
     },
@@ -89,9 +89,8 @@ export default StyleSheet.create({
     },
     headerFavorites: {
         width: '100%',
-        height: 160,
-        alignItems: 'center',
-        marginTop:-20
+        height: 180,
+        alignItems: 'center'
     },
     viewTextFavorites: {
         width: '100%',
@@ -101,8 +100,7 @@ export default StyleSheet.create({
     },
     textFavorites: {
         color: '#fff',
-        marginTop: 10,
-        marginBottom: 10
+        marginTop: 10
     },
     textEvaluation: {
         color: '#fff',
@@ -117,8 +115,7 @@ export default StyleSheet.create({
         width: '80%',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginTop: 10,
-     
+        marginTop: 20
     },
     viewListEvaluation: {
         flexDirection: 'row',

@@ -16,7 +16,6 @@ const Stack = () => {
       <Screen name="Login" component={Login} />
       <Screen name="TabBottomRoutes" component={TabBottomRoutes} />
       <Screen name="SelectionMovies" component={SelectionMovies} />
-
       <Screen name="MoviesDetail" component={MoviesDetail} />
       <Screen name="SeriesDetail" component={SeriesDetail} />
     </Navigator>
