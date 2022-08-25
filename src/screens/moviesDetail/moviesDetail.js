@@ -12,9 +12,12 @@ import Load from '../../Components/Load';
 const apikey = 'api_key=80eb37af6714ab187d2c58f9acc83af3';
 const language = 'language=pt-BR';
 
+import ModalAvaluete from '../../Components/ModalAvaluate'
+
 const MoviesDetail = ({ route, navigation }) => {
   const [details, setDetails] = useState({});
   const [detailsCredits, setDetailsCredits] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
   const { item } = route?.params || {};
   const id = `${item.id}`;
 
