@@ -14,7 +14,7 @@ export function SelectionSeries({ navigation }) {
     const [selectedId, setSelectedId] = useState()
     const [loading, setLoading] = useState(false)
     const [nameUser, setNameUser] = useState()
-    const {id} = useContext(Context)
+    const {sessionId} = useContext(Context)
 
     async function getResponseSeries() {
         const response = await getSeries(page)
@@ -28,7 +28,7 @@ export function SelectionSeries({ navigation }) {
     }, [])
     useEffect(() => {
         const getResponseAccount = async () => {
-            const response = await getAccount(id)
+            const response = await getAccount(sessionId)
             setNameUser(response.data.name)
             console.log(response.data.name)
         }
