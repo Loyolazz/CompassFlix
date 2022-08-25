@@ -14,6 +14,15 @@ export const getMovies = async page => {
     console.log(err);
   });
 };
+
+export const getSeries = async page => {
+  return Api.get(
+    `/tv/popular?api_key=${apiKey}&language=pt-BR&page=${page}`,
+  ).catch(err => {
+    console.log(err);
+  });
+};
+
 export const getToken = async () => {
   return Api
     .get(`/authentication/token/new?api_key=${apiKey}`)

@@ -1,15 +1,11 @@
 import { StyleSheet } from "react-native"
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#000',
-        paddingHorizontal: 10,
-    },
+   
     header: {
-        marginTop: 60,
-        alignItems: 'flex-start',
-        marginHorizontal: 10
+        marginTop: 50,
+        alignItems:'flex-start',
+        paddingHorizontal:10,
     },
     text: {
         fontSize: 20,
@@ -38,22 +34,12 @@ const styles = StyleSheet.create({
         color: '#FFF',
         marginTop: 8
     },
-    popularMovies: {
+    popularSeries: {
         fontSize: 16,
         fontWeight: '600',
         color: '#FFF',
         marginTop: 30,
         marginBottom: 40
-    },
-    containerCardMovies: {
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        flex: 1,
-        backgroundColor: 'blue'
-    },
-    section: {
-        width: '100%',
-        paddingHorizontal: 10,
     }
 })
 
