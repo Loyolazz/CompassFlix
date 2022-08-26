@@ -10,6 +10,7 @@ export default function EvaluationMovies({ navigation }) {
 
   const [nameUser, setNameUser] = useState([])
   const [idUser, setIdUser] = useState([])
+  const [idItem, setIdItem] = useState(null)
   const { sessionId } = useContext(Context)
   const [moviesListFavoriteEvaluation, setMovieListFavoriteEvaluation] = useState([])
 
@@ -22,13 +23,13 @@ export default function EvaluationMovies({ navigation }) {
     getResponseAccount();
   }, []);
 
-    useEffect(() => {
-      const EvaluationMovies = async () => {
-          const response = await Api.get(`/account/${idUser}/rated/movies?api_key=${apiKey}&session_id=${sessionId}`)
-          setMovieListFavoriteEvaluation(response.data.results);
-          console.log(response.data.results)
-      };
-      EvaluationMovies();
+  useEffect(() => {
+    const EvaluationMovies = async () => {
+      const response = await Api.get(`/account/${idUser}/rated/movies?api_key=${apiKey}&session_id=${sessionId}`)
+      setMovieListFavoriteEvaluation(response.data.results);
+
+    };
+    EvaluationMovies();
   }, [idUser, apiKey, sessionId])
 
 
@@ -40,7 +41,7 @@ export default function EvaluationMovies({ navigation }) {
       </View>
       <View style={styles.viewText}>
         <Text style={styles.title}>Avaliações de filmes recentes de <Text style={{ color: '#E9A6A6' }}>{nameUser}</Text>!</Text>
-  
+
       </View>
 
       <FlatList
@@ -61,22 +62,32 @@ export default function EvaluationMovies({ navigation }) {
               width: 76,
               height: 95,
               borderRadius: 20,
-              flexDirection: 'row',
               marginTop: 5,
-              alignItems: 'center'
             }}>
-              <Image source={{ uri: `https://image.tmdb.org/t/p/original/${item.poster_path}` }} style={{  width: 76,
-              height: 95,
-              borderRadius: 20,
-              flexDirection: 'row',
-              marginTop: 5,
-              alignItems: 'center'}} />
-              <View>
-               <Image source={star_red} style={{ width: 10, height: 10, marginRight: 8 }} />
+              <TouchableOpacity
+                onPress={() => {
+                  setIdItem(item.id),
+                    navigation.navigate('MoviesDetail', { item });
+                }}
+              >
+                <Image source={{ uri: `https://image.tmdb.org/t/p/original/${item.poster_path}` }} style={{
+                  width: 76,
+                  height: 95,
+                  borderRadius: 20,
+                  flexDirection: 'row',
+                  marginTop: 5,
+                  alignItems: 'center'
+                }} />
+              </TouchableOpacity >
+              <View  style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
+                <Image source={star_red} style={{ width: 10, height: 10, marginRight: 8 }} />
                 <Text style={{ color: "#fff", fontSize: 13 }}>{item.vote_average?.toFixed(1)}/10</Text>
-              {/* <Text>{item.id}</Text> */}
               </View>
-            </View></View>
+
+
+
+            </View>
+          </View>
 
 
         }
