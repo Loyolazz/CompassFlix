@@ -117,8 +117,8 @@ export default StyleSheet.create({
         width: '80%',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginTop: 10,
-     
+       
+        height:100
     },
     viewListEvaluation: {
         flexDirection: 'row',

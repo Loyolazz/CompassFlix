@@ -12,7 +12,7 @@ import { getAccount } from '../../services/api';
 import Api from '../../services/api';
 import star_red from '../../assets/star_red.png'
 export default function Profile({ navigation }) {
-  
+
   const [evaluationMovies, setEvaluationMovies] = useState([])
   const [evaluationSeries, setEvaluationSeries] = useState([])
   const { sessionId } = useContext(Context)
@@ -34,6 +34,7 @@ export default function Profile({ navigation }) {
     };
     getAccountId();
   }, [sessionId]);
+
   useEffect(() => {
     const init = async () => {
       const response = await Api.get(`/account/${idUser}/favorite/tv?api_key=${apikey}&session_id=${sessionId}`)
@@ -41,6 +42,7 @@ export default function Profile({ navigation }) {
     };
     init();
   }, [idUser, apikey, sessionId])
+
   useEffect(() => {
     const getResponseIdUser = async () => {
       const response = await getAccount(sessionId);
@@ -48,14 +50,14 @@ export default function Profile({ navigation }) {
     };
     getResponseIdUser();
   }, [sessionId]);
-/////////////////////////
+  /////////////////////////
   useEffect(() => {
     const init = async () => {
       const response = await Api.get(`/account/${idUser}/favorite/movies?api_key=${apikey}&session_id=${sessionId}`)
       setMovieListFavorite(response.data.results);
     };
     init();
-  }, [idUser,  sessionId])
+  }, [idUser, sessionId])
   ////////////////////////
   useEffect(() => {
     const EvaluationMovies = async () => {
@@ -65,6 +67,7 @@ export default function Profile({ navigation }) {
     };
     EvaluationMovies();
   }, [idUser, apikey, sessionId])
+
   useEffect(() => {
     const EvaluationMovies = async () => {
       const response = await Api.get(`/account/${dataUser}/rated/movies?api_key=${apikey}&session_id=${sessionId}`)
@@ -72,6 +75,7 @@ export default function Profile({ navigation }) {
     };
     EvaluationMovies();
   }, [dataUser, apikey, sessionId])
+
   useEffect(() => {
     const EvaluationSeries = async () => {
       const response = await Api.get(`/account/${dataUser}/rated/tv?api_key=${apikey}&session_id=${sessionId}`)
@@ -80,14 +84,7 @@ export default function Profile({ navigation }) {
     EvaluationSeries();
   }, [dataUser, apikey, sessionId])
 
-  function MoviesListPress() {
-    setListView(MoviesListDeafult);
-    setColorBtn({ moviesButton: "#9C4A8B", seriesButton: "#474A51" })
-  }
-  function SeriesListPress() {
-    setListView(SeriesListDeafult);
-    setColorBtn({ moviesButton: "#474A51", seriesButton: "#9C4A8B" })
-  }
+
   const DATA2 = [
     { id: '0' },
     { id: '1' },
@@ -106,61 +103,62 @@ export default function Profile({ navigation }) {
     getResponseAccount();
   }, [sessionId]);
 
-
-  const  MoviesListDeafult = (
+  const MoviesListDeafult = (
    
-    <View style={styles.headerFavorites}>
-
-      <View style={styles.viewTextFavorites}>
-        <Text style={styles.textFavorites}>Filmes favoritos de {dataUser.name}</Text>
-        <TouchableOpacity onPress={() => navigation.navigate('MoviesFavorites')}>
-          <Text style={styles.textViewAll}>Ver tudo</Text>
-        </TouchableOpacity>
-      </View>
-
-      <View style={styles.viewListFavorites}>
-        {moviesListFavorite.map((item, i) => i < 4 ?
-          <TouchableOpacity key={i} onPress={() => {
-            setIdItem(item.id),
-              navigation.navigate('MoviesDetail', { item });
-          }}>
-            <Image source={{ uri: `https://image.tmdb.org/t/p/original/${item.poster_path}` }} style={styles.styleItem} />
-          </TouchableOpacity> : null)
-        }
-      </View>
-
-      <View style={styles.headerEvaluation}>
-
-        <View style={styles.viewTextEvaluation}>
-          <Text style={styles.textEvaluation}>Avaliações de filmes recentes de {dataUser.name}</Text>
-          <TouchableOpacity onPress={() => navigation.navigate('EvaluationMovies')}>
-            <Text style={styles.textViewAll}>Ver tudo</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.viewListEvaluation}>
-          {moviesListFavoriteEvaluation.map((item, i) => i < 5 ?
-            <TouchableOpacity key={i} onPress={() => {
-              setIdItem(item.id),
-                navigation.navigate('MoviesDetail', { item });
-            }}>
-
-              <View >
-                <Image source={{ uri: `https://image.tmdb.org/t/p/original/${item.poster_path}` }} style={styles.styleItem} />
-              </View>
-
-              <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-                <Image source={star_red} style={{ width: 10, height: 10, marginRight: 8 }} />
-                <Text style={{ color: "#fff", fontSize: 13 }}>{item.vote_average?.toFixed(1)}/10</Text>
-              </View>
-
+        <View>
+        <View style={styles.headerFavorites}>
+  
+          <View style={styles.viewTextFavorites}>
+            <Text style={styles.textFavorites}>Filmes favoritos de {dataUser.name}</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('MoviesFavorites')}>
+              <Text style={styles.textViewAll}>Ver tudo</Text>
             </TouchableOpacity>
-            : null)
-          }
+          </View>
+  
+          <View style={styles.viewListFavorites}>
+            {moviesListFavorite.map((item, i) => i < 4 ?
+              <TouchableOpacity key={i} onPress={() => {
+                setIdItem(item.id),
+                  navigation.navigate('MoviesDetail', { item });
+              }}>
+                <Image source={{ uri: `https://image.tmdb.org/t/p/original/${item.poster_path}` }} style={styles.styleItem} />
+              </TouchableOpacity> : null)
+            }
+          </View>
         </View>
+        <View style={styles.headerEvaluation}>
+  
+          <View style={styles.viewTextEvaluation}>
+            <Text style={styles.textEvaluation}>Avaliações de filmes recentes de {dataUser.name}</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('EvaluationMovies')}>
+              <Text style={styles.textViewAll}>Ver tudo</Text>
+            </TouchableOpacity>
+          </View>
+  
+          <View style={styles.viewListEvaluation}>
+            {moviesListFavoriteEvaluation.map((item, i) => i < 5 ?
+              <TouchableOpacity key={i} onPress={() => {
+                setIdItem(item.id),
+                  navigation.navigate('MoviesDetail', { item });
+              }}>
+  
+                <Image source={{ uri: `https://image.tmdb.org/t/p/original/${item.poster_path}` }} style={styles.styleItem} />
+  
+                <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
+                  <Image source={star_red} style={{ width: 10, height: 10, marginRight: 8 }} />
+                  <Text style={{ color: "#fff", fontSize: 13 }}>{item.vote_average?.toFixed(1)}/10</Text>
+                </View>
+  
+              </TouchableOpacity>
+              : null)
+            }
+          </View>
+        </View>
+  
       </View>
-    </View>
+    
 
+   
   );
   const SeriesListDeafult = (
     <View>
@@ -207,10 +205,12 @@ export default function Profile({ navigation }) {
 
   );
   const [listView, setListView] = useState(MoviesListDeafult);
+
   const Logout = async () => {
     await AsyncStorage.clear();
     navigation.replace('Login');
   };
+ 
   return (
     <View style={styles.container}>
       <HeaderProfile
@@ -245,9 +245,9 @@ export default function Profile({ navigation }) {
         <View>
 
           <Text style={{ color: '#fff' }}>{evaluationMovies.total_results}</Text>
-          <View>{listView}</View>
-
-
+          <View>
+            {listView}
+            </View>
         </View>
 
       </View>
