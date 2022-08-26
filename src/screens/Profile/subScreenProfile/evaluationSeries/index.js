@@ -1,81 +1,109 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { View, Text, FlatList } from 'react-native';
+import React, {useState, useContext, useEffect} from 'react';
+import {View, Text, FlatList, TouchableOpacity, Image} from 'react-native';
 import BtnGoBack from '../../../../Components/ProfileComp/btnGoBack/btn';
 import styles from './styles';
-import { Context } from '../../../../context';
-import { getAccount } from '../../../../services/api';
+import {Context} from '../../../../context';
+import {getAccount, apiKey} from '../../../../services/api';
+import Api from '../../../../services/api';
+import star_red from '../../../../assets/star_red.png';
+export default function EvaluationSeries({navigation}) {
+  const [nameUser, setNameUser] = useState('');
+  const [idUser, setIdUser] = useState([]);
+  const [idItem, setIdItem] = useState(null);
+  const {sessionId} = useContext(Context);
+  const [serieListFavoriteEvaluation, setSerieListFavoriteEvaluation] =
+    useState([]);
 
-export default function EvaluationSeries({ navigation }) {
-  const DATA = [
-    { id: '1' },
-    { id: '2' },
-    { id: '3' },
-    { id: '4' },
-    { id: '5' },
-    { id: '6' },
-    { id: '7' },
-    { id: '8' },
-    { id: '9' },
-    { id: '10' },
-    { id: '11' },
-    { id: '12' },
-    { id: '13' },
-    { id: '14' },
-    { id: '15' },
-    { id: '16' },
-    { id: '17' },
-
-  ]
-  const [nameUser, setNameUser] = useState('')
-
-  const { sessionId } = useContext(Context)
   useEffect(() => {
     const getResponseAccount = async () => {
       const response = await getAccount(sessionId);
       setNameUser(response.data.name);
-      console.log(response.data.name)
+      setIdUser(response.data.id);
     };
     getResponseAccount();
   }, [sessionId]);
-  return (
 
+  useEffect(() => {
+    const EvaluationMovies = async () => {
+      const response = await Api.get(
+        `/account/${idUser}/rated/tv?api_key=${apiKey}&session_id=${sessionId}`,
+      );
+      setSerieListFavoriteEvaluation(response.data.results);
+      console.log(response.data.results);
+    };
+    EvaluationMovies();
+  }, [idUser, apiKey, sessionId]);
+
+  return (
     <View style={styles.container}>
-      <View style={{ marginTop: 20 }}>
+      <View style={{marginTop: 20}}>
         <BtnGoBack onPress={() => navigation.navigate('Profile')} />
       </View>
       <View style={styles.viewText}>
-        <Text style={styles.title}>Avaliações de series recentes de <Text style={{ color: '#E9A6A6' }}>{nameUser}</Text>!</Text>
+        <Text style={styles.title}>
+          Avaliações de series recentes de{' '}
+          <Text style={{color: '#E9A6A6'}}>{nameUser}</Text>!
+        </Text>
       </View>
 
       <FlatList
         numColumns={4}
-        data={DATA}
-
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) =>
-          <View style={{
-            justifyContent: 'space-between',
-            alignItems: 'flex-start',
-            flex: 1,
-            flexDirection: 'column',
-            marginBottom: 20,
-            paddingHorizontal: 10,
-            marginTop: 5,
-          }}>
-            <View style={{
-              width: 76,
-              height: 95,
-              borderRadius: 20,
-              backgroundColor: '#fff',
-              flexDirection: 'row',
+        data={serieListFavoriteEvaluation}
+        keyExtractor={item => item.id}
+        renderItem={({item}) => (
+          <View
+            style={{
+              justifyContent: 'space-between',
+              alignItems: 'flex-start',
+              flex: 1,
+              flexDirection: 'column',
+              marginBottom: 20,
+              paddingHorizontal: 10,
               marginTop: 5,
-              alignItems: 'center'
             }}>
-              <Text>{item.id}</Text>
-            </View></View>
-
-
-        }
+            <View
+              style={{
+                width: 76,
+                height: 95,
+                borderRadius: 20,
+                marginTop: 5,
+              }}>
+              <TouchableOpacity
+                onPress={() => {
+                  setIdItem(item.id),
+                    navigation.navigate('SeriesDetail', {item});
+                }}>
+                <Image
+                  source={{
+                    uri: `https://image.tmdb.org/t/p/original/${item.poster_path}`,
+                  }}
+                  style={{
+                    width: 76,
+                    height: 95,
+                    borderRadius: 20,
+                    flexDirection: 'row',
+                    marginTop: 5,
+                    alignItems: 'center',
+                  }}
+                />
+              </TouchableOpacity>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'flex-start',
+                  alignItems: 'center',
+                }}>
+                <Image
+                  source={star_red}
+                  style={{width: 10, height: 10, marginRight: 8}}
+                />
+                <Text style={{color: '#fff', fontSize: 13}}>
+                  {item.vote_average?.toFixed(1)}/10
+                </Text>
+              </View>
+            </View>
+          </View>
+        )}
       />
     </View>
   );

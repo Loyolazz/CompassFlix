@@ -75,8 +75,15 @@ const styles = StyleSheet.create({
     color: '#000',
     textTransform: 'uppercase',
     fontWeight: 'bold',
-    marginTop: 7
-  }
+  },
+  iconPincel: {
+    position: 'absolute',
+    top: -4,
+    right: -4,
+    padding: 1,
+    borderRadius: 30,
+    backgroundColor: '#C4C4C4',
+  },
 });
 
 export default styles;
