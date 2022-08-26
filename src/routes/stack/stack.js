@@ -4,7 +4,7 @@ import Login from '../../screens/login/login';
 import TabBottomRoutes from '../tab/tabbar';
 import {SelectionMovies} from '../../screens/selectionMovies/selectionMovies';
 import SeriesDetail from '../../screens/seriesDetail';
-import {Splash} from '../../screens/Splash';
+import ProfileX from '../../screens/ProfileX';
 import SlapshLoadLogin from '../../Components/SplashLoadLogin/splashLoadLogin';
 
 import MoviesDetail from '../../screens/moviesDetail/moviesDetail';
@@ -19,6 +19,7 @@ const Stack = () => {
       <Screen name="SelectionMovies" component={SelectionMovies} />
       <Screen name="MoviesDetail" component={MoviesDetail} />
       <Screen name="SeriesDetail" component={SeriesDetail} />
+      <Screen name="ProfileX" component={ProfileX} />
     </Navigator>
   );
 };

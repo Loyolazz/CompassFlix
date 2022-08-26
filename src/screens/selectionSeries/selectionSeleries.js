@@ -15,7 +15,7 @@ export function SelectionSeries({navigation}) {
   const [loading, setLoading] = useState(false);
   const [nameUser, setNameUser] = useState();
   const {sessionId} = useContext(Context);
-
+  const [dataUser, setDataUser] = useState('username');
   async function getResponseSeries() {
     const response = await getSeries(page);
     setSeries([...series, ...response.data.results]);
@@ -30,13 +30,22 @@ export function SelectionSeries({navigation}) {
       setNameUser(response.data.name);
       console.log(response.data.name);
     };
-    getResponseAccount();
+    const getResponseAccountPhoto = async () => {
+      const response = await getAccount(sessionId);
+     setDataUser(response.data);
+    };
+    getResponseAccountPhoto();
+    getResponseAccount()
   }, []);
+
 
   return series && nameUser ? (
     <View style={styles.container}>
       <View style={styles.section}>
-        <HeaderSeries nameUser={nameUser} />
+        <HeaderSeries 
+        nameUser={nameUser}
+        photoUser={`http://image.tmdb.org/t/p/original/${dataUser?.avatar?.tmdb?.avatar_path}`}
+        />
       </View>
       <FlatList
         data={series}

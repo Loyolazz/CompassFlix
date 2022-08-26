@@ -8,13 +8,16 @@ import Slashlogin from '../../assets/svg/Slashlogin.json'
 
 export default function SlapshLoadLogin() {
   const navigation = useNavigation()
-  const handleLogin = () => {
-    navigation.navigate('Login')
-  }
+  const FinashSplach = () => {
+    navigation.reset({
+      index: 0,
+      routes: [{name: 'Login'}],
+    });
+  };
 
   useEffect (()=>{
     setTimeout(() => {
-      handleLogin();
+      FinashSplach();
     }, 2000)
   },[])
 
