@@ -30,23 +30,23 @@ export const getToken = async () => {
 };
 
 export const validateToken = async (email, password, token) => {
-  return Api
-    .post(`/authentication/token/validate_with_login?api_key=${apiKey}`, {
+  return Api.post(
+    `/authentication/token/validate_with_login?api_key=${apiKey}`,
+    {
       username: email,
       password: password,
       request_token: token,
-    })
+    },
+  )
     .then(response =>
-      Api
-        .post(`/authentication/session/new?api_key=${apiKey}`, {
-          request_token: response.data.request_token,
-        })
-        .catch(error => {
-          Alert.alert('Atenção!', 'Usuário  ou senha inválidos');
-        }),
+      Api.post(`/authentication/session/new?api_key=${apiKey}`, {
+        request_token: response.data.request_token,
+      }).catch(error => {
+        console.log(error);
+      }),
     )
     .catch(error => {
-      Alert.alert('Atenção!', 'Usuário ou senha inválidos');
+      console.log(error);
     });
 };
 
@@ -73,27 +73,48 @@ export const getSeriesDetails = async id => {
 };
 
 export const ratePost = async (midia, id, sessionId, value) => {
-  return Api
-    .post(
-      `/${midia}/${id}/rating?api_key=${apiKey}&session_id=${sessionId}`,
-      {
-        value: value, 
-      },
-    )
-    .catch(error => {
-      console.log(error);
-    });
+  return Api.post(
+    `/${midia}/${id}/rating?api_key=${apiKey}&session_id=${sessionId}`,
+    {
+      value: value,
+    },
+  ).catch(error => {
+    console.log(error);
+  });
 };
 
 export const getNotas = async (midia, id, sessionId) => {
-  return Api
-    .get(
-      `/${midia}/${id}/account_states?api_key=${apiKey}&session_id=${sessionId}`,
-    )
-    .catch(error => {
-      console.log(error);
-    });
+  return Api.get(
+    `/${midia}/${id}/account_states?api_key=${apiKey}&session_id=${sessionId}`,
+  ).catch(error => {
+    console.log(error);
+  });
 };
 
+export const EvaluationSeries = async (dataUser, midia, sessionId) => {
+  return Api.get(
+    `/account/${dataUser}/rated/${midia}?api_key=${apiKey}&session_id=${sessionId}`,
+  ).catch(error => {
+    console.log(error);
+  });
+};
+
+export const getMoviesFavorites = async (idUser, midia, sessionId) => {
+  return Api.get(
+    `/account/${idUser}/favorite/${midia}?api_key=${apiKey}&session_id=${sessionId}`,
+  ).catch(error => {
+    console.log(error);
+  });
+};
+
+export const getPostMovies = async (sessionId, midia, idUser) => {
+  return Api
+    .get(
+      `/account/${idUser}/rated/${midia}?api_key=${apiKey}&session_id=${sessionId}`,
+    )
+    .catch(error => {
+      console.warn(error);
+    });
+};
 
 export default Api;

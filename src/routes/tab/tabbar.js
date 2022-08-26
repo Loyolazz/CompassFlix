@@ -1,8 +1,7 @@
 import React from 'react';
 import {View, Image} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Icon} from '@rneui/themed';
-import Profile from '../../screens/Profile/profile';
+import ProfileX from '../../screens/ProfileX';
 import {SelectionSeries} from '../../screens/selectionSeries/selectionSeleries';
 import RoutesPrifile from '../routesProfile/routesProfile'
 import {SelectionMovies} from '../../screens/selectionMovies/selectionMovies';
@@ -49,8 +48,8 @@ const TabBottomRoutes = () => {
       />
 
       <Tab.Screen
-        name="RoutesPrifile"
-        component={RoutesPrifile}
+        name="ProfileX"
+        component={ProfileX}
         options={{
           tabBarIcon: ({color, focused}) => (
             <ButtonUser focused={focused} color={color} />
