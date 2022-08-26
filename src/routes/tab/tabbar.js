@@ -48,8 +48,8 @@ const TabBottomRoutes = () => {
       />
 
       <Tab.Screen
-        name="ProfileX"
-        component={ProfileX}
+        name="Profile"
+        component={RoutesPrifile}
         options={{
           tabBarIcon: ({color, focused}) => (
             <ButtonUser focused={focused} color={color} />
