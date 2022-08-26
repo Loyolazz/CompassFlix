@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {
   KeyboardAvoidingView,
   Image,
@@ -15,10 +15,9 @@ import { useNavigation } from '@react-navigation/native';
 import Load from '../../Components/Load';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import {Context} from '../../context';
 
-import { Context } from '../../context';
-
-import { getToken, validateToken } from '../../services/api';
+import {getToken, validateToken} from '../../services/api';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -26,7 +25,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [secureTextEntryIcon, setSecureTextEntryIcon] = useState(true);
   const [token, setToken] = useState();
-  const { setSessionId } = useContext(Context);
+  const {setSessionId} = useContext(Context);
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -42,19 +41,18 @@ const Login = () => {
     if (!email || !password) {
       setTimeout(() => {
         setError(false);
-      }, 3000),setError(true)
+      }, 3000),
+        setError(true);
     }
 
     if (email && password !== '') {
       const response = await validateToken(email, password, token);
 
-  
-        const session_id = response.data.session_id;
-        setSessionId(session_id);
-        await AsyncStorage.setItem('sessionId', session_id);
-        const id = await AsyncStorage.getItem('sessionId');
-        navigation.replace('TabBottomRoutes');
-      
+      const session_id = response.data.session_id;
+      setSessionId(session_id);
+      await AsyncStorage.setItem('sessionId', session_id);
+      const id = await AsyncStorage.getItem('sessionId');
+      navigation.replace('TabBottomRoutes');
     } else {
       console.log('error');
       setLoading(false);
@@ -77,6 +75,7 @@ const Login = () => {
         source={require('../../assets/login_imagens/bannerLogin.png')}
         style={styles.banner}
       />
+
       <Animatable.Image
         animation="zoomInUp"
         duration={1000}
@@ -106,7 +105,7 @@ const Login = () => {
             <Icon
               size={25}
               color={'#ffffff80'}
-              style={{ paddingTop: 10, paddingLeft: 10 }}
+              style={{paddingTop: 10, paddingLeft: 10}}
               name="user"
             />
             <TextInput
@@ -127,7 +126,7 @@ const Login = () => {
             <Icon
               size={30}
               color={'#ffffff80'}
-              style={{ paddingTop: 10, paddingLeft: 10 }}
+              style={{paddingTop: 10, paddingLeft: 10}}
               name="lock"
             />
             <TextInput
@@ -141,9 +140,7 @@ const Login = () => {
               onChangeText={value => SetPassword(value)}
             />
 
-
-
-            <View style={{ position: 'absolute', marginLeft: 210, marginTop: 8 }}>
+            <View style={{position: 'absolute', marginLeft: 210, marginTop: 8}}>
               <TouchableOpacity
                 onPress={() => setSecureTextEntryIcon(!secureTextEntryIcon)}>
                 {secureTextEntryIcon == true ? (

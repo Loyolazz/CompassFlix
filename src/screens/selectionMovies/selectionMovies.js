@@ -17,6 +17,7 @@ export function SelectionMovies({navigation}) {
   const [selected, setSelected] = useState();
   const [idUSer, setIdUser] = useState({})
   const [rated, setRated] = useState([]);
+  const [dataUser, setDataUser] = useState('username');
   const {sessionId, user, setUser} = useContext(Context);
 
   const getResponseMovies = async () => {
@@ -33,7 +34,7 @@ export function SelectionMovies({navigation}) {
       const response = await getAccount(sessionId ? sessionId : storedUser);
       setSelected(response.data);
       setIdUser(response.data.id)
-
+      setDataUser(response.data);
     };
     getResponseAccount();
   }, [sessionId]);
@@ -45,7 +46,10 @@ export function SelectionMovies({navigation}) {
   return movies && selected ? (
     <View style={styles.container}>
       <View style={styles.section}>
-        <HeaderFilm nameUser={selected.name} />
+        <HeaderFilm 
+        nameUser={selected.name}
+        photoUser={`http://image.tmdb.org/t/p/original/${dataUser?.avatar?.tmdb?.avatar_path}`}
+         />
       </View>
 
       <FlatList

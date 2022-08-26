@@ -14,14 +14,15 @@ import {HeaderDetails} from '../../Components/movieDetailsComp/header/index';
 import {SinopseDetails} from '../../Components/movieDetailsComp/sinopse/sinopse';
 import Api from '../../services/api';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import Star from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import BtnGoback from '../../../node_modules/react-native-vector-icons/Ionicons';
 import Load from '../../Components/Load';
 const apikey = 'api_key=80eb37af6714ab187d2c58f9acc83af3';
 const language = 'language=pt-BR';
 import ModalAvaluate from '../../Components/ModalAvaluate';
-import { Context } from '../../context';
-import { getNotas, ratePost } from '../../services/api';
+import {Context} from '../../context';
+import {getNotas, ratePost} from '../../services/api';
 
 const MoviesDetail = ({route, navigation}) => {
   const [details, setDetails] = useState({});
@@ -52,12 +53,12 @@ const MoviesDetail = ({route, navigation}) => {
 
   useEffect(() => {
     const getResponseAvaluate = async () => {
-      const response = await getNotas('movie', id, sessionId)
-      setRated(response.data.rated)
-    }
+      const response = await getNotas('movie', id, sessionId);
+      setRated(response.data.rated);
+    };
 
     getResponseAvaluate();
-  },[sessionId, id])
+  }, [sessionId, id]);
 
   const {sessionId, evaluation} = useContext(Context);
 
@@ -89,6 +90,7 @@ const MoviesDetail = ({route, navigation}) => {
           style={styles.btnGoBack}>
           <BtnGoback name="md-arrow-back" size={23} color={'#000'} />
         </TouchableOpacity>
+
       </ImageBackground>
       <HeaderDetails
         Cartaz={Poster}
@@ -110,30 +112,28 @@ const MoviesDetail = ({route, navigation}) => {
         rate={value => postMovie(value)}
       />
 
-  
-
       {rated ? (
-            <TouchableOpacity
-              activeOpacity={0.5}
-              style={styles.ButtonAvalueteOk}
-              onPress={() => {
-                setModalVisible(true);
-              }}>
-              <Text style={styles.textModalOk}>Sua nota: {rated.value}/10</Text>
+        <TouchableOpacity
+          activeOpacity={0.5}
+          style={styles.ButtonAvalueteOk}
+          onPress={() => {
+            setModalVisible(true);
+          }}>
+          <Text style={styles.textModalOk}>Sua nota: {rated.value}/10</Text>
 
-              <View style={styles.icon}>
-                <EvilIcons name="pencil" size={10} />
-              </View>
-            </TouchableOpacity>
-          ) : (
-            <TouchableOpacity
-              style={styles.ButtonAvaluete}
-              onPress={() => {
-                setModalVisible(true);
-              }}>
-              <Text style={styles.textModal}>Avalie agora</Text>
-            </TouchableOpacity>
-          )}
+          <View style={styles.iconPincel}>
+            <EvilIcons name="pencil" size={10} />
+          </View>
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity
+          style={styles.ButtonAvaluete}
+          onPress={() => {
+            setModalVisible(true);
+          }}>
+          <Text style={styles.textModal}>Avalie agora</Text>
+        </TouchableOpacity>
+      )}
 
       <SinopseDetails titleSinopse={TitleSinopse} textSinopse={TextSinopse} />
       <ScrollView>

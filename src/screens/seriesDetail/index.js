@@ -5,7 +5,6 @@ import {
   ImageBackground,
   Text,
   ScrollView,
-  Button,
 } from 'react-native';
 
 import {HeaderDetails} from '../../Components/movieDetailsComp/header/index';
@@ -103,7 +102,7 @@ export default function SeriesDetail({route, navigation}) {
           }}>
           <Text style={styles.textModalOk}>Sua nota: {rated.value}/10</Text>
 
-          <View style={styles.icon}>
+          <View style={styles.iconPincel}>
             <EvilIcons name="pencil" size={10} />
           </View>
         </TouchableOpacity>
