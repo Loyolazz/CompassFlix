@@ -205,7 +205,14 @@ export default function Profile({ navigation }) {
 
   );
   const [listView, setListView] = useState(MoviesListDeafult);
-
+  function MoviesListPress() {
+    setListView(MoviesListDeafult);
+    setColorBtn({ moviesButton: "#9C4A8B", seriesButton: "#474A51" })
+  }
+  function SeriesListPress() {
+    setListView(SeriesListDeafult);
+    setColorBtn({ moviesButton: "#474A51", seriesButton: "#9C4A8B" })
+  }
   const Logout = async () => {
     await AsyncStorage.clear();
     navigation.replace('Login');
