@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   KeyboardAvoidingView,
   Image,
@@ -6,19 +6,20 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  Alert,
 } from 'react-native';
 import Eye from '../../../node_modules/react-native-vector-icons/Entypo';
 import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import styles from './style_login';
+import { useNavigation } from '@react-navigation/native';
 import Load from '../../Components/Load';
 import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import {Context} from '../../context';
 
-import {getToken, validateToken} from '../../services/api';
+import { Context } from '../../context';
+
+import { getToken, validateToken } from '../../services/api';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -26,9 +27,8 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [secureTextEntryIcon, setSecureTextEntryIcon] = useState(true);
   const [token, setToken] = useState();
-  const {setSessionId} = useContext(Context);
+  const { setSessionId } = useContext(Context);
   const [error, setError] = useState(false);
-
 
   useEffect(() => {
     const getResponseToken = async () => {
@@ -39,14 +39,16 @@ const Login = () => {
     checkLogin();
   }, []);
 
-
   const handleSignin = async () => {
     if (!email || !password) {
-      Alert.alert('Atenção!', 'Preencha todos os campos')
+      setTimeout(() => {
+        setError(false);
+      }, 3000),setError(true)
     }
 
     if (email && password !== '') {
       const response = await validateToken(email, password, token);
+
   
         const session_id = response.data.session_id;
         setSessionId(session_id);
@@ -97,14 +99,7 @@ const Login = () => {
           Entre na sua conta para continuar.
         </Animatable.Text>
 
-
-
-       {/* {  loading ? <Load load={loading} /> : */}
-
-
-
-       
-       <View style={styles.ViewInput}>
+        <View style={styles.ViewInput}>
           <Animatable.View
             animation="fadeInLeft"
             duration={1000}
@@ -112,14 +107,14 @@ const Login = () => {
             <Icon
               size={25}
               color={'#ffffff80'}
-              style={{paddingTop: 10, paddingLeft: 10}}
+              style={{ paddingTop: 10, paddingLeft: 10 }}
               name="user"
             />
             <TextInput
               style={styles.inputText}
               placeholder="usuário"
               autoCorrect={false}
-              placeholderTextColor={'#ffffff80'}
+              placeholderTextColor={error ? '#EC2626' : '#ffffff80'}
               autoCapitalize="none"
               keyboardType="email-address"
               onChangeText={setEmail}
@@ -133,7 +128,7 @@ const Login = () => {
             <Icon
               size={30}
               color={'#ffffff80'}
-              style={{paddingTop: 10, paddingLeft: 10}}
+              style={{ paddingTop: 10, paddingLeft: 10 }}
               name="lock"
             />
             <TextInput
@@ -142,14 +137,14 @@ const Login = () => {
               autoCorrect={false}
               value={secureTextEntryIcon}
               secureTextEntry={secureTextEntryIcon}
-              placeholderTextColor={'#ffffff80'}
+              placeholderTextColor={error ? '#EC2626' : '#ffffff80'}
               autoCapitalize="none"
               onChangeText={value => SetPassword(value)}
             />
 
-        
 
-            <View style={{position: 'absolute', marginLeft: 230, marginTop: 8}}>
+
+            <View style={{ position: 'absolute', marginLeft: 210, marginTop: 8 }}>
               <TouchableOpacity
                 onPress={() => setSecureTextEntryIcon(!secureTextEntryIcon)}>
                 {secureTextEntryIcon == true ? (
@@ -161,6 +156,9 @@ const Login = () => {
             </View>
           </Animatable.View>
         </View>
+              {
+                error ? <Text style={{color: '#EC2626'}}>Usuário ou senha inválidos</Text> : null
+              }
         <TouchableOpacity style={styles.button} onPress={handleSignin}>
           <Text style={styles.buttonText}>Entrar</Text>
         </TouchableOpacity>

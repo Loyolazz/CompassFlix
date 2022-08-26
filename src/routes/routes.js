@@ -3,7 +3,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import Stack from './stack/stack';
 import { Provider } from "../context";
 
-
 export default function () {
     return (
         <Provider>

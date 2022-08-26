@@ -7,8 +7,8 @@ const styles = StyleSheet.create({
   },
   banner: {
     width: Dimensions.get('window').width, 
-    height:480,
-    marginTop:-60
+    height:410,
+    marginTop:-40,
   },
   logo: {
     alignSelf: 'center',

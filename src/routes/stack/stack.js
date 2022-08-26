@@ -5,6 +5,7 @@ import TabBottomRoutes from '../tab/tabbar';
 import {SelectionMovies} from '../../screens/selectionMovies/selectionMovies';
 import SeriesDetail from '../../screens/seriesDetail';
 import {Splash} from '../../screens/Splash';
+import SlapshLoadLogin from '../../Components/SplashLoadLogin/splashLoadLogin';
 
 import MoviesDetail from '../../screens/moviesDetail/moviesDetail';
 const {Navigator, Screen} = createNativeStackNavigator();
@@ -12,7 +13,7 @@ const {Navigator, Screen} = createNativeStackNavigator();
 const Stack = () => {
   return (
     <Navigator initialRouteName="Splash" screenOptions={{headerShown: false}}>
-      <Screen name="Splash" component={Splash} />
+      <Screen name="Splash" component={SlapshLoadLogin} />
       <Screen name="Login" component={Login} />
       <Screen name="TabBottomRoutes" component={TabBottomRoutes} />
       <Screen name="SelectionMovies" component={SelectionMovies} />
