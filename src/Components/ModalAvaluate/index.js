@@ -1,98 +1,62 @@
 import React, {useContext, useState} from 'react';
 import {Modal, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
-import styles from './style';
-import Api from '../../services/api';
-import {apiKey} from '../../services/api';
 import {Context} from '../../context';
+import styles from './style';
 
-const EvaluateModal = ({
-  visible,
-  setModalVisible,
-  id,
-  setCurrentRating,
-  setRated,
-}) => {
-  const [rating, setRating] = useState('');
-  const [invalidRating, setInvalideRating] = useState(false);
-
-  const {sessionId} = useContext(Context);
-
-  const ratingIsValid = userRating => {
-    return userRating >= 0.5 &&
-      userRating <= 10 &&
-      userRating[0] !== '.' &&
-      userRating[userRating.length - 1] !== '.'
-      ? true
-      : false;
-  };
-
-  const rateMovie = async () => {
-    const userRating = rating;
-
-    if (ratingIsValid(userRating)) {
-      setInvalideRating(false);
-
-      try {
-
-        const reponse = await Api.post(`tv/${id}/rating?api_key=${apiKey}&session_id=${sessionId}`, {
-          value: userRating,
-        });
-
-        console.log(reponse)
-
-        setRated(true);
-        // setCurrentRating(rating);
-        setModalVisible(false);
-      } catch (error) {
-        console.log('error ao enviar', error);
-      }
-    } else {
-      setInvalideRating(true);
-    }
-  };
-
-  console.log(rating);
+const ModalAvaluate = ({modalVisible, onPress, rate, rating, setRating}) => {
+  const {setEvaluation} = useContext(Context);
+  const [invalido, setInvalido] = useState(false);
 
   return (
-    <Modal transparent animationType="fade" visible={visible}>
+    <Modal transparent={true} visible={modalVisible} onRequestClose={onPress}>
       <View style={styles.background}>
         <View style={styles.body}>
           <Text style={styles.title}>Faça a sua avaliação!</Text>
 
-          <View style={styles.ratingbody}>
-            <View style={styles.bodyinput}>
-              <EvilIcons
-                style={styles.icon}
-                name="pencil"
-                size={20}
-                color="#C4C4C4"
-              />
+          <View style={{marginTop: 22, marginBottom: 10, alignItems: 'center'}}>
+            <View style={{flexDirection: 'row', marginBottom: 10}}>
+              <View style={styles.bodyinput}>
+                <EvilIcons
+                  style={styles.icon}
+                  name="pencil"
+                  size={20}
+                  color="#C4C4C4"
+                />
 
-              <TextInput
-                style={styles.input}
-                keyboardType="numeric"
-                maxLength={3}
-                onChangeText={value => setRating(value.replace(/[^0-9.]/g, ''))}
-                value={rating}
-              />
+                <TextInput
+                  style={styles.input}
+                  keyboardType="numeric"
+                  maxLength={3}
+                  value={rating}
+                  onChangeText={value =>
+                    setRating(value.replace(/[^0-9.]/g, ''))
+                  }
+                />
+              </View>
+
+              <Text style={styles.maxnumber}> / 10</Text>
             </View>
 
-            <Text style={styles.maxnumber}> / 10</Text>
+            {invalido ? (
+              <View>
+                <Text style={styles.invalidnumber}>
+                  A nota deve ser entre 0,5 a 10
+                </Text>
+              </View>
+            ) : (
+              <View>
+                <Text style={styles.invalidnumber} />
+              </View>
+            )}
           </View>
 
-          {invalidRating && (
-            <Text style={styles.invalidnumber}>
-              A nota deve ser entre 0,5 a 10
-            </Text>
-          )}
-
-          <View style={[styles.buttons, {marginTop: invalidRating ? 10 : 32}]}>
+          <View style={styles.buttons}>
             <TouchableOpacity
               style={styles.btnCancel}
               onPress={() => {
-                setInvalideRating(false);
-                setModalVisible(false);
+                onPress();
+                setInvalido(false);
                 setRating('');
               }}>
               <Text style={styles.textCancel}>Cancelar</Text>
@@ -101,7 +65,16 @@ const EvaluateModal = ({
             <TouchableOpacity
               style={styles.btnOk}
               onPress={() => {
-                rateMovie();
+                if (rating >= 0.5 && rating <= 10 && rating % 0.5 === 0) {
+                  rate(rating);
+                  setEvaluation(rating);
+                  setInvalido(false);
+                  setRating('');
+                  onPress();
+                } else {
+                  setInvalido(true);
+                  setRating('');
+                }
               }}>
               <Text style={styles.textOk}>ok</Text>
             </TouchableOpacity>
@@ -112,4 +85,4 @@ const EvaluateModal = ({
   );
 };
 
-export default EvaluateModal;
+export default ModalAvaluate;

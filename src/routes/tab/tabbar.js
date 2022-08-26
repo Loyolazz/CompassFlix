@@ -4,7 +4,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Icon} from '@rneui/themed';
 import Profile from '../../screens/Profile/profile';
 import {SelectionSeries} from '../../screens/selectionSeries/selectionSeleries';
-
+import RoutesPrifile from '../routesProfile/routesProfile'
 import {SelectionMovies} from '../../screens/selectionMovies/selectionMovies';
 import iconMovies from '../../assets/iconsTabBar/iconMovies.png';
 import iconMovieFocused from '../../assets/iconsTabBar/iconMovieFocused.png';
@@ -49,8 +49,8 @@ const TabBottomRoutes = () => {
       />
 
       <Tab.Screen
-        name="Profile"
-        component={Profile}
+        name="RoutesPrifile"
+        component={RoutesPrifile}
         options={{
           tabBarIcon: ({color, focused}) => (
             <ButtonUser focused={focused} color={color} />
