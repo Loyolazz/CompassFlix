@@ -7,6 +7,7 @@ import HeaderFilm from '../../Components/selectMoviesComp/header/header';
 import {Context} from '../../context';
 import styles from './style_selectionMovies';
 import {getMovies, getAccount, getFavoriteSeries} from '../../services/api';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export function SelectionMovies({navigation}) {
   const [movies, setMovies] = useState([]);
@@ -16,7 +17,7 @@ export function SelectionMovies({navigation}) {
   const [selected, setSelected] = useState();
   const [idUSer, setIdUser] = useState({})
   const [rated, setRated] = useState([]);
-  const {sessionId} = useContext(Context);
+  const {sessionId, user, setUser} = useContext(Context);
 
   const getResponseMovies = async () => {
 
@@ -28,7 +29,8 @@ export function SelectionMovies({navigation}) {
 
   useEffect(() => {
     const getResponseAccount = async () => {
-      const response = await getAccount(sessionId);
+      const storedUser = await AsyncStorage.getItem('sessionId');
+      const response = await getAccount(sessionId ? sessionId : storedUser);
       setSelected(response.data);
       setIdUser(response.data.id)
 

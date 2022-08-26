@@ -65,6 +65,22 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     fontWeight: 'bold',
   },
+  ButtonAvalueteOk: {
+    backgroundColor: '#8BE0EC',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 116,
+    height: 22,
+    marginLeft: 20,
+    marginTop: -4,
+  },
+  textModalOk: {
+    fontSize: 10,
+    color: '#000',
+    textTransform: 'uppercase',
+    fontWeight: 'bold',
+    marginTop: 7
+  }
 });
 
 export default styles;

@@ -14,6 +14,7 @@ import Icon from 'react-native-vector-icons/EvilIcons';
 import styles from './style_login';
 import Load from '../../Components/Load';
 import {useNavigation} from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {Context} from '../../context';
 
@@ -35,6 +36,7 @@ const Login = () => {
       setToken(response.data.request_token);
     };
     getResponseToken();
+    checkLogin();
   }, []);
 
 
@@ -43,18 +45,26 @@ const Login = () => {
       Alert.alert('Atenção!', 'Preencha todos os campos')
     }
 
-    
-
     if (email && password !== '') {
       const response = await validateToken(email, password, token);
   
         const session_id = response.data.session_id;
         setSessionId(session_id);
+        await AsyncStorage.setItem('sessionId', session_id);
+        const id = await AsyncStorage.getItem('sessionId');
         navigation.replace('TabBottomRoutes');
       
     } else {
       console.log('error');
       setLoading(false);
+    }
+  };
+
+  const checkLogin = async () => {
+    const userStorage = await AsyncStorage.getItem('sessionId');
+    if (userStorage) {
+      navigation.navigate('TabBottomRoutes');
+      setSessionId(userStorage);
     }
   };
 

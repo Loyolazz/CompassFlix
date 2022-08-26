@@ -29,8 +29,7 @@ export default function EvaluationMovies({ navigation }) {
           console.log(response.data.results)
       };
       EvaluationMovies();
-  }, [idUser, apiKey, sessionId])
-
+  }, [idUser, sessionId])
 
   return (
 

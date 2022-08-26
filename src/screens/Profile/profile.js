@@ -7,6 +7,7 @@ import HeaderProfile from '../../Components/ProfileComp/header/headerProfile';
 import MoviesList from '../../Components/ProfileComp/MoviesList/moviesList';
 import SeriesList from '../../Components/ProfileComp/SerieList/serieList';
 import { Context } from '../../context'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getAccount } from '../../services/api';
 import Api from '../../services/api';
 import star_red from '../../assets/star_red.png'
@@ -206,12 +207,10 @@ export default function Profile({ navigation }) {
 
   );
   const [listView, setListView] = useState(MoviesListDeafult);
-  const logout = (navigation) => {
-    navigation.reset({
-        index: 0,
-        routes: [{ name: 'Login' }]
-    })
-}
+  const Logout = async () => {
+    await AsyncStorage.clear();
+    navigation.replace('Login');
+  };
   return (
     <View style={styles.container}>
       <HeaderProfile
@@ -219,7 +218,7 @@ export default function Profile({ navigation }) {
         textEvaluation={'Avaliações'}
         numberEvaluation={totalEvaluationNumber}
         photoUser={`http://image.tmdb.org/t/p/original/${dataUser?.avatar?.tmdb?.avatar_path}`}
-        LogOut={() => navigation.navigate('Login')}
+        LogOut={Logout}
       />
 
       <View style={styles.containerFavoritesAndEvaluation}>
