@@ -13,7 +13,6 @@ import Icon from 'react-native-vector-icons/EvilIcons';
 import styles from './style_login';
 import { useNavigation } from '@react-navigation/native';
 import Load from '../../Components/Load';
-import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -157,7 +156,7 @@ const Login = () => {
           </Animatable.View>
         </View>
               {
-                error ? <Text style={{color: '#EC2626'}}>Usuário ou senha inválidos</Text> : null
+                error ? <Text style={{color: '#EC2626', left: 80 }}>Usuário ou senha inválidos</Text> : null
               }
         <TouchableOpacity style={styles.button} onPress={handleSignin}>
           <Text style={styles.buttonText}>Entrar</Text>
