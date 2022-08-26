@@ -251,6 +251,8 @@ export default function ProfileX({navigation}) {
           )}
         </View>
       </View>
+      
     </View>
+    
   );
 }
