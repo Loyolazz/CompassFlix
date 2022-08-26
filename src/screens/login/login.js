@@ -152,9 +152,11 @@ const Login = () => {
             </View>
           </Animatable.View>
         </View>
+
               {
                 error ? <Text style={{color: '#EC2626', left: 80 }}>Usuário ou senha inválidos</Text> : null
               }
+
         <TouchableOpacity style={styles.button} onPress={handleSignin}>
           <Text style={styles.buttonText}>Entrar</Text>
         </TouchableOpacity>

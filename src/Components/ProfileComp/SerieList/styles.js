@@ -48,7 +48,7 @@ export default StyleSheet.create({
         marginTop: 20,
     },
     styleItem: {
-        width: 75, 
+        width: 70, 
         height: 100, 
         backgroundColor: '#121212', 
         justifyContent: 'center', 

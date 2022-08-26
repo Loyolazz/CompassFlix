@@ -9,7 +9,8 @@ export default StyleSheet.create({
         width: '100%', 
         justifyContent: 'center', 
         alignItems: 'center', 
-        marginTop:40 
+        marginTop:40,
+        marginBottom:30
     },
     title:{
         color: '#fff', 
