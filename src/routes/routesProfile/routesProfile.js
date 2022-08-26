@@ -20,15 +20,7 @@ export default function RoutesProfile() {
           name='Profile'
           component={Profile}
         />
-        <Stack.Screen
-          options={{
-            title: '',
-            headerTransparent: true,
-            headerShown: false
-          }}
-          name='SeriesFavorites'
-          component={SeriesFavorites}
-        />
+
         <Stack.Screen
           options={{
             title: '',
@@ -37,6 +29,16 @@ export default function RoutesProfile() {
           }}
           name='MoviesFavorites'
           component={MoviesFavorites}
+        />
+
+        <Stack.Screen
+          options={{
+            title: '',
+            headerTransparent: true,
+            headerShown: false
+          }}
+          name='SeriesFavorites'
+          component={SeriesFavorites}
         />
         <Stack.Screen
           options={{

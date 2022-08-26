@@ -72,4 +72,28 @@ export const getSeriesDetails = async id => {
   });
 };
 
+export const ratePost = async (midia, id, sessionId, value) => {
+  return Api
+    .post(
+      `/${midia}/${id}/rating?api_key=${apiKey}&session_id=${sessionId}`,
+      {
+        value: value, 
+      },
+    )
+    .catch(error => {
+      console.log(error);
+    });
+};
+
+export const getNotas = async (midia, id, sessionId) => {
+  return Api
+    .get(
+      `/${midia}/${id}/account_states?api_key=${apiKey}&session_id=${sessionId}`,
+    )
+    .catch(error => {
+      console.log(error);
+    });
+};
+
+
 export default Api;

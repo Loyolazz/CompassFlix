@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {
   View,
   TouchableOpacity,
@@ -14,10 +14,14 @@ import Api from '../../services/api';
 import BtnGoback from '../../../node_modules/react-native-vector-icons/Ionicons';
 const apikey = 'api_key=80eb37af6714ab187d2c58f9acc83af3';
 const language = 'language=pt-BR';
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
+
 import styles from './style';
 import Load from '../../Components/Load';
 import ModalAvaluate from '../../Components/ModalAvaluate';
 import Season from '../../Components/seasons';
+import {ratePost, getNotas} from '../../services/api';
+import {Context} from '../../context';
 
 export default function SeriesDetail({route, navigation}) {
   const [details, setDetails] = useState([]);
@@ -38,6 +42,21 @@ export default function SeriesDetail({route, navigation}) {
     detailsSeries();
   }, []);
 
+  const {sessionId, evaluation} = useContext(Context);
+
+  const postSerie = async () => {
+    await ratePost('tv', id, sessionId, rating);
+  };
+
+  useEffect(() => {
+    const getResponseAvaluate = async () => {
+      const response = await getNotas('tv', id, sessionId);
+      setRated(response.data.rated);
+    };
+
+    getResponseAvaluate();
+  }, [sessionId, id]);
+
   const Banner = `https://image.tmdb.org/t/p/w342/${details.backdrop_path}`;
   const uri = 'https://image.tmdb.org/t/p/w342/';
   return details.backdrop_path && details.poster_path ? (
@@ -48,8 +67,6 @@ export default function SeriesDetail({route, navigation}) {
           style={styles.btnGoBack}>
           <BtnGoback name="md-arrow-back" size={23} color={'#000'} />
         </TouchableOpacity>
-
-        {/* <ButtonFavorite /> */}
       </ImageBackground>
 
       <HeaderDetails
@@ -67,20 +84,38 @@ export default function SeriesDetail({route, navigation}) {
       />
 
       <ModalAvaluate
-        visible={modalVisible}
-        setModalVisible={setModalVisible}
-        setCurrentRating={setRating}
-        setRated={setRated}
-        id={id}
+        modalVisible={modalVisible}
+        onPress={() => {
+          setModalVisible(!modalVisible);
+        }}
+        rating={rating}
+        setRating={value => setRating(value)}
+        rate={value => postSerie(value)}
       />
 
-      <TouchableOpacity
-        style={styles.ButtonAvaluete}
-        onPress={() => {
-          setModalVisible(true);
-        }}>
-        <Text style={styles.textModal}>Avalie agora</Text>
-      </TouchableOpacity>
+
+      {rated ? (
+        <TouchableOpacity
+          activeOpacity={0.5}
+          style={styles.ButtonAvalueteOk}
+          onPress={() => {
+            setModalVisible(true);
+          }}>
+          <Text style={styles.textModalOk}>Sua nota: {rated.value}/10</Text>
+
+          <View style={styles.icon}>
+            <EvilIcons name="pencil" size={10} />
+          </View>
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity
+          style={styles.ButtonAvaluete}
+          onPress={() => {
+            setModalVisible(true);
+          }}>
+          <Text style={styles.textModal}>Avalie agora</Text>
+        </TouchableOpacity>
+      )}
 
       <SinopseDetails
         titleSinopse={details.tagline ? details.tagline : 'Sem Descrição.'}

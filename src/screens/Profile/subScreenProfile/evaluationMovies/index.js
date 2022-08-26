@@ -23,15 +23,14 @@ export default function EvaluationMovies({ navigation }) {
     getResponseAccount();
   }, []);
 
-  useEffect(() => {
-    const EvaluationMovies = async () => {
-      const response = await Api.get(`/account/${idUser}/rated/movies?api_key=${apiKey}&session_id=${sessionId}`)
-      setMovieListFavoriteEvaluation(response.data.results);
-
-    };
-    EvaluationMovies();
+    useEffect(() => {
+      const EvaluationMovies = async () => {
+          const response = await Api.get(`/account/${idUser}/rated/movies?api_key=${apiKey}&session_id=${sessionId}`)
+          setMovieListFavoriteEvaluation(response.data.results);
+          console.log(response.data.results)
+      };
+      EvaluationMovies();
   }, [idUser, apiKey, sessionId])
-
 
   return (
 
