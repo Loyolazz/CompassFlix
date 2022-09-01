@@ -45,6 +45,15 @@ const styles = StyleSheet.create({
     paddingTop: 16,
     paddingBottom: 20,
   },
+  containerMain2: {
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+    paddingTop: 16,
+    paddingBottom: 120,
+
+  },
   textVerAll: {
     fontSize: 10,
     lineHeight: 12.26,
@@ -92,8 +101,17 @@ const styles = StyleSheet.create({
     height: 28,
   },
   containerMovieFavorites: {
-    height: 89,
-    justifyContent: 'center',
+    height: 119,
+    justifyContent: 'space-between',
+    width:'100%',
+    alignItems:'center'
+  },
+  containerEvaluation: {
+    height: 129,
+    justifyContent: 'space-between',
+    width:'100%',
+    alignItems:'center',
+    marginTop:10,
   },
   listMidiaFavorites: {
     width: 67,
@@ -103,9 +121,18 @@ const styles = StyleSheet.create({
   },
   containerRow: {
     width: '100%',
-    backgroundColor: 'red',
+    backgroundColor: 'grey',
     height: 0.1,
     marginTop: 20,
+    
+  },
+  containerRow2: {
+    width: '100%',
+    height: 30,
+    marginTop: 20,
+    flexDirection:'row',
+    justifyContent:'space-between',
+    paddingHorizontal:20
   },
 });
 

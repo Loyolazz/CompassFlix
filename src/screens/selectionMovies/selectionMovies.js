@@ -8,7 +8,7 @@ import {Context} from '../../context';
 import styles from './style_selectionMovies';
 import {getMovies, getAccount, getFavoriteSeries} from '../../services/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import Icon from 'react-native-vector-icons/Ionicons';
 export function SelectionMovies({navigation}) {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -49,9 +49,11 @@ export function SelectionMovies({navigation}) {
         <HeaderFilm 
         nameUser={selected.name}
         photoUser={`http://image.tmdb.org/t/p/original/${dataUser?.avatar?.tmdb?.avatar_path}`}
+         
          />
+        
       </View>
-
+   
       <FlatList
         numColumns={4}
        

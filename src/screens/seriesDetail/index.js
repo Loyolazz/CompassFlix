@@ -6,7 +6,7 @@ import {
   Text,
   ScrollView,
 } from 'react-native';
-
+import * as Animatable from 'react-native-animatable';
 import {HeaderDetails} from '../../Components/movieDetailsComp/header/index';
 import {SinopseDetails} from '../../Components/movieDetailsComp/sinopse/sinopse';
 import Api, {getAccountStates} from '../../services/api';
@@ -174,7 +174,12 @@ export default function SeriesDetail({route, navigation}) {
         textSinopse={details.overview ? details.overview : 'Sem Sinopse.'}
       />
 
-      <View style={styles.flex2_5}>
+      <Animatable.View style={styles.flex2_5}
+      animation="zoomInUp"
+          duration={1000}
+      >
+
+
         <ScrollView>
           {details.seasons.map((item, index) => (
             <Season
@@ -192,7 +197,7 @@ export default function SeriesDetail({route, navigation}) {
             />
           ))}
         </ScrollView>
-      </View>
+      </Animatable.View>
     </View>
   ) : (
     <Load />
