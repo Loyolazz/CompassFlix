@@ -1,4 +1,8 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, {
+  useState,
+  useContext,
+  useEffect
+} from 'react';
 import {
   TouchableOpacity,
   View,
@@ -9,20 +13,23 @@ import {
 } from 'react-native';
 import ModalExitAccount from '../../Components/ModalExitAccount';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {Context} from '../../context';
+import { Context } from '../../context';
 import {
   getAccount,
   EvaluationSeries,
   getMoviesFavorites,
   getPostMovies,
 } from '../../services/api';
-
+import star from '../../assets/star_red.png'
 import Icon from 'react-native-vector-icons/Ionicons';
-
+import SeeItAll from '../../Components/ProfileComp2/SeeItAll';
+import SelectedItem from '../../Components/ProfileComp2/SelectedItem';
+import SeeItAllEvaluation from '../../Components/ProfileComp2/SeeItAllEvaluation';
+import SelectedItemEvaluation from '../../Components/ProfileComp2/SelectedItemEvaluation';
 import styles from './styles';
-import {FlatList} from 'react-native-gesture-handler';
+import { FlatList } from 'react-native-gesture-handler';
 
-export default function ProfileX({navigation}) {
+export default function ProfileX({ navigation }) {
   const [modalVisibleExit, setVisibleModal] = useState(false);
   const [dataUser, setDataUser] = useState('username');
   const [evaluationSeries, setEvaluationSeries] = useState([]);
@@ -30,9 +37,8 @@ export default function ProfileX({navigation}) {
   const [favoriteMovies, setFavoriteMovies] = useState([]);
   const [favoriteSeries, setFavoriteSeries] = useState([]);
   const [movieButtonFocused, setMovieButtonFocused] = useState(true);
-  const [movieRaring, setMovieRating] = useState(true);
-
-  const {sessionId} = useContext(Context);
+  const [idItem, setIdItem] = useState(null);
+  const { sessionId } = useContext(Context);
   const totalEvaluationNumber =
     evaluationSeries.total_results + evaluationMovies.total_results;
 
@@ -40,6 +46,7 @@ export default function ProfileX({navigation}) {
     const getResponseAccount = async () => {
       const response = await getAccount(sessionId);
       setDataUser(response.data);
+
     };
     getResponseAccount();
   }, [sessionId]);
@@ -63,8 +70,23 @@ export default function ProfileX({navigation}) {
     const getResponseMoviesFavorites = async () => {
       const response = await getMoviesFavorites(dataUser, 'movies', sessionId);
       setFavoriteMovies(response.data);
+
     };
 
+    const getResponseSeriesFavorites = async () => {
+      const response = await getMoviesFavorites(dataUser, 'tv', sessionId);
+      setFavoriteSeries(response.data);
+
+    };
+    getResponseMoviesFavorites();
+    getResponseSeriesFavorites();
+  }, [dataUser, sessionId]);
+
+  useEffect(() => {
+    const getResponseMoviesFavorites = async () => {
+      const response = await getMoviesFavorites(dataUser, 'movies', sessionId);
+      setFavoriteMovies(response.data);
+    };
     const getResponseSeriesFavorites = async () => {
       const response = await getMoviesFavorites(dataUser, 'tv', sessionId);
       setFavoriteSeries(response.data);
@@ -72,15 +94,6 @@ export default function ProfileX({navigation}) {
 
     getResponseMoviesFavorites();
     getResponseSeriesFavorites();
-  }, [dataUser, sessionId]);
-
-  useEffect(() => {
-    const getResponseMoviesFavoritesRating = async () => {
-      const response = await getPostMovies(dataUser, 'movies', sessionId);
-      setMovieRating(response.data);
-    };
-
-    getResponseMoviesFavoritesRating();
   }, [dataUser, sessionId]);
 
   const Logout = async () => {
@@ -102,7 +115,7 @@ export default function ProfileX({navigation}) {
         onPress={() => setVisibleModal(false)}
       />
 
-      {dataUser.avatar?.avatar_path ? (
+      {dataUser?.avatar?.tmdb?.avatar_path ? (
         <View style={styles.containerPhotoUser}>
           <Image
             source={{
@@ -111,9 +124,10 @@ export default function ProfileX({navigation}) {
             style={styles.photoUser}
           />
         </View>
-      ) : (
+      ) :
+
         <Icon name="person-circle" color="rgba(255,255,255,0.4)" size={78} />
-      )}
+      }
 
       <Text style={styles.nameUser}>{dataUser?.name}</Text>
 
@@ -128,7 +142,7 @@ export default function ProfileX({navigation}) {
           <ActivityIndicator size="large" color="#E9A6A6" />
         )}
       </View>
-
+      {/* ///////////////////// btnMovieSeries //////////////////// */}
       <View style={styles.containerButtonSandM}>
         <View style={styles.borderButton}>
           <TouchableWithoutFeedback
@@ -168,91 +182,128 @@ export default function ProfileX({navigation}) {
           </TouchableWithoutFeedback>
         </View>
       </View>
-
+      {/* ///////////////////// container princiapl //////////////////// */}
       <View style={styles.containerMain}>
         {movieButtonFocused ? (
-          <>
-            <Text style={styles.textInfo}>
-              Filmes favoritos de {dataUser.name}
-            </Text>
-            <TouchableWithoutFeedback
-              onPress={() => {
-                navigation.navigate('MoviesFavorites');
-              }}>
-              <Text style={styles.textVerAll}>Ver Tudo</Text>
-            </TouchableWithoutFeedback>
-          </>
-        ) : (
-          <>
-            <Text style={styles.textInfo}>
-              Séries favoritos de {dataUser.name}
-            </Text>
-            <TouchableWithoutFeedback
-              onPress={() => {
-                navigation.navigate('SeriesFavorites');
-              }}>
-              <Text style={styles.textVerAll}>Ver Tudo</Text>
-            </TouchableWithoutFeedback>
-          </>
-        )}
-      </View>
-
-      <View style={styles.containerMovieFavorites}>
-        {favoriteMovies?.results && favoriteSeries?.results ? (
-          <FlatList
-            data={
-              movieButtonFocused
-                ? favoriteMovies?.results?.slice(0, 4)
-                : favoriteSeries?.results?.slice(0, 4)
-            }
-            horizontal={true}
-            keyExtractor={item => String(item.id)}
-            renderItem={({item}) => (
-              <Image
-                style={styles.listMidiaFavorites}
-                source={{
-                  uri: `http://image.tmdb.org/t/p/w185/${item.poster_path}`,
-                }}
-              />
-            )}
+          <SeeItAll
+            midia={'Filmes'}
+            letra={'o'}
+            nameUser={dataUser.name}
+            onPress={() => {
+              navigation.navigate('MoviesFavorites');
+            }}
           />
         ) : (
+          <SeeItAll
+            midia={'Séries'}
+            letra={'a'}
+            nameUser={dataUser.name}
+            onPress={() => {
+              navigation.navigate('SeriesFavorites');
+            }}
+          />
+        )}
+      </View>
+      {/*  //////////////////// Container filmes favoritos /////////////////// */}
+      <View style={styles.containerMovieFavorites}>
+        {favoriteMovies?.results && favoriteSeries?.results ? (
+          <View>
+            <FlatList
+              data={
+                movieButtonFocused
+                  ? favoriteMovies?.results?.slice(0, 4)
+                  : favoriteSeries?.results?.slice(0, 4)
+              }
+              horizontal={true}
+              keyExtractor={item => String(item.id)}
+              renderItem={({ item }) => (
+                movieButtonFocused ?
+
+                  <SelectedItem
+                    onPress={() => {
+                      setIdItem(item.id), navigation.navigate('MoviesDetail', { item });
+                    }}
+                    uri={`http://image.tmdb.org/t/p/w185/${item.poster_path}`}
+                  />
+                  :
+                  <SelectedItem
+                    onPress={() => {
+                      setIdItem(item.id), navigation.navigate('SeriesDetail', { item });
+                    }}
+                    uri={`http://image.tmdb.org/t/p/w185/${item.poster_path}`}
+                  />
+
+              )}
+            />
+
+          </View>) : (
           <ActivityIndicator size="large" color="#E9A6A6" />
         )}
       </View>
+      <View style={{ width: '100%', borderWidth: 0.3, marginBottom: 10, borderTopColor: 'grey' }}>
 
-      <View style={styles.containerRow}>
-        <View style={styles.containerMain}>
+
+        <View style={styles.containerRow2}>
+
           {movieButtonFocused ? (
-            <>
-              <Text style={styles.textInfo}>
-                Avaliações recentes de {dataUser.name}
-              </Text>
-              <TouchableWithoutFeedback
-                onPress={() => {
-                  navigation.navigate('');
-                }}>
-                <Text style={styles.textVerAll}>Ver Tudo</Text>
-              </TouchableWithoutFeedback>
-            </>
-          ) : (
-            <>
-              <Text style={styles.textInfo}>
-                Avaliações de séries recentes de {dataUser.name}
-              </Text>
+            <SeeItAllEvaluation
+              midia={'Filmes'}
+              nameUser={dataUser.name}
+              onPress={() => {
+                navigation.navigate('MoviesEvaluation');
+              }}
+            />
 
-              <TouchableWithoutFeedback
-                onPress={() => {
-                  navigation.navigate('');
-                }}>
-                <Text style={styles.textVerAll}>Ver Tudo</Text>
-              </TouchableWithoutFeedback>
-            </>
+          ) : (
+            <SeeItAllEvaluation
+              midia={'Séries'}
+              nameUser={dataUser.name}
+              onPress={() => {
+                navigation.navigate('SeriesEvaluation');
+              }}
+            />
+
+          )}
+
+        </View>
+        <View style={styles.containerEvaluation}>
+          {favoriteMovies?.results && favoriteSeries?.results ? (
+            <View>
+              <FlatList
+                data={
+                  movieButtonFocused
+                    ? evaluationMovies?.results?.slice(0, 5)
+                    : evaluationSeries?.results?.slice(0, 5)
+                }
+                horizontal={true}
+                keyExtractor={item => String(item.id)}
+                renderItem={({ item }) => (
+                  movieButtonFocused ?
+                    <SelectedItemEvaluation
+                      onPress={() => {
+                        setIdItem(item.id), navigation.navigate('MoviesDetail', { item })
+                      }
+                      }
+                      uri={`http://image.tmdb.org/t/p/w185/${item.poster_path}`}
+                      vote={item.vote_average.toFixed(1)}
+                    />
+                    :
+                    <SelectedItemEvaluation
+                      onPress={() => {
+                        setIdItem(item.id), navigation.navigate('SeriesDetail', { item })
+                      }
+                      }
+                      uri={`http://image.tmdb.org/t/p/w185/${item.poster_path}`}
+                      vote={item.vote_average.toFixed(1)}
+                    />
+                )}
+              />
+
+            </View>) : (
+            <ActivityIndicator size="large" color="#E9A6A6" />
           )}
         </View>
       </View>
-      
     </View>
-    
   );
 }

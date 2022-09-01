@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     marginEnd: 4,
   },
   containerVisible: {
-    backgroundColor: 'rgba(255, 255, 255, 0.5)',
+    backgroundColor: 'grey',
     marginEnd: 20,
     marginStart: 20,
     paddingStart: 13,
