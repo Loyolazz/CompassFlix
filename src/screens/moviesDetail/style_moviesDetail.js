@@ -17,8 +17,6 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     alignItems: 'center',
     justifyContent: 'center',
-    marginHorizontal: 20,
-    marginBottom: 130,
   },
   elencoView: {
     backgroundColor: '#9C4A8B',
@@ -84,6 +82,16 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     backgroundColor: '#C4C4C4',
   },
+  buttonFavorite: {
+    width: '100%',
+    position: 'absolute',
+    alignItems: 'flex-end',
+    marginTop: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 10,
+    alignItems: 'center',
+  }
 });
 
 export default styles;
