@@ -1,23 +1,14 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
-
-  containerButtonStarOn: {
-    position: 'absolute',
-    alignItems: 'center',
+  buttonRight: {
+    width: 35,
+    height: 35,
+    backgroundColor: '#fff',
+    borderRadius: 20,
     justifyContent: 'center',
-    top: 19,
-    right: 20,
-    backgroundColor: 'white',
-    borderRadius: 40,
-    width: 30,
-    height: 30,
+    alignItems: 'center',
   },
-
-  buttonStar: {
-    color: 'red',
-  },
-
 });
 
 export default styles;

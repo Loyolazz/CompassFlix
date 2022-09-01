@@ -9,7 +9,7 @@ import {
 
 import {HeaderDetails} from '../../Components/movieDetailsComp/header/index';
 import {SinopseDetails} from '../../Components/movieDetailsComp/sinopse/sinopse';
-import Api from '../../services/api';
+import Api, {getAccountStates} from '../../services/api';
 import BtnGoback from '../../../node_modules/react-native-vector-icons/Ionicons';
 const apikey = 'api_key=80eb37af6714ab187d2c58f9acc83af3';
 const language = 'language=pt-BR';
@@ -19,7 +19,14 @@ import styles from './style';
 import Load from '../../Components/Load';
 import ModalAvaluate from '../../Components/ModalAvaluate';
 import Season from '../../Components/seasons';
-import {ratePost, getNotas} from '../../services/api';
+import ButtonFavorite from '../../Components/ButtonFavorite';
+import {
+  ratePost,
+  getNotas,
+  markFavorite,
+  unmarkFavorite,
+  getAccount,
+} from '../../services/api';
 import {Context} from '../../context';
 
 export default function SeriesDetail({route, navigation}) {
@@ -29,44 +36,91 @@ export default function SeriesDetail({route, navigation}) {
   const [visible, setVisible] = useState(false);
   const [seasonNumber, setSeasonNumber] = useState();
   const [seasonSelected, setSeasonSelected] = useState();
+  const [dataUser, setDataUser] = useState();
   const [modalVisible, setModalVisible] = useState(false);
   const [rating, setRating] = useState(0);
   const [rated, setRated] = useState(false);
+  const [favoriteSeries, setFavoriteSeries] = useState();
 
-  const detailsSeries = async () => {
-    const response = await Api.get(`tv/${id}?${apikey}&${language}`);
-    setDetails(response.data);
-  };
+  const {sessionId, evaluation, setEvaluation} = useContext(Context);
+
   useEffect(() => {
-    detailsSeries();
-  }, []);
+    const getResponseAccount = async () => {
+      const response = await getAccount(sessionId);
+      setDataUser(response.data);
+    };
+    getResponseAccount();
+  }, [sessionId]);
 
-  const {sessionId, evaluation} = useContext(Context);
+  useEffect(() => {
+    const detailsSeries = async () => {
+      const response = await Api.get(`tv/${id}?${apikey}&${language}`);
+      setDetails(response.data);
+    };
+    detailsSeries();
+
+    if (evaluation) {
+      const getResponseFavorite = async () => {
+        const response = await getAccountStates('tv', id, sessionId);
+        setFavoriteSeries(response.data.favorite);
+      };
+      getResponseFavorite();
+    } else {
+      const getResponseFavorite = async () => {
+        const response = await getAccountStates('tv', id, sessionId);
+        setFavoriteSeries(response.data.favorite);
+      };
+      getResponseFavorite();
+    }
+  }, [evaluation]);
+
+  useEffect(() => {
+    if (evaluation) {
+      const getResponse = async () => {
+        const reponse = await getAccountStates('tv', id, sessionId);
+        setRated(reponse.data.rated);
+      };
+      getResponse();
+    } else {
+      const getResponse = async () => {
+        const reponse = await getAccountStates('tv', id, sessionId);
+        setRated(reponse.data.rated);
+      };
+      getResponse();
+    }
+  }, [evaluation]);
 
   const postSerie = async () => {
     await ratePost('tv', id, sessionId, rating);
+    setEvaluation(!evaluation);
   };
 
-  useEffect(() => {
-    const getResponseAvaluate = async () => {
-      const response = await getNotas('tv', id, sessionId);
-      setRated(response.data.rated);
-    };
-
-    getResponseAvaluate();
-  }, [sessionId, id]);
+  const favorite = async () => {
+    setEvaluation(!evaluation);
+    if (favoriteSeries) {
+      await unmarkFavorite(dataUser.id, sessionId, 'tv', id);
+    } else {
+      await markFavorite(dataUser.id, sessionId, 'tv', id);
+    }
+  };
 
   const Banner = `https://image.tmdb.org/t/p/w342/${details.backdrop_path}`;
   const uri = 'https://image.tmdb.org/t/p/w342/';
   return details.backdrop_path && details.poster_path ? (
     <View style={styles.container}>
-      <ImageBackground source={{uri: Banner}} style={styles.logoBackground}>
+      <ImageBackground
+        source={{uri: Banner}}
+        style={styles.logoBackground}></ImageBackground>
+
+      <View style={styles.buttonFavorite}>
         <TouchableOpacity
           onPress={() => navigation.navigate('TabBottomRoutes')}
           style={styles.btnGoBack}>
           <BtnGoback name="md-arrow-back" size={23} color={'#000'} />
         </TouchableOpacity>
-      </ImageBackground>
+
+        <ButtonFavorite onPress={favorite} favorite={favoriteSeries} />
+      </View>
 
       <HeaderDetails
         Cartaz={`${uri}${details.poster_path}`}
@@ -91,7 +145,6 @@ export default function SeriesDetail({route, navigation}) {
         setRating={value => setRating(value)}
         rate={value => postSerie(value)}
       />
-
 
       {rated ? (
         <TouchableOpacity

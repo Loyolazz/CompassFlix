@@ -83,14 +83,6 @@ export const ratePost = async (midia, id, sessionId, value) => {
   });
 };
 
-export const getNotas = async (midia, id, sessionId) => {
-  return Api.get(
-    `/${midia}/${id}/account_states?api_key=${apiKey}&session_id=${sessionId}`,
-  ).catch(error => {
-    console.log(error);
-  });
-};
-
 export const EvaluationSeries = async (dataUser, midia, sessionId) => {
   return Api.get(
     `/account/${dataUser}/rated/${midia}?api_key=${apiKey}&session_id=${sessionId}`,
@@ -108,13 +100,45 @@ export const getMoviesFavorites = async (idUser, midia, sessionId) => {
 };
 
 export const getPostMovies = async (sessionId, midia, idUser) => {
-  return Api
-    .get(
-      `/account/${idUser}/rated/${midia}?api_key=${apiKey}&session_id=${sessionId}`,
-    )
-    .catch(error => {
-      console.warn(error);
-    });
+  return Api.get(
+    `/account/${idUser}/rated/${midia}?api_key=${apiKey}&session_id=${sessionId}`,
+  ).catch(error => {
+    console.warn(error);
+  });
+};
+
+export const markFavorite = async (userId, session_id, midia, midiaId) => {
+  return Api.post(
+    `/account/${userId}/favorite?api_key=${apiKey}&session_id=${session_id}`,
+    {
+      media_type: midia,
+      media_id: midiaId,
+      favorite: true,
+    },
+  ).catch(error => {
+    console.warn('Erro na avaliação', error);
+  });
+};
+
+export const unmarkFavorite = async (userId, session_id, midia, midiaId) => {
+  return Api.post(
+    `/account/${userId}/favorite?api_key=${apiKey}&session_id=${session_id}`,
+    {
+      media_type: midia,
+      media_id: midiaId,
+      favorite: false,
+    },
+  ).catch(error => {
+    console.warn('Erro', error);
+  });
+};
+
+export const getAccountStates = async (midia, movie_id, session_id) => {
+  return Api.get(
+    `/${midia}/${movie_id}/account_states?api_key=${apiKey}&session_id=${session_id}`,
+  ).catch(error => {
+    console.log('Error', errpr);
+  });
 };
 
 export default Api;

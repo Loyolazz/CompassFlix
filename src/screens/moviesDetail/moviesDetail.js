@@ -14,7 +14,7 @@ import {HeaderDetails} from '../../Components/movieDetailsComp/header/index';
 import {SinopseDetails} from '../../Components/movieDetailsComp/sinopse/sinopse';
 import Api from '../../services/api';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
-import Star from 'react-native-vector-icons/MaterialCommunityIcons';
+import ButtonFavorite from '../../Components/ButtonFavorite';
 
 import BtnGoback from '../../../node_modules/react-native-vector-icons/Ionicons';
 import Load from '../../Components/Load';
@@ -22,7 +22,13 @@ const apikey = 'api_key=80eb37af6714ab187d2c58f9acc83af3';
 const language = 'language=pt-BR';
 import ModalAvaluate from '../../Components/ModalAvaluate';
 import {Context} from '../../context';
-import {getNotas, ratePost} from '../../services/api';
+import {
+  ratePost,
+  getAccountStates,
+  getAccount,
+  markFavorite,
+  unmarkFavorite,
+} from '../../services/api';
 
 const MoviesDetail = ({route, navigation}) => {
   const [details, setDetails] = useState({});
@@ -30,7 +36,10 @@ const MoviesDetail = ({route, navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [rating, setRating] = useState(0);
   const [rated, setRated] = useState();
+  const [dataUser, setDataUser] = useState();
+  const [favoriteMovies, setFavoriteMovies] = useState();
 
+  const {sessionId, evaluation, setEvaluation} = useContext(Context);
   const {item} = route?.params || {};
   const id = `${item.id}`;
 
@@ -40,32 +49,71 @@ const MoviesDetail = ({route, navigation}) => {
     );
     setDetailsCredits(response.data);
   };
+
+  useEffect(() => {
+    const getResponseAccount = async () => {
+      const response = await getAccount(sessionId);
+      setDataUser(response.data);
+    };
+    getResponseAccount();
+  }, [sessionId]);
+
   useEffect(() => {
     DetailsCredits();
   }, []);
-  const Details = async () => {
-    const response = await Api.get(`/movie/${id}?${apikey}&${language}`);
-    setDetails(response.data);
-  };
-  useEffect(() => {
-    Details();
-  }, []);
 
   useEffect(() => {
-    const getResponseAvaluate = async () => {
-      const response = await getNotas('movie', id, sessionId);
-      setRated(response.data.rated);
+    const Details = async () => {
+      const response = await Api.get(`/movie/${id}?${apikey}&${language}`);
+      setDetails(response.data);
     };
 
-    getResponseAvaluate();
-  }, [sessionId, id]);
+    Details();
 
-  const {sessionId, evaluation} = useContext(Context);
+    if (evaluation) {
+      const getResponseFavorite = async () => {
+        const response = await getAccountStates('movie', id, sessionId);
+        setFavoriteMovies(response.data.favorite);
+      };
+      getResponseFavorite();
+    } else {
+      const getResponseFavorite = async () => {
+        const response = await getAccountStates('movie', id, sessionId);
+        setFavoriteMovies(response.data.favorite);
+      };
+      getResponseFavorite();
+    }
+  }, [evaluation]);
+
+  useEffect(() => {
+    if (evaluation) {
+      const getResponse = async () => {
+        const reponse = await getAccountStates('movie', id, sessionId);
+        setRated(reponse.data.rated);
+      };
+      getResponse();
+    } else {
+      const getResponse = async () => {
+        const reponse = await getAccountStates('movie', id, sessionId);
+        setRated(reponse.data.rated);
+      };
+      getResponse();
+    }
+  }, [evaluation]);
 
   const postMovie = async () => {
     await ratePost('movie', id, sessionId, rating);
   };
   ////////////// Details ////////////////
+
+  const favorite = async () => {
+    setEvaluation(!evaluation);
+    if (favoriteMovies) {
+      await unmarkFavorite(dataUser.id, sessionId, 'movie', id);
+    } else {
+      await markFavorite(dataUser.id, sessionId, 'movie', id);
+    }
+  };
 
   const Title = details.title;
   const Year = `${String(details.release_date).substring(0, 4)}`;
@@ -84,14 +132,19 @@ const MoviesDetail = ({route, navigation}) => {
 
   return details.poster_path && details.backdrop_path ? (
     <View style={styles.container}>
-      <ImageBackground source={{uri: Banner}} style={styles.ImgBackground}>
+      <ImageBackground
+        source={{uri: Banner}}
+        style={styles.ImgBackground}></ImageBackground>
+      <View style={styles.buttonFavorite}>
         <TouchableOpacity
           onPress={() => navigation.navigate('TabBottomRoutes')}
           style={styles.btnGoBack}>
           <BtnGoback name="md-arrow-back" size={23} color={'#000'} />
         </TouchableOpacity>
 
-      </ImageBackground>
+        <ButtonFavorite onPress={favorite} favorite={favoriteMovies} />
+      </View>
+
       <HeaderDetails
         Cartaz={Poster}
         Director={director}
