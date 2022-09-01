@@ -1,33 +1,21 @@
 import React from 'react';
-import {TouchableOpacity} from 'react-native';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import {Image, TouchableOpacity} from 'react-native';
+
 import styles from './style';
 
-export default function ButtonFavorite({
-  isFavorite,
-  setDataFavorite,
-  awaitFavorite,
-  setIsFavorite,
-  id,
-  mediaType,
-}) {
+const ButtonFavorite = ({onPress, favorite}) => {
   return (
     <TouchableOpacity
-      style={[styles.containerButtonStarOn]}
-      onPress={() => {
-        setIsFavorite(!isFavorite);
-        setDataFavorite({
-          media_type: mediaType,
-          media_id: id,
-          favorite: isFavorite,
-        });
-        awaitFavorite();
-      }}>
-      <AntDesign
-        name="star"
-        size={24}
-        style={isFavorite && styles.buttonStar}
-      />
+      activeOpacity={0.5}
+      style={styles.buttonRight}
+      onPress={onPress}>
+      {favorite ? (
+        <Image source={require('../../assets/starFocused.png')} />
+      ) : (
+        <Image source={require('../../assets/starNotFocused.png')} />
+      )}
     </TouchableOpacity>
   );
-}
+};
+
+export default ButtonFavorite;
