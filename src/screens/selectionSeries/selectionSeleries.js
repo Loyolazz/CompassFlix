@@ -28,7 +28,6 @@ export function SelectionSeries({navigation}) {
     const getResponseAccount = async () => {
       const response = await getAccount(sessionId);
       setNameUser(response.data.name);
-      console.log(response.data.name);
     };
     const getResponseAccountPhoto = async () => {
       const response = await getAccount(sessionId);

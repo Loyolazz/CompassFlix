@@ -11,12 +11,16 @@ import routesProfileX from '../routesProfileX/routesProfileX';
 import ButtonSeries from '../../Components/Tabbuttons/ButtonSeries';
 import ButtonUser from '../../Components/Tabbuttons/ButtonUser';
 
+import MoviesStack from '../stack/MoviesStack';
+import SeriesStack from '../stack/SeriesStack';
+
+
 const Tab = createBottomTabNavigator();
 
 const TabBottomRoutes = () => {
   return (
     <Tab.Navigator
-      initialRouteName="SelectionMovies"
+      initialRouteName="MoviesStack"
       screenOptions={{
         headerShown: false,
         tabBarShowLabel: false,
@@ -24,8 +28,8 @@ const TabBottomRoutes = () => {
         tabBarStyle: {height: 50, backgroundColor: '#454545'},
       }}>
       <Tab.Screen
-        name="SelectionSeries"
-        component={SelectionSeries}
+        name="SeriesStack"
+        component={SeriesStack}
         options={{
           tabBarIcon: ({color, focused}) => (
             <ButtonSeries focused={focused} color={color} />
@@ -34,8 +38,8 @@ const TabBottomRoutes = () => {
       />
 
       <Tab.Screen
-        name="SelectionMovies"
-        component={SelectionMovies}
+        name="MoviesStack"
+        component={MoviesStack}
         options={{
           tabBarIcon: ({focused}) => {
             if (focused) {
