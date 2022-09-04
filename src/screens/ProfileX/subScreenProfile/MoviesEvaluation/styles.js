@@ -35,4 +35,37 @@ export default StyleSheet.create({
         marginBottom: 20,
       
     }
+    ,
+    containerMoviesEmpty:{
+        width:'100%',  
+        alignItems:'center', 
+        justifyContent:'center'
+    },
+    textEmptyMovies:{
+        color: 'grey', 
+        fontSize:20, 
+        marginBottom:30, 
+        marginTop:10 
+    },
+    stylePoster:{
+        width: 76,
+        height: 95,
+        borderRadius: 20,
+        marginTop: 5,
+        alignItems: 'center',
+    },
+    containerTextStar:{
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+    },
+    styleStar:{
+        width: 10, 
+        height: 10, 
+        marginRight: 8
+    },
+    textNote:{
+        color: '#fff', 
+        fontSize: 13
+    }
 })

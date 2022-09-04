@@ -5,6 +5,7 @@ import styles from './styles';
 import {getAccount, EvaluationSeries} from '../../../../services/api';
 import star_red from '../../../../assets/star_red.png';
 import BtnGoBack from '../../../../Components/ProfileComp/btnGoBack/btn';
+import BlockIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 export default function   MoviesEvaluation({navigation}) {
   const [nameUser, setNameUser] = useState('');
   const [idUser, setIdUser] = useState([]);
@@ -25,7 +26,7 @@ export default function   MoviesEvaluation({navigation}) {
   useEffect(() => {
     const getEvaluationMovies = async () => {
       const response = await EvaluationSeries(dataUser, 'movies', sessionId);
-      setMoviesEvaluation(response.data.results);
+      setMoviesEvaluation(response.data);
     };
 
     getEvaluationMovies();
@@ -44,10 +45,15 @@ export default function   MoviesEvaluation({navigation}) {
           !
         </Text>
       </View>
-
+      {moviesEvaluation.total_results === 0 ?
+        <View style={{width:'100%',  alignItems:'center', justifyContent:'center'}}>
+          <Text style={{ color: 'grey', fontSize:20, marginBottom:30, marginTop:10 }}>Sem Avaliações de Filmes</Text>
+        <BlockIcon name='movie-open-remove-outline' size={100} color={'grey'}/>
+        </View> 
+        :  
       <FlatList
         numColumns={4}
-        data={moviesEvaluation}
+        data={moviesEvaluation.results}
         keyExtractor={item => item.id}
         renderItem={({item}) => (
           <View
@@ -88,12 +94,12 @@ export default function   MoviesEvaluation({navigation}) {
                 style={{width: 10, height: 10, marginRight: 8}}
               />
               <Text style={{color: '#fff', fontSize: 13}}>
-                {item.vote_average?.toFixed(1)}/10
+                {item.rating?.toFixed(0)}/10
               </Text>
             </View>
           </View>
         )}
-      />
+      />}
     </View>
   );
 }

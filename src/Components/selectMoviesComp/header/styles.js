@@ -41,7 +41,30 @@ const styles = StyleSheet.create({
         color: '#FFF',
         marginTop: 30,
         marginBottom: 40
-    }
+    },
+    viewNameUser:{
+        width:'100%', 
+        justifyContent:'space-between', 
+        flexDirection:'row'
+    },
+    containerNameUser:{
+        width: '100%', 
+        marginHorizontal: 20, 
+        alignItems: 'flex-start'
+   },
+   containerText:{
+    flexDirection: 'row', 
+    justifyContent: 'center'
+   },
+   viewPhoto:{
+    width: '100%', 
+    alignItems: 'flex-end' 
+   },
+   stylePhoto:{
+    width: 50, 
+    height: 50, 
+    borderRadius: 60
+   }
 })
 
 export default styles

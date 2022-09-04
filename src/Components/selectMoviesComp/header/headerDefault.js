@@ -2,15 +2,15 @@ import React from "react";
 import { View, Text,Image, TouchableOpacity } from "react-native";
 import styles from "./styles";
 
-export default function HeaderSeries ({nameUser,photoUser,onPress}) {
+export default function HeaderMoviesDefault({nameUser,photoUser,onPress }) {
     return (
         <View style={styles.header}> 
        <TouchableOpacity onPress={onPress} style={styles.viewPhoto}>
-                 <Image source={{ uri: photoUser }} style={styles.stylePhoto}></Image>
-                 
+                 <Image source={photoUser} style={styles.stylePhoto}></Image>
             </TouchableOpacity>
             
             <View style={styles.containerText}>
+
 
                 <View style={styles.containerNameUser}>
                     <View style={styles.viewNameUser}>
