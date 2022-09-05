@@ -90,7 +90,7 @@ export default function MovieList({ navigation }) {
                     <Text style={{ color: '#FFFFFF', paddingTop: 30 }}>{listMovieDetails.description}</Text>
                 </View>
             </View>
-            <View style={{ paddingTop: '10%', alignItems: 'center', justifyContent: 'space-between' }}>
+            <View style={{alignItems: 'center' ,justifyContent: 'space-between', marginBottom: 10,}}>
                 <FlatList
                     data={listMovie}
                     keyExtractor={(item, index) => `${index}`}
@@ -99,7 +99,7 @@ export default function MovieList({ navigation }) {
                         const poster = `${item.poster_path}`
                         const id = `${item.id}`;
                         return (
-                            <View style={{ justifyContent: 'space-between' }}>
+                            <View style={{ justifyContent: 'space-between',  width: 95, marginTop: 15, alignItems: 'center'}}>
                                 <Image
                                     style={styles.Image}
                                     source={{ uri: `http://image.tmdb.org/t/p/w185/${poster}` }}
