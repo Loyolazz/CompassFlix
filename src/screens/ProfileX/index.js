@@ -22,16 +22,15 @@ import {
   getPostMovies,
   apiKey
 } from '../../services/api';
-import star from '../../assets/star_red.png'
+
 import Icon from 'react-native-vector-icons/Ionicons';
 import SeeItAll from '../../Components/ProfileComp2/SeeItAll';
 import SelectedItem from '../../Components/ProfileComp2/SelectedItem';
 import SeeItAllEvaluation from '../../Components/ProfileComp2/SeeItAllEvaluation';
 import SelectedItemEvaluation from '../../Components/ProfileComp2/SelectedItemEvaluation';
 import styles from './styles';
-import Api from '../../services/api';
 import { FlatList } from 'react-native-gesture-handler';
-import { CardStyleInterpolators } from '@react-navigation/stack';
+
 
 export default function ProfileX({ navigation }) {
 
