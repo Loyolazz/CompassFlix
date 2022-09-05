@@ -6,8 +6,8 @@ const styles = StyleSheet.create({
     width: 67,
     height: 89,
     borderRadius: 7,
-    marginEnd: 12,
-  
+    margin:6
+   
 }});
 
 export default styles;

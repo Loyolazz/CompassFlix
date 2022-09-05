@@ -10,6 +10,7 @@ import {
   Image,
   ActivityIndicator,
   TouchableWithoutFeedback,
+
 } from 'react-native';
 import ModalExitAccount from '../../Components/ModalExitAccount';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -19,6 +20,7 @@ import {
   EvaluationSeries,
   getMoviesFavorites,
   getPostMovies,
+  apiKey
 } from '../../services/api';
 import star from '../../assets/star_red.png'
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -27,9 +29,12 @@ import SelectedItem from '../../Components/ProfileComp2/SelectedItem';
 import SeeItAllEvaluation from '../../Components/ProfileComp2/SeeItAllEvaluation';
 import SelectedItemEvaluation from '../../Components/ProfileComp2/SelectedItemEvaluation';
 import styles from './styles';
+import Api from '../../services/api';
 import { FlatList } from 'react-native-gesture-handler';
+import { CardStyleInterpolators } from '@react-navigation/stack';
 
 export default function ProfileX({ navigation }) {
+
   const [modalVisibleExit, setVisibleModal] = useState(false);
   const [dataUser, setDataUser] = useState('username');
   const [evaluationSeries, setEvaluationSeries] = useState([]);
@@ -39,8 +44,11 @@ export default function ProfileX({ navigation }) {
   const [movieButtonFocused, setMovieButtonFocused] = useState(true);
   const [idItem, setIdItem] = useState(null);
   const { sessionId } = useContext(Context);
+
+
   const totalEvaluationNumber =
     evaluationSeries.total_results + evaluationMovies.total_results;
+
 
   useEffect(() => {
     const getResponseAccount = async () => {
@@ -60,6 +68,7 @@ export default function ProfileX({ navigation }) {
     const getEvaluationMovies = async () => {
       const response = await EvaluationSeries(dataUser, 'movies', sessionId);
       setEvaluationMovies(response.data);
+ 
     };
 
     getEvaluationSeries();
@@ -86,10 +95,13 @@ export default function ProfileX({ navigation }) {
     const getResponseMoviesFavorites = async () => {
       const response = await getMoviesFavorites(dataUser, 'movies', sessionId);
       setFavoriteMovies(response.data);
+     
+   
     };
     const getResponseSeriesFavorites = async () => {
       const response = await getMoviesFavorites(dataUser, 'tv', sessionId);
       setFavoriteSeries(response.data);
+   
     };
 
     getResponseMoviesFavorites();
@@ -100,6 +112,7 @@ export default function ProfileX({ navigation }) {
     await AsyncStorage.clear();
     navigation.replace('Login');
   };
+
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -114,6 +127,8 @@ export default function ProfileX({ navigation }) {
         logout={Logout}
         onPress={() => setVisibleModal(false)}
       />
+
+
 
       {dataUser?.avatar?.tmdb?.avatar_path ? (
         <View style={styles.containerPhotoUser}>
@@ -131,17 +146,29 @@ export default function ProfileX({ navigation }) {
 
       <Text style={styles.nameUser}>{dataUser?.name}</Text>
 
-      <View style={styles.containerTotalResults}>
-        {evaluationSeries.total_results && evaluationMovies.total_results ? (
-          <>
-            <Text style={styles.totalAvaluation}>{totalEvaluationNumber}</Text>
-
-            <Text style={styles.textAvaliacao}>Avaliações</Text>
-          </>
-        ) : (
-          <ActivityIndicator size="large" color="#E9A6A6" />
-        )}
+      <View style={styles.viewListMovies}>
+        <TouchableOpacity style={styles.btnViewListMovies}>
+          <Text style={styles.textListMovies}>Ver listas de filmes</Text>
+          </TouchableOpacity>
       </View>
+
+      {evaluationSeries?.total_results === 0 && evaluationMovies?.total_results === 0 ? (
+        <View style={styles.containerTotalResults}>
+          <Text style={styles.totalAvaluation}>0</Text>
+          <Text style={styles.textAvaliacao}>Avaliações</Text>
+        </View>) :
+        (<View style={styles.containerTotalResults}>
+          {evaluationSeries.total_results && evaluationMovies.total_results ? (
+            <>
+              <Text style={styles.totalAvaluation}>{totalEvaluationNumber}</Text>
+
+              <Text style={styles.textAvaliacao}>Avaliações</Text>
+            </>
+          ) : (
+            <ActivityIndicator size="large" color="#E9A6A6" />
+          )}
+        </View>)}
+
       {/* ///////////////////// btnMovieSeries //////////////////// */}
       <View style={styles.containerButtonSandM}>
         <View style={styles.borderButton}>
@@ -205,41 +232,44 @@ export default function ProfileX({ navigation }) {
         )}
       </View>
       {/*  //////////////////// Container filmes favoritos /////////////////// */}
-      <View style={styles.containerMovieFavorites}>
-        {favoriteMovies?.results && favoriteSeries?.results ? (
-          <View>
-            <FlatList
-              data={
-                movieButtonFocused
-                  ? favoriteMovies?.results?.slice(0, 4)
-                  : favoriteSeries?.results?.slice(0, 4)
-              }
-              horizontal={true}
-              keyExtractor={item => String(item.id)}
-              renderItem={({ item }) => (
-                movieButtonFocused ?
+      {favoriteMovies?.total_results === 0 || favoriteSeries?.total_results === 0 ?
+        <View style={styles.containerMovieFavorites}>
+          <Text style={{ color: '#fff', marginTop: 30, fontSize: 20 }}>Lista vazia</Text>
+        </View> :
+        <View style={styles.containerMovieFavorites}>
+          {favoriteMovies?.results && favoriteSeries?.results ? (
+            <View>
+              <FlatList
+                data={
+                  movieButtonFocused
+                    ? favoriteMovies?.results?.slice(0, 4)
+                    : favoriteSeries?.results?.slice(0, 4)
+                }
+                horizontal={true}
+                keyExtractor={item => String(item.id)}
+                renderItem={({ item }) => (
+                  movieButtonFocused ?
+                    <SelectedItem
+                      onPress={() => {
+                        setIdItem(item.id), navigation.navigate('MoviesDetail', { item });
+                      }}
+                      uri={`http://image.tmdb.org/t/p/w185/${item.poster_path}`}
+                    />
+                    :
+                    <SelectedItem
+                      onPress={() => {
+                        setIdItem(item.id), navigation.navigate('SeriesDetail', { item });
+                      }}
+                      uri={`http://image.tmdb.org/t/p/w185/${item.poster_path}`}
+                    />
 
-                  <SelectedItem
-                    onPress={() => {
-                      setIdItem(item.id), navigation.navigate('MoviesDetail', { item });
-                    }}
-                    uri={`http://image.tmdb.org/t/p/w185/${item.poster_path}`}
-                  />
-                  :
-                  <SelectedItem
-                    onPress={() => {
-                      setIdItem(item.id), navigation.navigate('SeriesDetail', { item });
-                    }}
-                    uri={`http://image.tmdb.org/t/p/w185/${item.poster_path}`}
-                  />
+                )}
+              />
 
-              )}
-            />
-
-          </View>) : (
-          <ActivityIndicator size="large" color="#E9A6A6" />
-        )}
-      </View>
+            </View>) : (
+            <ActivityIndicator size="large" color="#E9A6A6" />
+          )}
+        </View>}
       <View style={{ width: '100%', borderWidth: 0.3, marginBottom: 10, borderTopColor: 'grey' }}>
 
 
@@ -266,6 +296,10 @@ export default function ProfileX({ navigation }) {
           )}
 
         </View>
+        {favoriteMovies?.total_results === 0 && favoriteMovies?.total_results === 0 ?(
+         <View style={styles.containerEvaluation}>
+           <Text  style={{ color: '#fff', marginTop: 30, fontSize: 20 }}>Sem avaliações</Text>
+        </View>):(
         <View style={styles.containerEvaluation}>
           {favoriteMovies?.results && favoriteSeries?.results ? (
             <View>
@@ -285,7 +319,7 @@ export default function ProfileX({ navigation }) {
                       }
                       }
                       uri={`http://image.tmdb.org/t/p/w185/${item.poster_path}`}
-                      vote={item.vote_average.toFixed(1)}
+                      vote={item.rating.toFixed(0) + '/10'}
                     />
                     :
                     <SelectedItemEvaluation
@@ -294,7 +328,7 @@ export default function ProfileX({ navigation }) {
                       }
                       }
                       uri={`http://image.tmdb.org/t/p/w185/${item.poster_path}`}
-                      vote={item.vote_average.toFixed(1)}
+                      vote={item.rating.toFixed(0) + '/10'}
                     />
                 )}
               />
@@ -302,7 +336,7 @@ export default function ProfileX({ navigation }) {
             </View>) : (
             <ActivityIndicator size="large" color="#E9A6A6" />
           )}
-        </View>
+        </View>)}
       </View>
     </View>
   );
