@@ -18,6 +18,26 @@ const styles = StyleSheet.create({
     backgroundColor: '#E9A6A6',
     borderRadius: 7,
   },
+  viewListMovies:{
+    width:'100%', 
+    alignItems:'center', 
+    justifyContent:'center', 
+    marginTop:10,
+    height:50
+  },
+  btnViewListMovies:{
+    width:120, 
+    backgroundColor:'#6C7BFC', 
+    alignItems:'center', 
+    padding:3, 
+    borderRadius:7, 
+    borderWidth:1, 
+    borderColor:'#2456B6'
+  },
+  textListMovies:{
+    color:'#fff', 
+    fontSize:12
+  },
   textExit: {
     color: '#000',
     fontSize: 12,
@@ -67,7 +87,7 @@ const styles = StyleSheet.create({
   },
   containerTotalResults: {
     alignItems: 'center',
-    marginTop: 46,
+    marginTop: 15,
     height: 54,
   },
   totalAvaluation: {
