@@ -6,8 +6,7 @@ export const styles = StyleSheet.create({
             //alignItems: 'flex-end'
         },
         ContainerButtonSandM: {
-            flexDirection: 'row',
-            paddingTop: 22,
+            flexDirection: 'row',   
             backgroundColor: '#000000',
             width: 120,
             height: 40,
@@ -32,7 +31,7 @@ export const styles = StyleSheet.create({
             justifyContent: 'center',
         },
         Icon: {
-            bottom: 12
+           
         },
         Button: {
             width: 40,

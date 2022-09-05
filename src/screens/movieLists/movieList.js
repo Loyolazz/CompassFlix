@@ -5,6 +5,7 @@ import Arrow from "react-native-vector-icons/Feather";
 import { apiKey } from "../../services/api";
 import Api from "../../services/api";
 import { styles } from "./style_movieList";
+import * as Animatable from 'react-native-animatable';
 
 export default function MovieList({ navigation }) {
     const [movieButtonFocused, setMovieButtonFocused] = useState(true);
@@ -19,6 +20,7 @@ export default function MovieList({ navigation }) {
         }
         testelist();
     }, [])
+
 
 
     return (
@@ -42,18 +44,24 @@ export default function MovieList({ navigation }) {
                                     setMovieButtonFocused(true);
                                 }}>
                                 {movieButtonFocused ? (
-                                    <Icon
-                                        name='eye'
-                                        size={37}
-                                        color='#bd1451'
-                                        style={styles.Icon}
-                                    />
+                                    <View style={{ width: 65, height: 40, backgroundColor: "#E9A6A6", borderRadius: 20, alignItems: 'center', justifyContent: 'center' }}>
+                                        <Icon
+                                            name='eye'
+                                            size={37}
+                                            color='#fff'
+                                            style={styles.Icon}
+                                        />
+                                    </View>
                                 ) : (
-                                    <Icon
-                                        name='eye'
-                                        size={37}
-                                        style={styles.Icon}
-                                    />
+                                    <View style={{ width: 65, height: 40, borderRadius: 20, alignItems: 'center', justifyContent: 'center' }}>
+                                        <Icon
+                                            name='eye'
+                                            size={37}
+                                            color='#000'
+                                            style={styles.Icon}
+                                        />
+                                    </View>
+
                                 )}
                             </TouchableOpacity>
                         </View>
@@ -64,18 +72,24 @@ export default function MovieList({ navigation }) {
                                     setMovieButtonFocused(false);
                                 }}>
                                 {!movieButtonFocused ? (
-                                    <Icon
-                                        name='pencil'
-                                        size={35}
-                                        color='#bd1451'
-                                        style={styles.Icon}
-                                    />
+                                    <View style={{ width: 65, height: 40, borderRadius: 20, backgroundColor: "#E9A6A6", alignItems: 'center', justifyContent: 'center' }}>
+                                        <Icon
+                                            name='pencil'
+                                            size={35}
+                                            color='#fff'
+                                            style={styles.Icon}
+                                        />
+                                    </View>
+
                                 ) : (
-                                    <Icon
-                                        name='pencil'
-                                        size={35}
-                                        style={styles.Icon}
-                                    />
+                                    <View style={{ width: 65, height: 40, borderRadius: 20, alignItems: 'center', justifyContent: 'center' }}>
+                                        <Icon
+                                            name='pencil'
+                                            size={35}
+                                            color='#000'
+                                            style={styles.Icon}
+                                        />
+                                    </View>
                                 )}
                             </TouchableOpacity>
                         </View>
@@ -90,7 +104,8 @@ export default function MovieList({ navigation }) {
                     <Text style={{ color: '#FFFFFF', paddingTop: 30 }}>{listMovieDetails.description}</Text>
                 </View>
             </View>
-            <View style={{alignItems: 'center' ,justifyContent: 'space-between', marginBottom: 10,}}>
+            {movieButtonFocused ? (<View style={{ alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
+
                 <FlatList
                     data={listMovie}
                     keyExtractor={(item, index) => `${index}`}
@@ -99,7 +114,8 @@ export default function MovieList({ navigation }) {
                         const poster = `${item.poster_path}`
                         const id = `${item.id}`;
                         return (
-                            <View style={{ justifyContent: 'space-between',  width: 95, marginTop: 15, alignItems: 'center'}}>
+
+                            <View style={{ justifyContent: 'space-between', width: 95, marginTop: 15, alignItems: 'center' }}>
                                 <Image
                                     style={styles.Image}
                                     source={{ uri: `http://image.tmdb.org/t/p/w185/${poster}` }}
@@ -112,7 +128,42 @@ export default function MovieList({ navigation }) {
                         );
                     }}
                 />
-            </View>
+            </View>) : (<View style={{ alignItems: 'center', justifyContent: 'space-between', marginBottom: 10, }}>
+                <FlatList
+                    data={listMovie}
+                    keyExtractor={(item, index) => `${index}`}
+                    numColumns={4}
+                    renderItem={({ item }) => {
+                        const poster = `${item.poster_path}`
+                        const id = `${item.id}`;
+                        return (
+
+                            <View style={{ justifyContent: 'space-between', width: 95, marginTop: 15, alignItems: 'center' }}>
+                                <>
+                                    <View style={{ width: '90%', alignItems: 'flex-end' }}>
+
+                                        <TouchableOpacity style={{ width: 20, height: 20, backgroundColor: '#fff', borderRadius: 20, alignItems: 'center', justifyContent: 'center', }}>
+                                            <Text style={{ color: 'red', fontSize: 23 }}>-</Text>
+                                        </TouchableOpacity>
+                                    </View>
+
+                                    <Image
+                                        style={styles.Image}
+                                        source={{ uri: `http://image.tmdb.org/t/p/w185/${poster}` }}
+                                        onPress={() => {
+                                            setSelectedId(id);
+                                            navigation.navigate('MoviesDetail', { item });
+                                        }}
+                                    />
+                                </>
+
+                            </View>
+                        );
+                    }}
+                />
+            </View>)}
+
+
         </View>
     )
 }
