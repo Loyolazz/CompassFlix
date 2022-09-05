@@ -137,7 +137,7 @@ const MoviesDetail = ({route, navigation}) => {
         style={styles.ImgBackground}></ImageBackground>
       <View style={styles.buttonFavorite}>
         <TouchableOpacity
-          onPress={() => navigation.navigate('TabBottomRoutes')}
+          onPress={() => navigation.navigate('SelectionMovies')}
           style={styles.btnGoBack}>
           <BtnGoback name="md-arrow-back" size={23} color={'#000'} />
         </TouchableOpacity>
@@ -149,7 +149,7 @@ const MoviesDetail = ({route, navigation}) => {
         Cartaz={Poster}
         Director={director}
         Nota={Note}
-        Votes={Votes}
+        Votes={Votes >= 1000 ? `${(Votes / 1000)?.toFixed(0)}` : Votes?.toFixed(0)}
         Year={Year}
         Duration={Duration}
         TitleFilm={Title}

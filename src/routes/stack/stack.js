@@ -2,12 +2,7 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Login from '../../screens/login/login';
 import TabBottomRoutes from '../tab/tabbar';
-import {SelectionMovies} from '../../screens/selectionMovies/selectionMovies';
-import SeriesDetail from '../../screens/seriesDetail';
-import ProfileX from '../../screens/ProfileX';
 import SlapshLoadLogin from '../../Components/SplashLoadLogin/splashLoadLogin';
-
-import MoviesDetail from '../../screens/moviesDetail/moviesDetail';
 const {Navigator, Screen} = createNativeStackNavigator();
 
 const Stack = () => {
@@ -16,10 +11,6 @@ const Stack = () => {
       <Screen name="Splash" component={SlapshLoadLogin} />
       <Screen name="Login" component={Login} />
       <Screen name="TabBottomRoutes" component={TabBottomRoutes} />
-      <Screen name="SelectionMovies" component={SelectionMovies} />
-      <Screen name="MoviesDetail" component={MoviesDetail} />
-      <Screen name="SeriesDetail" component={SeriesDetail} />
-      <Screen name="ProfileX" component={ProfileX} />
     </Navigator>
   );
 };

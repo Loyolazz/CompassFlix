@@ -11,8 +11,7 @@ import Eye from '../../../node_modules/react-native-vector-icons/Entypo';
 import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import styles from './style_login';
-import { useNavigation } from '@react-navigation/native';
-import Load from '../../Components/Load';
+import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {Context} from '../../context';
@@ -52,7 +51,7 @@ const Login = () => {
       setSessionId(session_id);
       await AsyncStorage.setItem('sessionId', session_id);
       const id = await AsyncStorage.getItem('sessionId');
-      navigation.replace('TabBottomRoutes');
+      navigation.reset({index: 0, routes: [{name: 'TabBottomRoutes'}]});
     } else {
       console.log('error');
       setLoading(false);
@@ -62,7 +61,8 @@ const Login = () => {
   const checkLogin = async () => {
     const userStorage = await AsyncStorage.getItem('sessionId');
     if (userStorage) {
-      navigation.navigate('TabBottomRoutes');
+      navigation.reset({index: 0, routes: [{name: 'TabBottomRoutes'}]});
+
       setSessionId(userStorage);
     }
   };
@@ -153,9 +153,11 @@ const Login = () => {
           </Animatable.View>
         </View>
 
-              {
-                error ? <Text style={{color: '#EC2626', left: 80 }}>Usuário ou senha inválidos</Text> : null
-              }
+        {error ? (
+          <Text style={{color: '#EC2626', left: 80}}>
+            Usuário ou senha inválidos
+          </Text>
+        ) : null}
 
         <TouchableOpacity style={styles.button} onPress={handleSignin}>
           <Text style={styles.buttonText}>Entrar</Text>
