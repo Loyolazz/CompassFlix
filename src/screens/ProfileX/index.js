@@ -20,7 +20,6 @@ import {
   getMoviesFavorites,
   getPostMovies,
 } from '../../services/api';
-import star from '../../assets/star_red.png'
 import Icon from 'react-native-vector-icons/Ionicons';
 import SeeItAll from '../../Components/ProfileComp2/SeeItAll';
 import SelectedItem from '../../Components/ProfileComp2/SelectedItem';

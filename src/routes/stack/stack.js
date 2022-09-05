@@ -6,10 +6,10 @@ import {SelectionMovies} from '../../screens/selectionMovies/selectionMovies';
 import SeriesDetail from '../../screens/seriesDetail';
 import ProfileX from '../../screens/ProfileX';
 import SlapshLoadLogin from '../../Components/SplashLoadLogin/splashLoadLogin';
-
 import MoviesDetail from '../../screens/moviesDetail/moviesDetail';
-const {Navigator, Screen} = createNativeStackNavigator();
 
+
+const {Navigator, Screen} = createNativeStackNavigator();
 const Stack = () => {
   return (
     <Navigator initialRouteName="Splash" screenOptions={{headerShown: false}}>

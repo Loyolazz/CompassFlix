@@ -11,10 +11,7 @@ import {HeaderDetails} from '../../Components/movieDetailsComp/header/index';
 import {SinopseDetails} from '../../Components/movieDetailsComp/sinopse/sinopse';
 import Api, {getAccountStates} from '../../services/api';
 import BtnGoback from '../../../node_modules/react-native-vector-icons/Ionicons';
-const apikey = 'api_key=80eb37af6714ab187d2c58f9acc83af3';
-const language = 'language=pt-BR';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
-
 import styles from './style';
 import Load from '../../Components/Load';
 import ModalAvaluate from '../../Components/ModalAvaluate';
@@ -28,6 +25,9 @@ import {
   getAccount,
 } from '../../services/api';
 import {Context} from '../../context';
+
+const apikey = 'api_key=80eb37af6714ab187d2c58f9acc83af3';
+const language = 'language=pt-BR';
 
 export default function SeriesDetail({route, navigation}) {
   const [details, setDetails] = useState([]);

@@ -6,20 +6,15 @@ import {
   ImageBackground,
   ScrollView,
 } from 'react-native';
-
 import styles from './style_moviesDetail';
-
 import {ViewElenco} from '../../Components/movieDetailsComp/elenco';
 import {HeaderDetails} from '../../Components/movieDetailsComp/header/index';
 import {SinopseDetails} from '../../Components/movieDetailsComp/sinopse/sinopse';
 import Api from '../../services/api';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import ButtonFavorite from '../../Components/ButtonFavorite';
-
 import BtnGoback from '../../../node_modules/react-native-vector-icons/Ionicons';
 import Load from '../../Components/Load';
-const apikey = 'api_key=80eb37af6714ab187d2c58f9acc83af3';
-const language = 'language=pt-BR';
 import ModalAvaluate from '../../Components/ModalAvaluate';
 import {Context} from '../../context';
 import {
@@ -30,6 +25,9 @@ import {
   unmarkFavorite,
 } from '../../services/api';
 
+const apikey = 'api_key=80eb37af6714ab187d2c58f9acc83af3';
+const language = 'language=pt-BR';
+
 const MoviesDetail = ({route, navigation}) => {
   const [details, setDetails] = useState({});
   const [detailsCredits, setDetailsCredits] = useState([]);
@@ -38,7 +36,6 @@ const MoviesDetail = ({route, navigation}) => {
   const [rated, setRated] = useState();
   const [dataUser, setDataUser] = useState();
   const [favoriteMovies, setFavoriteMovies] = useState();
-
   const {sessionId, evaluation, setEvaluation} = useContext(Context);
   const {item} = route?.params || {};
   const id = `${item.id}`;

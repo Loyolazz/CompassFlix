@@ -1,17 +1,19 @@
-import React, {useState, useContext, useEffect} from 'react';
-import {View, Text, TouchableOpacity, FlatList, Image} from 'react-native';
-import {Context} from '../../../../context';
+import React, { useState, useContext, useEffect } from 'react';
+import { View, Text, TouchableOpacity, FlatList, Image } from 'react-native';
+import { Context } from '../../../../context';
 import styles from './styles';
-import {getAccount, EvaluationSeries} from '../../../../services/api';
+import { getAccount, EvaluationSeries } from '../../../../services/api';
 import star_red from '../../../../assets/star_red.png';
 import BtnGoBack from '../../../../Components/ProfileComp/btnGoBack/btn';
-export default function   MoviesEvaluation({navigation}) {
+
+export default function MoviesEvaluation({ navigation }) {
   const [nameUser, setNameUser] = useState('');
   const [idUser, setIdUser] = useState([]);
   const [idItem, setIdItem] = useState(null);
   const [dataUser, setDataUser] = useState('username');
   const [moviesEvaluation, setMoviesEvaluation] = useState([]);
-  const {sessionId} = useContext(Context);
+  const { sessionId } = useContext(Context);
+
   useEffect(() => {
     const getResponseAccount = async () => {
       const response = await getAccount(sessionId);
@@ -27,20 +29,18 @@ export default function   MoviesEvaluation({navigation}) {
       const response = await EvaluationSeries(dataUser, 'movies', sessionId);
       setMoviesEvaluation(response.data.results);
     };
-
     getEvaluationMovies();
-
   }, [dataUser, sessionId]);
 
-   
+
   return (
     <View style={styles.container}>
-      <View style={{marginTop: 20}}>
+      <View style={{ marginTop: 20 }}>
         <BtnGoBack onPress={() => navigation.navigate('ProfileX')} />
       </View>
       <View style={styles.viewText}>
         <Text style={styles.title}>
-          Avaliações de filmes recentes de <Text style={{color: '#E9A6A6'}}>{nameUser}</Text>
+          Avaliações de filmes recentes de <Text style={{ color: '#E9A6A6' }}>{nameUser}</Text>
           !
         </Text>
       </View>
@@ -49,7 +49,7 @@ export default function   MoviesEvaluation({navigation}) {
         numColumns={4}
         data={moviesEvaluation}
         keyExtractor={item => item.id}
-        renderItem={({item}) => (
+        renderItem={({ item }) => (
           <View
             style={{
               justifyContent: 'space-between',
@@ -62,7 +62,7 @@ export default function   MoviesEvaluation({navigation}) {
             }}>
             <TouchableOpacity
               onPress={() => {
-                setIdItem(item.id), navigation.navigate('MoviesDetail', {item});
+                setIdItem(item.id), navigation.navigate('MoviesDetail', { item });
               }}>
               <Image
                 source={{
@@ -85,9 +85,9 @@ export default function   MoviesEvaluation({navigation}) {
               }}>
               <Image
                 source={star_red}
-                style={{width: 10, height: 10, marginRight: 8}}
+                style={{ width: 10, height: 10, marginRight: 8 }}
               />
-              <Text style={{color: '#fff', fontSize: 13}}>
+              <Text style={{ color: '#fff', fontSize: 13 }}>
                 {item.vote_average?.toFixed(1)}/10
               </Text>
             </View>

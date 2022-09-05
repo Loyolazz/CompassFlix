@@ -136,7 +136,15 @@ export const getAccountStates = async (midia, movie_id, session_id) => {
   return Api.get(
     `/${midia}/${movie_id}/account_states?api_key=${apiKey}&session_id=${session_id}`,
   ).catch(error => {
-    console.log('Error', errpr);
+    console.log('Error', error);
+  });
+};
+
+export const getListMovie = async (list_id) => {
+  return Api.get(
+    `/list/8215543?api_key=${apiKey}&language=en-US`,
+  ).catch(error => {
+    console.log('Error', error);
   });
 };
 
