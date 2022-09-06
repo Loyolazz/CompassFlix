@@ -21,6 +21,8 @@ export function SelectionMovies({ navigation }) {
   const [dataUser, setDataUser] = useState('username');
   const { sessionId, user, setUser } = useContext(Context);
 
+  console.log(sessionId)
+
   const getResponseMovies = async () => {
     const response = await getMovies(page);
     setMovies([...movies, ...response.data.results]);

@@ -109,6 +109,7 @@ export default function ProfileX({ navigation }) {
       </TouchableOpacity>
 
       <ModalExitAccount
+        title="Deseja mesmo sair?"
         modalExit={modalVisibleExit}
         logout={Logout}
         onPress={() => setVisibleModal(false)}
