@@ -104,7 +104,6 @@ export default function SeriesDetail({route, navigation}) {
     }
   };
 
-  const notas = details.vote_count;
   const Banner = `https://image.tmdb.org/t/p/w342/${details.backdrop_path}`;
   const uri = 'https://image.tmdb.org/t/p/w342/';
   const notas = details.vote_count;
