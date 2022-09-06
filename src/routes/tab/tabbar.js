@@ -10,15 +10,19 @@ import routesProfileX from '../routesProfileX/routesProfileX';
 import ButtonSeries from '../../Components/Tabbuttons/ButtonSeries';
 import ButtonUser from '../../Components/Tabbuttons/ButtonUser';
 
+
 import StackMovies from '../stack/StackMovies';
 import StackSeries from '../stack/StackSeries';
+
 
 const Tab = createBottomTabNavigator();
 
 const TabBottomRoutes = () => {
   return (
     <Tab.Navigator
+
       initialRouteName="StackMovies"
+
       screenOptions={{
         headerShown: false,
         tabBarShowLabel: false,

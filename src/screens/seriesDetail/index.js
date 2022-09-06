@@ -104,6 +104,7 @@ export default function SeriesDetail({route, navigation}) {
     }
   };
 
+  const notas = details.vote_count;
   const Banner = `https://image.tmdb.org/t/p/w342/${details.backdrop_path}`;
   const uri = 'https://image.tmdb.org/t/p/w342/';
   const notas = details.vote_count;
@@ -129,6 +130,7 @@ export default function SeriesDetail({route, navigation}) {
         Votes={
           notas >= 1000 ? `${(notas / 1000)?.toFixed(0)}` : notas?.toFixed(0)
         }
+
         Year={`${String(details.first_air_date).substring(0, 4)}`}
         TitleFilm={details.name ? details.name : 'Sem Titulo'}
         poster={`${uri}${details.poster_path}`}
