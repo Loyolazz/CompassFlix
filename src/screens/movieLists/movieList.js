@@ -1,27 +1,34 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, FlatList, Image } from "react-native";
 import Icon from "react-native-vector-icons/EvilIcons"
 import Arrow from "react-native-vector-icons/Feather";
-import { apiKey } from "../../services/api";
+import { apiKey, removeItem } from "../../services/api";
 import Api from "../../services/api";
 import { styles } from "./style_movieList";
 import * as Animatable from 'react-native-animatable';
+import { Context } from "../../context/index"
 
 export default function MovieList({ navigation }) {
     const [movieButtonFocused, setMovieButtonFocused] = useState(true);
     const [listMovieDetails, setListMovieDetails] = useState([])
     const [listMovie, setListMovie] = useState([])
+    const [deletItem, setDeletItem] = useState(false)
+    const { sessionId } = useContext(Context)
+
 
     useEffect(() => {
-        const testelist = async () => {
+        const list = async () => {
             const response = await Api.get(`/list/8215543?api_key=${apiKey}&language=pt-BR`)
             setListMovie(response.data.items)
             setListMovieDetails(response.data)
+            console.log(response.data.items.id)
         }
-        testelist();
+        list();
     }, [])
-
-
+    
+    const itemRemoved = async () => {
+        await removeItem("8215543", sessionId, id)
+    }
 
     return (
         <View style={{ flex: 1, backgroundColor: 'black' }}>
@@ -137,12 +144,14 @@ export default function MovieList({ navigation }) {
                         const poster = `${item.poster_path}`
                         const id = `${item.id}`;
                         return (
-
                             <View style={{ justifyContent: 'space-between', width: 95, marginTop: 15, alignItems: 'center' }}>
                                 <>
                                     <View style={{ width: '90%', alignItems: 'flex-end' }}>
 
-                                        <TouchableOpacity style={{ width: 20, height: 20, backgroundColor: '#fff', borderRadius: 20, alignItems: 'center', justifyContent: 'center', }}>
+                                        <TouchableOpacity 
+                                        style={{ width: 20, height: 20, backgroundColor: '#fff', borderRadius: 20, alignItems: 'center', justifyContent: 'center', }}
+                                        onPress={itemRemoved}
+                                        >
                                             <Text style={{ color: 'red', fontSize: 23 }}>-</Text>
                                         </TouchableOpacity>
                                     </View>
@@ -155,15 +164,14 @@ export default function MovieList({ navigation }) {
                                             navigation.navigate('MoviesDetail', { item });
                                         }}
                                     />
+                                    <Text style={{color: '#fff'}}>{id}</Text>
                                 </>
-
                             </View>
                         );
                     }}
                 />
-            </View>)}
-
-
+            </View>
+            )}
         </View>
     )
 }

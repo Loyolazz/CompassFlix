@@ -148,4 +148,29 @@ export const getListMovie = async (list_id) => {
   });
 };
 
+export const movieDelet = async (sessionId) => {
+  return Api.post(
+    `list/8215543/remove_item?api_key=${apiKey}&session_id=${sessionId}`,
+    347201,
+    {
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+    }
+  )
+};
+
+export const removeItem = async (list_id, sessionId, midiaId) => {
+  return Api.post(
+    `list/${list_id}/remove_item?api_key=${apiKey}&session_id=${sessionId}`, {
+    midiaId: midiaId
+  }
+  ).catch(error => {
+    console.error("Error", error)}
+  )
+
+}
+
+
+
 export default Api;
