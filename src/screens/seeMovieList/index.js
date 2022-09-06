@@ -1,6 +1,6 @@
 import React, { Component, useState } from 'react';
 import { View, Text, TouchableOpacity, Modal, Pressable } from 'react-native';
-
+import Trash from 'react-native-vector-icons/EvilIcons';
 import styles from './style copy'
 import BtnGoBack from '../../Components/ProfileComp2/btnGoBack/btn'
 import { TextInput } from 'react-native-gesture-handler';
@@ -12,32 +12,38 @@ const useCounter = () => {
     };
     return [value, setCounter];
 };
-// const Counter = () => {
-//     const [counter, setCounter] = useCounter(0);
-//     return (
-//         <View>
-//             <Text>{counter}</Text>
-//             <TouchableOpacity title="clique aqui" onPress={() => setCounter()} ><Text>+</Text></TouchableOpacity>
-//         </View>
-//     );
-// };
+const Counter = () => {
+    const [counter, setCounter] = useCounter(0);
+    return (
+        <View>
+            <Text>{counter}</Text>
+            <TouchableOpacity title="clique aqui" onPress={() => setCounter()} ><Text>+</Text></TouchableOpacity>
+        </View>
+    );
+};
 
 export default function SeeMovieList({ navigation }) {
     const [counter, setCounter] = useCounter(0);
     const [modalVisible, setModalVisible] = useState(false);
-    const [descricao,setDescricao] = useState('');
-    const ExibirDescricao = () =>{
-        return(
-            <View style={{backgroundColor:'blue', width:'100%', flex:1}}>
-                <Text>{descricao}</Text>
+    const [description, setDescription] = useState('')
+    const [nameList, setNameList] = useState('')
+    // const [list, setList] = useState({
+    //     nameList:nameList,
+    //     description:description
+    // });
+    const ExibirDescricao = () => {
+        return (
+            <View style={{ backgroundColor: 'blue', width: '100%', flex: 1 }}>
+                <Text>{nameList}</Text>
+                <Text>{description}</Text>
             </View>
         )
     }
     return (
         <View style={styles.container}>
             <View>
-                <Modal
 
+                <Modal
                     animationType="slide"
                     transparent={true}
                     visible={modalVisible}
@@ -45,53 +51,56 @@ export default function SeeMovieList({ navigation }) {
                         Alert.alert("Modal has been closed.");
                         setModalVisible(!modalVisible);
                     }}>
-                    <View
-                        style={{ backgroundColor: '#fff', width: 330, height: 170, borderRadius: 20, marginHorizontal: '10%', marginVertical: '80%', alignItems: 'center' }}
-                    >
-                        <View style={{ width: '100%', alignItems: 'center', marginTop: 10 }}>
-                            <Text style={{ color: '#000', fontWeight: 'bold' }}>Nova lista</Text>
+
+                    <View style={styles.containerMyList}>
+
+                        <View style={styles.viewTitle}>
+                            <Text style={styles.title}>Nova lista</Text>
                         </View>
 
-                        <View style={{ width: '100%', alignItems: 'center', justifyContent: 'center', height: 100 }}>
+                        <View style={styles.containerModal}>
 
-                            <View style={{ width: '90%', height: "85%", justifyContent: 'space-between', alignItems: 'center', marginTop: 6 }}>
+                            <View style={styles.containerTextInput}>
+
                                 <TextInput
                                     placeholder='Nome da lista'
                                     placeholderTextColor={'#8E8E8E'}
-                                    style={{ backgroundColor: '#d7d8d7', width: 280, height: 31, borderRadius: 5, fontSize: 12, justifyContent: 'flex-end' }}>
+                                    style={styles.styleInpuListName}
+                                    value={nameList}
+                                    onChangeText={text => setNameList(text)}
+                                    >
 
                                 </TextInput>
+
                                 <TextInput
                                     placeholder='Descrição'
                                     placeholderTextColor={'#8E8E8E'}
-                                    style={{
-                                        backgroundColor: '#d7d8d7', width: 280, height: 50
-                                        , borderRadius: 5, fontSize: 12
-                                    }}
-                                    value={descricao}
-                                    onChangeText={text => setDescricao(text)}
+                                    style={styles.styleInpuListInput}
+                                    value={description}
+                                    onChangeText={text => setDescription(text)}
                                     >
-
                                 </TextInput>
                             </View>
 
                         </View>
-                        <View style={{ width: '60%', flexDirection: 'row', justifyContent: 'space-between', marginTop: 6 }}>
+                        <View style={styles.containerBtnModal}>
+
                             <TouchableOpacity
-                                style={{ borderWidth: 1, borderColor: '#000', width: 80, alignItems: 'center', justifyContent: 'center', borderRadius: 5 }}
+                                style={styles.btnCancel}
                                 onPress={() => setModalVisible(!modalVisible)}>
-                                <Text style={{ color: '#000', fontSize: 12, fontWeight: 'bold' }}>Cancelar</Text>
+                                <Text style={styles.textCancel}>Cancelar</Text>
                             </TouchableOpacity>
+
                             <TouchableOpacity
-                                style={{ backgroundColor: '#000', width: 80, alignItems: 'center', justifyContent: 'center', borderRadius: 5 }}
+                                style={styles.btnSave}
                                 onPress={ExibirDescricao}>
-                                <Text style={{ color: '#fff', fontSize: 12, fontWeight: 'bold' }}>Salvar</Text>
+                                <Text style={styles.textSave}>Salvar</Text>
                             </TouchableOpacity>
+
                         </View>
 
 
                     </View>
-
 
                 </Modal>
 
@@ -103,19 +112,35 @@ export default function SeeMovieList({ navigation }) {
 
             <View style={styles.viewTitle}>
                 <Text style={styles.txtTitle}>Minhas listas</Text>
+            </View>
+
+            <View style={styles.mainList}>
+                <View style={styles.viewCardList}>
+                    <View style={styles.styleCard }>
+                        <Text style={{ fontSize: 15, color: '#fff', fontWeight: 'bold' }}>{nameList.toUpperCase()}</Text>
+                        <Text style={{ fontSize: 13, color: '#fff', fontWeight: 'bold' }}>{description.toUpperCase()}</Text>
+                    </View>
+
+                    <View style={styles.viewTrash}>
+
+                        <TouchableOpacity>
+                            <Trash name='trash' size={34} color={'#EC2626'} />
+                        </TouchableOpacity>
+
+                    </View>
+
+
+                </View>
 
             </View>
-            <View style={styles.mainList}>
-         
-           <Text style={{ fontSize: 30 }}>{descricao}</Text>
-               
-                
-            </View>
+
             <View style={styles.footerBtnCreateList}>
+
                 <TouchableOpacity
                     onPress={() => setModalVisible(true)}
-                    style={{ width: 60, height: 60, borderRadius: 30, backgroundColor: 'pink', justifyContent: 'center', alignItems: 'center' }}>
+                    style={styles.btnCreatList}>
                     <Text style={{ color: '#000', fontSize: 40 }}>+</Text>
+               
                 </TouchableOpacity>
 
             </View>
