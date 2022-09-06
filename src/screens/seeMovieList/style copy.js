@@ -32,7 +32,8 @@ export default StyleSheet.create({
         justifyContent:'flex-start', 
         alignItems:'center', 
         marginTop:30,
-        paddingVertical:20
+        paddingVertical:20,
+        flex:1
     },
     containerMyList:{
         backgroundColor: '#fff', 
