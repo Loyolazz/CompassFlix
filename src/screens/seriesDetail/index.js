@@ -106,6 +106,7 @@ export default function SeriesDetail({route, navigation}) {
 
   const Banner = `https://image.tmdb.org/t/p/w342/${details.backdrop_path}`;
   const uri = 'https://image.tmdb.org/t/p/w342/';
+  const notas = details.vote_count;
   return details.backdrop_path && details.poster_path ? (
     <View style={styles.container}>
       <ImageBackground
@@ -114,7 +115,7 @@ export default function SeriesDetail({route, navigation}) {
 
       <View style={styles.buttonFavorite}>
         <TouchableOpacity
-          onPress={() => navigation.navigate('TabBottomRoutes')}
+          onPress={() => navigation.goBack()}
           style={styles.btnGoBack}>
           <BtnGoback name="md-arrow-back" size={23} color={'#000'} />
         </TouchableOpacity>
@@ -125,7 +126,9 @@ export default function SeriesDetail({route, navigation}) {
       <HeaderDetails
         Cartaz={`${uri}${details.poster_path}`}
         Nota={`${details.vote_average?.toFixed(1)}/10`}
-        Votes={details.vote_count}
+        Votes={
+          notas >= 1000 ? `${(notas / 1000)?.toFixed(0)}` : notas?.toFixed(0)
+        }
         Year={`${String(details.first_air_date).substring(0, 4)}`}
         TitleFilm={details.name ? details.name : 'Sem Titulo'}
         poster={`${uri}${details.poster_path}`}
@@ -174,12 +177,10 @@ export default function SeriesDetail({route, navigation}) {
         textSinopse={details.overview ? details.overview : 'Sem Sinopse.'}
       />
 
-      <Animatable.View style={styles.flex2_5}
-      animation="zoomInUp"
-          duration={1000}
-      >
-
-
+      <Animatable.View
+        style={styles.flex2_5}
+        animation="zoomInUp"
+        duration={1000}>
         <ScrollView>
           {details.seasons.map((item, index) => (
             <Season
