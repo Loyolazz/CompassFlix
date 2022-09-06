@@ -8,14 +8,14 @@ import {
   StyleSheet,
 } from 'react-native';
 
-const ModalExitAccount = ({modalExit, onPress, logout}) => {
+const ModalExitAccount = ({modalExit, onPress, logout, title}) => {
   return (
     <Modal transparent={true} visible={modalExit} onRequestClose={onPress}>
       <TouchableWithoutFeedback onPress={onPress} touchSoundDisabled>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Text style={styles.modalTxtHeader}>Atenção!</Text>
-            <Text style={styles.modalTxtMid}>Deseja mesmo sair?</Text>
+            <Text style={styles.modalTxtMid}>{title}</Text>
             <View style={styles.modalContainerFooter}>
               <View style={styles.modalContentFooter}>
                 <TouchableOpacity
