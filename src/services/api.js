@@ -140,37 +140,29 @@ export const getAccountStates = async (midia, movie_id, session_id) => {
   });
 };
 
-export const getListMovie = async (list_id) => {
+export const getListMovie = async list_id => {
+  return Api.get(`/list/8215543?api_key=${apiKey}&language=en-US`).catch(
+    error => {
+      console.log('Error', error);
+    },
+  );
+};
+
+export const getMoviesList = async (listId) => {
   return Api.get(
-    `/list/8215543?api_key=${apiKey}&language=en-US`,
-  ).catch(error => {
-    console.log('Error', error);
-  });
-};
-
-export const movieDelet = async (sessionId) => {
-  return Api.post(
-    `list/8215543/remove_item?api_key=${apiKey}&session_id=${sessionId}`,
-    347201,
-    {
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-    }
-  )
-};
-
-export const removeItem = async (list_id, sessionId, midiaId) => {
-  return Api.post(
-    `list/${list_id}/remove_item?api_key=${apiKey}&session_id=${sessionId}`, {
-    midiaId: midiaId
-  }
-  ).catch(error => {
-    console.error("Error", error)}
-  )
-
+    `/list/8216071?api_key=${apiKey}&language=pt-BR` )
+    .catch(err => {
+      console.log(err)
+    })
 }
 
-
+export const removeItem = async (list_id, session_id, media_id) => {
+  return Api.post(
+    `list/${list_id}/remove_item?api_key=${apiKey}&session_id=${session_id}`,
+    {
+      media_id: media_id,
+    },
+  ).catch(err => console.warn(err));
+};
 
 export default Api;

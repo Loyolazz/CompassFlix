@@ -45,6 +45,7 @@ export const styles = StyleSheet.create({
             width: 76,
             height: 95,
             borderRadius: 10,
-            justifyContent: 'space-between'
+            justifyContent: 'space-between',
+            marginBottom: 10,
         },
     })
