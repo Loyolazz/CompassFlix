@@ -137,8 +137,21 @@ export const getAccountStates = async (midia, movie_id, session_id) => {
   return Api.get(
     `/${midia}/${movie_id}/account_states?api_key=${apiKey}&session_id=${session_id}`,
   ).catch(error => {
-    console.log('Error', errpr);
+    console.log('Error', error);
   });
-};
 
+};
+export const getList = async (idUser, sessionId) => {
+	return Api.get(
+	`account/${idUser}/lists?api_key=${apiKey}&language=pt-BR&session_id=${sessionId}&page=1`,
+    )
+    .catch(err => console.warn(err));
+}
+//delete list
+export const deleteList = async (list_id,sessionId) => {
+	return Api.delete(
+	`list/${list_id}?api_key=${apiKey}&session_id=${sessionId}`,
+  )
+    .catch(err => console.warn(err));
+}
 export default Api;

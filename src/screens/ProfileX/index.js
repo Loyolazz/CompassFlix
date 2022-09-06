@@ -146,7 +146,9 @@ export default function ProfileX({ navigation }) {
       <Text style={styles.nameUser}>{dataUser?.name}</Text>
 
       <View style={styles.viewListMovies}>
-        <TouchableOpacity style={styles.btnViewListMovies}>
+        <TouchableOpacity
+        onPress={() => {navigation.navigate('SeeMovieList')}}
+        style={styles.btnViewListMovies}>
           <Text style={styles.textListMovies}>Ver listas de filmes</Text>
           </TouchableOpacity>
       </View>
