@@ -2,15 +2,13 @@ import React, {useEffect, useState, useContext} from 'react';
 import {
   View,
   Text,
-  StyleSheet,
   TouchableOpacity,
   FlatList,
   Image,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import Arrow from 'react-native-vector-icons/Feather';
-import {apiKey, removeItem, getMoviesList} from '../../services/api';
-import Api from '../../services/api';
+import {removeItem, getMoviesList} from '../../services/api';
 import {styles} from './style_movieList';
 import * as Animatable from 'react-native-animatable';
 import {Context} from '../../context';
@@ -21,7 +19,6 @@ export default function MovieList({navigation}) {
   const [listMovieDetails, setListMovieDetails] = useState([]);
   const [listMovie, setListMovie] = useState([]);
   const [idMovie, setIdMovie] = useState();
-  const [deletItem, setDeletItem] = useState(false);
   const [modalVisibleExit, setVisibleModalExit] = useState(false);
 
   const {sessionId, evaluation, setEvaluation} = useContext(Context);
