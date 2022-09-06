@@ -1,48 +1,59 @@
-import React, { Component, useState } from 'react';
-import { View, Text, TouchableOpacity, Modal, Pressable } from 'react-native';
-import Trash from 'react-native-vector-icons/EvilIcons';
+import React, { useEffect, useState, useContext } from 'react';
+import { View, Text, TouchableOpacity, Modal, FlatList } from 'react-native';
+import CardList from '../../Components/seeMovieListComp/index';
 import styles from './style copy'
 import BtnGoBack from '../../Components/ProfileComp2/btnGoBack/btn'
 import { TextInput } from 'react-native-gesture-handler';
+import { getAccount, getList, deleteList } from '../../services/api';
+import { Context } from '../../context';
+import ModalExitAccount from '../../Components/ModalExitAccount';
 
-const useCounter = () => {
-    const [value, setValue] = useState(0);
-    const setCounter = () => {
-        setValue(value + 1);
-    };
-    return [value, setCounter];
-};
-const Counter = () => {
-    const [counter, setCounter] = useCounter(0);
-    return (
-        <View>
-            <Text>{counter}</Text>
-            <TouchableOpacity title="clique aqui" onPress={() => setCounter()} ><Text>+</Text></TouchableOpacity>
-        </View>
-    );
-};
 
 export default function SeeMovieList({ navigation }) {
-    const [counter, setCounter] = useCounter(0);
+
     const [modalVisible, setModalVisible] = useState(false);
     const [description, setDescription] = useState('')
     const [nameList, setNameList] = useState('')
-    // const [list, setList] = useState({
-    //     nameList:nameList,
-    //     description:description
-    // });
-    const ExibirDescricao = () => {
-        return (
-            <View style={{ backgroundColor: 'blue', width: '100%', flex: 1 }}>
-                <Text>{nameList}</Text>
-                <Text>{description}</Text>
-            </View>
-        )
+    const [dataUser, setDataUser] = useState('');
+    const [list, setList] = useState({});
+    const [del, setDel] = useState('');
+    const { sessionId, evaluation, setEvaluation } = useContext(Context);
+    const [visibleBtnDel, setVisibileBtnDel] = useState(false);
+    const [idItem, setIdItem] = useState();
+
+    useEffect(() => {
+        const getResponseAccount = async () => {
+            const response = await getAccount(sessionId);
+            setDataUser(response.data.id);
+            console.log(response.data.id);
+        };
+        getResponseAccount();
+    }, [sessionId]);
+
+    useEffect(() => {
+        const getListMovies = async () => {
+            const response = await getList(dataUser, sessionId);
+            setList(response.data.results);
+            console.log(response.data.results);
+        };
+        getListMovies();
+    }, [dataUser, sessionId, evaluation]);
+
+    const delIdList = async (list_id) => {
+        await deleteList(list_id,sessionId);
+        setVisibileBtnDel(!visibleBtnDel)
+        setEvaluation(!evaluation)
     }
+
     return (
         <View style={styles.container}>
             <View>
-
+                <ModalExitAccount
+                    modalExit={visibleBtnDel}
+                    title={'Deseja mesmo remover o filme?'}
+                    onPress={() => setVisibileBtnDel(false)}
+                    logout={()=> delIdList(idItem)}
+                />
                 <Modal
                     animationType="slide"
                     transparent={true}
@@ -68,7 +79,7 @@ export default function SeeMovieList({ navigation }) {
                                     style={styles.styleInpuListName}
                                     value={nameList}
                                     onChangeText={text => setNameList(text)}
-                                    >
+                                >
 
                                 </TextInput>
 
@@ -78,7 +89,7 @@ export default function SeeMovieList({ navigation }) {
                                     style={styles.styleInpuListInput}
                                     value={description}
                                     onChangeText={text => setDescription(text)}
-                                    >
+                                >
                                 </TextInput>
                             </View>
 
@@ -93,7 +104,7 @@ export default function SeeMovieList({ navigation }) {
 
                             <TouchableOpacity
                                 style={styles.btnSave}
-                                onPress={ExibirDescricao}>
+                            >
                                 <Text style={styles.textSave}>Salvar</Text>
                             </TouchableOpacity>
 
@@ -115,22 +126,26 @@ export default function SeeMovieList({ navigation }) {
             </View>
 
             <View style={styles.mainList}>
-                <View style={styles.viewCardList}>
-                    <View style={styles.styleCard }>
-                        <Text style={{ fontSize: 15, color: '#fff', fontWeight: 'bold' }}>{nameList.toUpperCase()}</Text>
-                        <Text style={{ fontSize: 13, color: '#fff', fontWeight: 'bold' }}>{description.toUpperCase()}</Text>
-                    </View>
+                <FlatList
 
-                    <View style={styles.viewTrash}>
+                    data={list}
+                    keyExtractor={(item, index) => `${index}`}
+                    renderItem={({ item }) => {
+                        return (
+                            <>
+                                <CardList
+                                    nameList={item.name}
+                                    qtdFilms={item.item_count}
+                                    deletelListPress={() => { setVisibileBtnDel(!visibleBtnDel); setIdItem(item.id) }}
+                                />
 
-                        <TouchableOpacity>
-                            <Trash name='trash' size={34} color={'#EC2626'} />
-                        </TouchableOpacity>
+                                {/* <Text style={{ color: '#fff' }}>{item.id}</Text> */}
+                            </>
+                        )
+                    }}
+                />
 
-                    </View>
 
-
-                </View>
 
             </View>
 
@@ -140,7 +155,7 @@ export default function SeeMovieList({ navigation }) {
                     onPress={() => setModalVisible(true)}
                     style={styles.btnCreatList}>
                     <Text style={{ color: '#000', fontSize: 40 }}>+</Text>
-               
+
                 </TouchableOpacity>
 
             </View>
