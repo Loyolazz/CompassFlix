@@ -8,7 +8,7 @@ export default function () {
     return (
         <Provider>
         <NavigationContainer>
-            <MovieList/>
+            <Stack/>
         </NavigationContainer>
         </Provider>
     )
