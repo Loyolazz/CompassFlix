@@ -7,6 +7,7 @@ import Api from '../../../../services/api';
 import star_red from '../../../../assets/star_red.png';
 import BtnGoBack from '../../../../Components/ProfileComp/btnGoBack/btn';
 import BlockIcon from 'react-native-vector-icons/MaterialIcons'
+
 export default function SeriesFavorites({navigation}) {
   const [nameUser, setNameUser] = useState('');
   const [idUser, setIdUser] = useState([]);
@@ -14,6 +15,7 @@ export default function SeriesFavorites({navigation}) {
   const [dataUser, setDataUser] = useState('username');
   const [favoriteSeries, setFavoriteSeries] = useState([]);
   const {sessionId} = useContext(Context);
+  
   useEffect(() => {
     const getResponseAccount = async () => {
       const response = await getAccount(sessionId);
@@ -25,12 +27,10 @@ export default function SeriesFavorites({navigation}) {
   }, [sessionId]);
  
   useEffect(() => {
-   
     const getResponseSeriesFavorites = async () => {
       const response = await getMoviesFavorites(dataUser, 'tv', sessionId);
       setFavoriteSeries(response.data);
     };
-
     getResponseSeriesFavorites();
   }, [dataUser, sessionId]);
 

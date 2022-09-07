@@ -6,7 +6,9 @@ import MoviesEvaluation from '../../screens/ProfileX/subScreenProfile/MoviesEval
 import SeriesEvaluation from '../../screens/ProfileX/subScreenProfile/SeriesEvaluation';
 import SeeMovieList from '../../screens/seeMovieList';
 import ProfileX from '../../screens/ProfileX';
+
 const Stack = createStackNavigator();
+
 export default function RoutesProfile() {
   return (
 
@@ -70,8 +72,5 @@ export default function RoutesProfile() {
       />
 
     </Stack.Navigator>
-
-
-
   );
 }

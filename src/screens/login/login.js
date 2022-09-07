@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   KeyboardAvoidingView,
   Image,
@@ -11,12 +11,10 @@ import Eye from '../../../node_modules/react-native-vector-icons/Entypo';
 import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import styles from './style_login';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-import {Context} from '../../context';
-
-import {getToken, validateToken} from '../../services/api';
+import { Context } from '../../context';
+import { getToken, validateToken } from '../../services/api';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -24,7 +22,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [secureTextEntryIcon, setSecureTextEntryIcon] = useState(true);
   const [token, setToken] = useState();
-  const {setSessionId} = useContext(Context);
+  const { setSessionId } = useContext(Context);
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -105,7 +103,7 @@ const Login = () => {
             <Icon
               size={25}
               color={'#ffffff80'}
-              style={{paddingTop: 10, paddingLeft: 10}}
+              style={{ paddingTop: 10, paddingLeft: 10 }}
               name="user"
             />
             <TextInput
@@ -126,7 +124,7 @@ const Login = () => {
             <Icon
               size={30}
               color={'#ffffff80'}
-              style={{paddingTop: 10, paddingLeft: 10}}
+              style={{ paddingTop: 10, paddingLeft: 10 }}
               name="lock"
             />
             <TextInput
@@ -140,7 +138,7 @@ const Login = () => {
               onChangeText={value => SetPassword(value)}
             />
 
-            <View style={{position: 'absolute', marginLeft: 210, marginTop: 8}}>
+            <View style={{ position: 'absolute', marginLeft: 210, marginTop: 8 }}>
               <TouchableOpacity
                 onPress={() => setSecureTextEntryIcon(!secureTextEntryIcon)}>
                 {secureTextEntryIcon == true ? (

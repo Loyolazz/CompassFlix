@@ -6,6 +6,7 @@ import { getAccount, EvaluationSeries } from '../../../../services/api';
 import star_red from '../../../../assets/star_red.png';
 import BtnGoBack from '../../../../Components/ProfileComp/btnGoBack/btn';
 import BlockIcon from 'react-native-vector-icons/MaterialIcons'
+
 export default function SeriesEvaluation({ navigation }) {
   const [nameUser, setNameUser] = useState('');
   const [idUser, setIdUser] = useState([]);
@@ -13,6 +14,7 @@ export default function SeriesEvaluation({ navigation }) {
   const [dataUser, setDataUser] = useState('username');
   const [seriesEvaluation, setSeriesEvaluation] = useState([]);
   const { sessionId } = useContext(Context);
+
   useEffect(() => {
     const getResponseAccount = async () => {
       const response = await getAccount(sessionId);
@@ -29,9 +31,8 @@ export default function SeriesEvaluation({ navigation }) {
       setSeriesEvaluation(response.data);
     
     };
-
-    getEvaluationSeries();
-
+    
+    getEvaluationMovies();
   }, [dataUser, sessionId]);
 
 
@@ -95,7 +96,6 @@ export default function SeriesEvaluation({ navigation }) {
                 source={star_red}
                 style={{ width: 10, height: 10, marginRight: 8 }}
               />
-              <Text style={{ color: '#fff', fontSize: 13 }}>
                 {item.rating?.toFixed(0)}/10
               </Text>
             </View>
