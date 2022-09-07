@@ -168,8 +168,8 @@ export const createList = async (sessionId, nameList, description) => {
   }).catch(err => console.warn(err));
 };
 
-export const getMoviesList = async listId => {
-  return Api.get(`/list/8216071?api_key=${apiKey}&language=pt-BR`).catch(
+export const getMoviesList = async list_Id => {
+  return Api.get(`/list/${list_Id}?api_key=${apiKey}&language=pt-BR`).catch(
     err => {
       console.log(err);
     },
