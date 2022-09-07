@@ -138,7 +138,7 @@ export const getAccountStates = async (midia, movie_id, session_id) => {
   ).catch(error => {
     console.log('Error', error);
   });
-
+};
 
 export const getListMovie = async list_id => {
   return Api.get(`/list/8215543?api_key=${apiKey}&language=en-US`).catch(
@@ -149,40 +149,32 @@ export const getListMovie = async list_id => {
 };
 
 export const getList = async (idUser, sessionId) => {
-	return Api.get(
-	`account/${idUser}/lists?api_key=${apiKey}&language=pt-BR&session_id=${sessionId}&page=1`,
-    )
-    .catch(err => console.warn(err));
-}
+  return Api.get(
+    `account/${idUser}/lists?api_key=${apiKey}&language=pt-BR&session_id=${sessionId}&page=1`,
+  ).catch(err => console.warn(err));
+};
 //delete list
-export const deleteList = async (list_id,sessionId) => {
-	return Api.delete(
-	`list/${list_id}?api_key=${apiKey}&session_id=${sessionId}`,
-  )
-    .catch(err => console.log(err));
-}
-
-export const createList = async (sessionId, nameList, description) => {
-  return Api
-    .post(
-      `/list?api_key=${apiKey}&session_id=${sessionId}`,
-      {
-        name: nameList,
-        description: description,
-        language: 'pt-BR',
-      },
-    )
-    .catch(err => console.warn(err));
+export const deleteList = async (list_id, sessionId) => {
+  return Api.delete(
+    `list/${list_id}?api_key=${apiKey}&session_id=${sessionId}`,
+  ).catch(err => console.log(err));
 };
 
+export const createList = async (sessionId, nameList, description) => {
+  return Api.post(`/list?api_key=${apiKey}&session_id=${sessionId}`, {
+    name: nameList,
+    description: description,
+    language: 'pt-BR',
+  }).catch(err => console.warn(err));
+};
 
-export const getMoviesList = async (listId) => {
-  return Api.get(
-    `/list/8216071?api_key=${apiKey}&language=pt-BR` )
-    .catch(err => {
-      console.log(err)
-    })
-}
+export const getMoviesList = async listId => {
+  return Api.get(`/list/8216071?api_key=${apiKey}&language=pt-BR`).catch(
+    err => {
+      console.log(err);
+    },
+  );
+};
 
 export const removeItem = async (list_id, session_id, media_id) => {
   return Api.post(
@@ -192,6 +184,5 @@ export const removeItem = async (list_id, session_id, media_id) => {
     },
   ).catch(err => console.warn(err));
 };
-
 
 export default Api;

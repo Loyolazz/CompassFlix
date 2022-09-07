@@ -3,7 +3,6 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Login from '../../screens/login/login';
 import { SelectionMovies } from '../../screens/selectionMovies/selectionMovies';
 import TabBottomRoutes from '../tab/tabbar';
-import MoviesDetail from '../../screens/moviesDetail/moviesDetail';
 import SeriesDetail from '../../screens/seriesDetail';
 import SlapshLoadLogin from '../../Components/SplashLoadLogin/splashLoadLogin';
 import MoviesDetail from '../../screens/moviesDetail/moviesDetail';

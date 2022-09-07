@@ -54,7 +54,7 @@ export default function SeeMovieList({navigation}) {
       <View>
         <ModalExitAccount
           modalExit={visibleBtnDel}
-          title={'Deseja mesmo remover o filme?'}
+          title={'Deseja mesmo remover essa lista?'}
           onPress={() => setVisibileBtnDel(false)}
           logout={() => delIdList(idItem)}
         />
