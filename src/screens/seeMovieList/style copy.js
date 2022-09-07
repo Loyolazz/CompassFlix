@@ -72,13 +72,15 @@ export default StyleSheet.create({
         height: 31, 
         borderRadius: 5, 
         fontSize: 12, 
-        justifyContent: 'flex-end' 
+        justifyContent: 'flex-end',
+        color: '#000000'
     },
     styleInpuListInput:{
         backgroundColor: '#d7d8d7', 
         width: 280, height: 50, 
         borderRadius: 5, 
-        fontSize: 12
+        fontSize: 12,
+        color: '#000000'
     },
     containerBtnModal:{
         width: '60%', 

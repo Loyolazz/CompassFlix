@@ -152,6 +152,19 @@ export const deleteList = async (list_id,sessionId) => {
 	return Api.delete(
 	`list/${list_id}?api_key=${apiKey}&session_id=${sessionId}`,
   )
-    .catch(err => console.warn(err));
+    .catch(err => console.log(err));
 }
+
+export const createList = async (sessionId, nameList, description) => {
+  return Api
+    .post(
+      `/list?api_key=${apiKey}&session_id=${sessionId}`,
+      {
+        name: nameList,
+        description: description,
+        language: 'pt-BR',
+      },
+    )
+    .catch(err => console.warn(err));
+};
 export default Api;
