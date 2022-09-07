@@ -60,11 +60,6 @@ export default function SeeMovieList({navigation}) {
         />
 
 
-
-
-
-
-
         <Modal
           animationType="slide"
           transparent={true}
@@ -150,13 +145,14 @@ export default function SeeMovieList({navigation}) {
                 <CardList
                   nameList={item.name}
                   qtdFilms={item.item_count}
+                  pressCard={() => { setIdItem(item.id),navigation.navigate('MovieList',{ item })} }
                   deletelListPress={() => {
                     setVisibileBtnDel(!visibleBtnDel);
                     setIdItem(item.id);
                   }}
                 />
 
-                {/* <Text style={{ color: '#fff' }}>{item.id}</Text> */}
+                
               </>
             );
           }}

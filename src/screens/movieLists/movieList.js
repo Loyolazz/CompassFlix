@@ -14,21 +14,22 @@ import * as Animatable from 'react-native-animatable';
 import {Context} from '../../context';
 import ModalExitAccount from '../../Components/ModalExitAccount';
 
-export default function MovieList({navigation}) {
+export default function MovieList({route,navigation}) {
   const [movieButtonFocused, setMovieButtonFocused] = useState(true);
   const [listMovieDetails, setListMovieDetails] = useState([]);
   const [listMovie, setListMovie] = useState([]);
   const [idMovie, setIdMovie] = useState();
   const [modalVisibleExit, setVisibleModalExit] = useState(false);
-
+  const {item} = route?.params || {};
+  const id = `${item.id}`;
   const {sessionId, evaluation, setEvaluation} = useContext(Context);
 
   useEffect(() => {
     const getInfoList = async () => {
-      const response = await getMoviesList();
-
+      const response = await getMoviesList(id);
       setListMovie(response.data.items);
       setListMovieDetails(response.data);
+
     };
 
     getInfoList();
@@ -36,17 +37,18 @@ export default function MovieList({navigation}) {
 
   const itemRemoved = async () => {
     await removeItem(
-      '8216071',
-      '03911cae86cd8ebbc46ab1933e00cc6bebf418a9',
+      id,
+      sessionId,
       idMovie,
     );
 
     setVisibleModalExit(false);
-    setEvaluation(!evaluation);
+     setEvaluation(!evaluation);
   };
 
   return (
     <View style={{flex: 1, backgroundColor: 'black'}}>
+   
       <View
         style={{
           alignItems: 'flex-start',
@@ -58,7 +60,7 @@ export default function MovieList({navigation}) {
         }}>
         <TouchableOpacity
           style={styles.Button}
-          onPress={() => navigation.navigate('TabBottomRoutes')}>
+          onPress={() => navigation.navigate('SeeMovieList')}>
           <Arrow name="arrow-left" size={23} color={'#000'} style={{}} />
         </TouchableOpacity>
         <View style={styles.ContainerStart}>
