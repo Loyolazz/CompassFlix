@@ -5,6 +5,7 @@ import MoviesFavorites from '../../screens/ProfileX/subScreenProfile/MoviesFavor
 import MoviesEvaluation from '../../screens/ProfileX/subScreenProfile/MoviesEvaluation';
 import SeriesEvaluation from '../../screens/ProfileX/subScreenProfile/SeriesEvaluation';
 import SeeMovieList from '../../screens/seeMovieList';
+import MovieList from '../../screens/movieLists/movieList';
 import ProfileX from '../../screens/ProfileX';
 
 const Stack = createStackNavigator();
@@ -69,6 +70,15 @@ export default function RoutesProfile() {
         }}
         name='SeeMovieList'
         component={SeeMovieList}
+      />
+       <Stack.Screen
+        options={{
+          title: '',
+          headerTransparent: true,
+          headerShown: false
+        }}
+        name='MovieList'
+        component={MovieList}
       />
 
     </Stack.Navigator>
