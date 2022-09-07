@@ -1,19 +1,18 @@
 import React from "react";
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 import styles from "./styles";
 
-export default function HeaderFilm({ nameUser, photoUser }) {
+export default function HeaderFilm({ nameUser, photoUser, onPress }) {
     return (
         <View style={styles.header}>
-            <View style={{width:'100%', alignItems:'flex-end'}}>
-                 <Image source={{ uri: photoUser }} style={{ width: 50, height: 50,  borderRadius: 60 }}></Image>
-            </View>
+            <TouchableOpacity onPress={onPress} style={styles.viewPhoto}>
+                 <Image source={{ uri: photoUser }} style={styles.stylePhoto}></Image>
+            </TouchableOpacity>
             
-            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+            <View style={styles.containerText}>
 
-
-                <View style={{ width: '100%', marginHorizontal: 20, alignItems: 'flex-start' }}>
-                    <View style={{width:'100%', justifyContent:'space-between', flexDirection:'row'}}>
+            <View style={styles.containerNameUser}>
+                <View style={styles.viewNameUser}>
 
                         <View style={styles.containerRow}>
                             <Text style={styles.title}>Olá,</Text>

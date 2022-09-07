@@ -5,6 +5,7 @@ import styles from './styless';
 import { getAccount, EvaluationSeries } from '../../../../services/api';
 import star_red from '../../../../assets/star_red.png';
 import BtnGoBack from '../../../../Components/ProfileComp/btnGoBack/btn';
+import BlockIcon from 'react-native-vector-icons/MaterialIcons'
 
 export default function SeriesEvaluation({ navigation }) {
   const [nameUser, setNameUser] = useState('');
@@ -25,12 +26,15 @@ export default function SeriesEvaluation({ navigation }) {
   }, [sessionId]);
 
   useEffect(() => {
-    const getEvaluationMovies = async () => {
+    const getEvaluationSeries = async () => {
       const response = await EvaluationSeries(dataUser, 'tv', sessionId);
-      setSeriesEvaluation(response.data.results);
+      setSeriesEvaluation(response.data);
+    
     };
+    
     getEvaluationMovies();
   }, [dataUser, sessionId]);
+
 
   return (
     <View style={styles.container}>
@@ -43,10 +47,15 @@ export default function SeriesEvaluation({ navigation }) {
           !
         </Text>
       </View>
-
-      <FlatList
+      {seriesEvaluation.total_results === 0 ?
+        <View style={{width:'100%',  alignItems:'center', justifyContent:'center'}}>
+          <Text style={{ color: 'grey', fontSize:20, marginBottom:30, marginTop:10 }}>Sem avaliações recentes</Text>
+        <BlockIcon name='tv-off' size={100} color={'grey'}/>
+        </View> 
+        :  
+        <FlatList
         numColumns={4}
-        data={seriesEvaluation}
+        data={seriesEvaluation.results}
         keyExtractor={item => item.id}
         renderItem={({ item }) => (
           <View
@@ -61,7 +70,7 @@ export default function SeriesEvaluation({ navigation }) {
             }}>
             <TouchableOpacity
               onPress={() => {
-                setIdItem(item.id), navigation.navigate('MoviesDetail', { item });
+                setIdItem(item.id), navigation.navigate('SeriesDetail', { item });
               }}>
               <Image
                 source={{
@@ -75,6 +84,7 @@ export default function SeriesEvaluation({ navigation }) {
                   alignItems: 'center',
                 }}
               />
+     
             </TouchableOpacity>
             <View
               style={{
@@ -86,13 +96,12 @@ export default function SeriesEvaluation({ navigation }) {
                 source={star_red}
                 style={{ width: 10, height: 10, marginRight: 8 }}
               />
-              <Text style={{ color: '#fff', fontSize: 13 }}>
-                {item.vote_average?.toFixed(1)}/10
+                {item.rating?.toFixed(0)}/10
               </Text>
             </View>
           </View>
         )}
-      />
+      />}
     </View>
   );
 }

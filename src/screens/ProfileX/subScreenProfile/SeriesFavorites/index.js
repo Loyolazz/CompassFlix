@@ -6,6 +6,7 @@ import {getAccount, getMoviesFavorites} from '../../../../services/api';
 import Api from '../../../../services/api';
 import star_red from '../../../../assets/star_red.png';
 import BtnGoBack from '../../../../Components/ProfileComp/btnGoBack/btn';
+import BlockIcon from 'react-native-vector-icons/MaterialIcons'
 
 export default function SeriesFavorites({navigation}) {
   const [nameUser, setNameUser] = useState('');
@@ -28,7 +29,7 @@ export default function SeriesFavorites({navigation}) {
   useEffect(() => {
     const getResponseSeriesFavorites = async () => {
       const response = await getMoviesFavorites(dataUser, 'tv', sessionId);
-      setFavoriteSeries(response.data.results);
+      setFavoriteSeries(response.data);
     };
     getResponseSeriesFavorites();
   }, [dataUser, sessionId]);
@@ -44,10 +45,15 @@ export default function SeriesFavorites({navigation}) {
           !
         </Text>
       </View>
-
+      {favoriteSeries.total_results === 0 ?
+        <View style={{width:'100%',  alignItems:'center', justifyContent:'center'}}>
+          <Text style={{ color: 'grey', fontSize:20, marginBottom:30, marginTop:10 }}>Sem Séries recentes</Text>
+        <BlockIcon name='tv-off' size={100} color={'grey'}/>
+        </View> 
+        :  
       <FlatList
         numColumns={4}
-        data={favoriteSeries}
+        data={favoriteSeries.results}
         keyExtractor={item => item.id}
         renderItem={({item}) => (
           <View
@@ -94,7 +100,7 @@ export default function SeriesFavorites({navigation}) {
             </View>
           </View>
         )}
-      />
+      />}
     </View>
   );
 }

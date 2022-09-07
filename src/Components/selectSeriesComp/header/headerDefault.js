@@ -1,16 +1,17 @@
 import React from "react";
-import { View, Text,Image, TouchableOpacity } from "react-native";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 import styles from "./styles";
 
-export default function HeaderSeries ({nameUser,photoUser,onPress}) {
+export default function HeaderSeriesDefault({ nameUser, photoUser, onPress }) {
     return (
-        <View style={styles.header}> 
-       <TouchableOpacity onPress={onPress} style={styles.viewPhoto}>
-                 <Image source={{ uri: photoUser }} style={styles.stylePhoto}></Image>
-                 
+        <View style={styles.header}>
+            <TouchableOpacity onPress={onPress} style={styles.viewPhoto}>
+                <Image source={photoUser} style={styles.stylePhoto}></Image>
+
             </TouchableOpacity>
-            
+
             <View style={styles.containerText}>
+
 
                 <View style={styles.containerNameUser}>
                     <View style={styles.viewNameUser}>
@@ -20,9 +21,9 @@ export default function HeaderSeries ({nameUser,photoUser,onPress}) {
                             <Text style={styles.label}>{nameUser}</Text>
                             <Text style={styles.title}>!</Text>
                         </View>
-                      
+
                     </View>
- 
+
 
                 </View>
 

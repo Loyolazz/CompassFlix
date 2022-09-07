@@ -4,6 +4,8 @@ import CardMovies from '../../Components/selectMoviesComp/cards/cardMovies';
 import Load from '../../Components/Load';
 import Loading from '../../Components/Loading';
 import HeaderFilm from '../../Components/selectMoviesComp/header/header';
+import HeaderMoviesDefault from '../../Components/selectMoviesComp/header/headerDefault';
+import photo_default from '../../assets/photo_default.png'
 import { Context } from '../../context';
 import styles from './style_selectionMovies';
 import { getMovies, getAccount, getFavoriteSeries } from '../../services/api';
@@ -20,8 +22,6 @@ export function SelectionMovies({ navigation }) {
   const [rated, setRated] = useState([]);
   const [dataUser, setDataUser] = useState('username');
   const { sessionId, user, setUser } = useContext(Context);
-
-  console.log(sessionId)
 
   const getResponseMovies = async () => {
     const response = await getMovies(page);
@@ -43,14 +43,29 @@ export function SelectionMovies({ navigation }) {
   useEffect(() => {
     getResponseMovies();
   }, []);
-
+  const userPhotoProfile = `http://image.tmdb.org/t/p/original/${dataUser?.avatar?.tmdb?.avatar_path}`
   return movies && selected ? (
     <View style={styles.container}>
       <View style={styles.section}>
-        <HeaderFilm
-          nameUser={selected.name}
-          photoUser={`http://image.tmdb.org/t/p/original/${dataUser?.avatar?.tmdb?.avatar_path}`}
-        />
+        {dataUser?.avatar?.tmdb?.avatar_path ?
+          <>
+            <HeaderFilm
+              nameUser={selected.name}
+              photoUser={userPhotoProfile}
+              onPress={() => navigation.navigate('Profile')}
+            />
+          </>
+          :
+          <>
+            <HeaderMoviesDefault
+              nameUser={selected.name}
+              photoUser={photo_default}
+              onPress={() => navigation.navigate('Profile')}
+            />
+          </>
+
+        }
+
       </View>
       <FlatList
         numColumns={4}

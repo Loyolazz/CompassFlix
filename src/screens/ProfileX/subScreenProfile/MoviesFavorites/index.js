@@ -6,6 +6,7 @@ import {getAccount, getMoviesFavorites} from '../../../../services/api';
 import star_red from '../../../../assets/star_red.png';
 import BtnGoBack from '../../../../Components/ProfileComp/btnGoBack/btn';
 
+import BlockIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 export default function   MoviesFavorites({navigation}) {
   const [nameUser, setNameUser] = useState('');
   const [idUser, setIdUser] = useState([]);
@@ -27,7 +28,8 @@ export default function   MoviesFavorites({navigation}) {
    
     const getResponseSeriesFavorites = async () => {
       const response = await getMoviesFavorites(dataUser, 'movies', sessionId);
-      setFavoriteMovies(response.data.results);
+      setFavoriteMovies(response.data);
+
     };
 
     getResponseSeriesFavorites();
@@ -44,22 +46,19 @@ export default function   MoviesFavorites({navigation}) {
           !
         </Text>
       </View>
-
+      {moviesSeries.total_results === 0 ?
+        <View style={styles.containerMoviesEmpty}>
+          <Text style={styles.textEmptyMovies}>Sem Filmes Favoritos</Text>
+        <BlockIcon name='movie-open-remove-outline' size={100} color={'grey'}/>
+        </View> 
+        :  
       <FlatList
         numColumns={4}
-        data={moviesSeries}
+        data={moviesSeries.results}
         keyExtractor={item => item.id}
         renderItem={({item}) => (
           <View
-            style={{
-              justifyContent: 'space-between',
-              alignItems: 'flex-start',
-              flex: 1,
-              flexDirection: 'column',
-              marginBottom: 20,
-              paddingHorizontal: 10,
-              marginTop: 5,
-            }}>
+            style={styles.containerCard}>
             <TouchableOpacity
               onPress={() => {
                 setIdItem(item.id), navigation.navigate('MoviesDetail', {item});
@@ -68,33 +67,22 @@ export default function   MoviesFavorites({navigation}) {
                 source={{
                   uri: `https://image.tmdb.org/t/p/original/${item.poster_path}`,
                 }}
-                style={{
-                  width: 76,
-                  height: 95,
-                  borderRadius: 20,
-
-                  marginTop: 5,
-                  alignItems: 'center',
-                }}
+                style={styles.stylePoster}
               />
             </TouchableOpacity>
             <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'flex-start',
-                alignItems: 'center',
-              }}>
+              style={styles.containerTextStar}>
               <Image
                 source={star_red}
-                style={{width: 10, height: 10, marginRight: 8}}
+                style={styles.styleStar}
               />
-              <Text style={{color: '#fff', fontSize: 13}}>
+              <Text style={styles.textNote}>
                 {item.vote_average?.toFixed(1)}/10
               </Text>
             </View>
           </View>
         )}
-      />
+      />}
     </View>
   );
 }
