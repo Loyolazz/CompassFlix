@@ -3,16 +3,16 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import Trash from 'react-native-vector-icons/EvilIcons';
 import styles from './styles'
 
-export default function seeMovieListComp({nameList, description, qtdFilms,deletelListPress, navigation}) {
+export default function seeMovieListComp({nameList, description, qtdFilms,deletelListPress, navigation,pressCard}) {
  
     return (
    
         <View style={styles.viewCardList}>
-                    <View style={styles.styleCard }>
+                    <TouchableOpacity onPress={pressCard} style={styles.styleCard }>
                         <Text style={{ fontSize: 15, color: '#fff', fontWeight: 'bold' }}>{nameList}</Text>
                         <Text style={{ fontSize: 13, color: '#fff', fontWeight: 'bold' }}>{description}</Text>
                         <Text style={{ fontSize: 13, color: '#fff', fontWeight: 'bold' }}>{qtdFilms} Filmes</Text>
-                    </View>
+                    </TouchableOpacity>
 
                     <View style={styles.viewTrash}>
 
