@@ -11,6 +11,7 @@ import styles from './style_selectionMovies';
 import { getMovies, getAccount, getFavoriteSeries } from '../../services/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/Ionicons';
+
 export function SelectionMovies({ navigation }) {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -23,8 +24,6 @@ export function SelectionMovies({ navigation }) {
   const { sessionId, user, setUser } = useContext(Context);
 
   const getResponseMovies = async () => {
-
-
     const response = await getMovies(page);
     setMovies([...movies, ...response.data.results]);
     setPage(page + 1);
@@ -68,10 +67,8 @@ export function SelectionMovies({ navigation }) {
         }
 
       </View>
-
       <FlatList
         numColumns={4}
-
         data={movies}
         keyExtractor={(item, index) => `${index}`}
         onEndReached={getResponseMovies}

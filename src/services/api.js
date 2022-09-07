@@ -1,5 +1,4 @@
 import axios from 'axios';
-import {Alert} from 'react-native';
 
 export const apiKey = 'ecd878f5eb6f5ca388735c699adaff80';
 
@@ -140,18 +139,30 @@ export const getAccountStates = async (midia, movie_id, session_id) => {
     console.log('Error', error);
   });
 
+
+export const getListMovie = async list_id => {
+  return Api.get(`/list/8215543?api_key=${apiKey}&language=en-US`).catch(
+    error => {
+      console.log('Error', error);
+    },
+  );
 };
-export const getList = async (idUser, sessionId) => {
-	return Api.get(
-	`account/${idUser}/lists?api_key=${apiKey}&language=pt-BR&session_id=${sessionId}&page=1`,
-    )
-    .catch(err => console.warn(err));
+
+export const getMoviesList = async (listId) => {
+  return Api.get(
+    `/list/8216071?api_key=${apiKey}&language=pt-BR` )
+    .catch(err => {
+      console.log(err)
+    })
 }
-//delete list
-export const deleteList = async (list_id,sessionId) => {
-	return Api.delete(
-	`list/${list_id}?api_key=${apiKey}&session_id=${sessionId}`,
-  )
-    .catch(err => console.warn(err));
-}
+
+export const removeItem = async (list_id, session_id, media_id) => {
+  return Api.post(
+    `list/${list_id}/remove_item?api_key=${apiKey}&session_id=${session_id}`,
+    {
+      media_id: media_id,
+    },
+  ).catch(err => console.warn(err));
+};
+
 export default Api;

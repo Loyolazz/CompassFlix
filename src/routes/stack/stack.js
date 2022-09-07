@@ -6,9 +6,10 @@ import TabBottomRoutes from '../tab/tabbar';
 import MoviesDetail from '../../screens/moviesDetail/moviesDetail';
 import SeriesDetail from '../../screens/seriesDetail';
 import SlapshLoadLogin from '../../Components/SplashLoadLogin/splashLoadLogin';
+import MoviesDetail from '../../screens/moviesDetail/moviesDetail';
 import ProfileX from '../../screens/ProfileX';
-const {Navigator, Screen} = createNativeStackNavigator();
 
+const {Navigator, Screen} = createNativeStackNavigator();
 const Stack = () => {
   return (
     <Navigator initialRouteName="Splash" screenOptions={{headerShown: false}}>
