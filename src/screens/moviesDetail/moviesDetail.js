@@ -1,22 +1,25 @@
-import React, {useEffect, useState, useContext} from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import {
   View,
   TouchableOpacity,
   Text,
   ImageBackground,
   ScrollView,
+  Pressable,
+  Modal,
+  FlatList
 } from 'react-native';
 import styles from './style_moviesDetail';
-import {ViewElenco} from '../../Components/movieDetailsComp/elenco';
-import {HeaderDetails} from '../../Components/movieDetailsComp/header/index';
-import {SinopseDetails} from '../../Components/movieDetailsComp/sinopse/sinopse';
+import { ViewElenco } from '../../Components/movieDetailsComp/elenco';
+import { HeaderDetails } from '../../Components/movieDetailsComp/header/index';
+import { SinopseDetails } from '../../Components/movieDetailsComp/sinopse/sinopse';
 import Api from '../../services/api';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import ButtonFavorite from '../../Components/ButtonFavorite';
 import BtnGoback from '../../../node_modules/react-native-vector-icons/Ionicons';
 import Load from '../../Components/Load';
 import ModalAvaluate from '../../Components/ModalAvaluate';
-import {Context} from '../../context';
+import { Context } from '../../context';
 import {
   ratePost,
   getAccountStates,
@@ -28,16 +31,18 @@ import {
 const apikey = 'api_key=80eb37af6714ab187d2c58f9acc83af3';
 const language = 'language=pt-BR';
 
-const MoviesDetail = ({route, navigation}) => {
+const MoviesDetail = ({ route, navigation }) => {
   const [details, setDetails] = useState({});
   const [detailsCredits, setDetailsCredits] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisibleTeste, setModalVisibleTeste] = useState(false);
   const [rating, setRating] = useState(0);
   const [rated, setRated] = useState();
   const [dataUser, setDataUser] = useState();
   const [favoriteMovies, setFavoriteMovies] = useState();
-  const {sessionId, evaluation, setEvaluation} = useContext(Context);
-  const {item} = route?.params || {};
+  const { sessionId, evaluation, setEvaluation } = useContext(Context);
+  const [selectedId, setSelectedId] = useState(null);
+  const { item } = route?.params || {};
   const id = `${item.id}`;
 
   const DetailsCredits = async () => {
@@ -126,11 +131,71 @@ const MoviesDetail = ({route, navigation}) => {
   const director = detailsCredits.crew?.find(
     element => element.job === 'Director',
   )?.name;
-
+  const data = [
+    { id: '1' },
+    { id: '2' },
+    { id: '3' },
+    { id: '4' },
+  ]
   return details.poster_path && details.backdrop_path ? (
     <View style={styles.container}>
+
+
+
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisibleTeste}
+        onRequestClose={() => {
+          setModalVisibleTeste(!modalVisibleTeste);
+        }}
+      >
+        <View style={styles.containerModalAddList}>
+          <View style={styles.viewTitleAndBtnExitModal}>
+            <Text style={styles.styleTxtTitleModal}>Salvar filmes em...</Text>
+            
+            <Pressable
+              onPress={() => setModalVisibleTeste(!modalVisibleTeste)}
+            >
+              <Text style={styles.txtExit}>X</Text>
+            </Pressable>
+          </View>
+
+          <View style={styles. containerAddMovieList} />
+          <View style={styles.viewFlatlistAddMovie}>
+            <FlatList
+              data={data}
+              keyExtractor={item => String(item.id)}
+              renderItem={({ item }) => {
+                const backgroundColor = item.id === selectedId ? "#000" : "#fff";
+                return (
+                  <View style={styles.containerItemAddMovie}>
+
+                    <View style={styles.viewCircleSelection}>
+                      <TouchableOpacity onPress={() => setSelectedId(item.id)} style={{ backgroundColor, height: 17, width: 17, borderRadius: 20 }}>
+
+                      </TouchableOpacity>
+                    </View>
+                    <Text style={{marginLeft:10}}>nome da lista</Text>
+                  </View>
+
+                )
+              }}
+            />
+          </View>
+          <TouchableOpacity style={styles.viewBtnSaveAddMovie}>
+            <Text style={styles.txtBtnSaveAddMovie}>Salvar</Text>
+          </TouchableOpacity>
+        </View>
+
+
+
+
+
+      </Modal>
       <ImageBackground
-        source={{uri: Banner}}
+        source={{ uri: Banner }}
         style={styles.ImgBackground}></ImageBackground>
       <View style={styles.buttonFavorite}>
         <TouchableOpacity
@@ -151,6 +216,14 @@ const MoviesDetail = ({route, navigation}) => {
         Duration={Duration}
         TitleFilm={Title}
       />
+      <TouchableOpacity onPress={() => setModalVisibleTeste(true)}>
+        <Text style={{ color: '#fff' }}>aperte aqui</Text>
+      </TouchableOpacity>
+
+
+
+
+
 
       <ModalAvaluate
         modalVisible={modalVisible}
@@ -187,7 +260,7 @@ const MoviesDetail = ({route, navigation}) => {
 
       <SinopseDetails titleSinopse={TitleSinopse} textSinopse={TextSinopse} />
       <ScrollView>
-        <View style={{paddingHorizontal: 20, marginBottom: 10, marginTop: 5}}>
+        <View style={{ paddingHorizontal: 20, marginBottom: 10, marginTop: 5 }}>
           <View style={styles.elencoView}>
             <Text style={styles.elencoText}>Elenco</Text>
           </View>
