@@ -40,8 +40,6 @@ export const validateToken = async (email, password, token) => {
     .then(response =>
       Api.post(`/authentication/session/new?api_key=${apiKey}`, {
         request_token: response.data.request_token,
-      }).catch(error => {
-        console.log(error);
       }),
     )
     .catch(error => {
@@ -179,6 +177,15 @@ export const getMoviesList = async list_Id => {
 export const removeItem = async (list_id, session_id, media_id) => {
   return Api.post(
     `list/${list_id}/remove_item?api_key=${apiKey}&session_id=${session_id}`,
+    {
+      media_id: media_id,
+    },
+  ).catch(err => console.warn(err));
+};
+
+export const AddMovieList = async (list_id, session_id, media_id) => {
+  return Api.post(
+    `list/${list_id}/add_item?api_key=${apiKey}&session_id=${session_id}`,
     {
       media_id: media_id,
     },
