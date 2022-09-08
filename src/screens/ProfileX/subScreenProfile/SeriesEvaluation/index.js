@@ -4,7 +4,7 @@ import {Context} from '../../../../context';
 import styles from './styless';
 import {getAccount, EvaluationSeries} from '../../../../services/api';
 import star_red from '../../../../assets/star_red.png';
-import BtnGoBack from '../../../../Components/ProfileComp/btnGoBack/btn';
+import BtnGoBack from '../../../../Components/ProfileComp2/btnGoBack/btn';
 import BlockIcon from 'react-native-vector-icons/MaterialIcons';
 
 export default function SeriesEvaluation({navigation}) {
@@ -107,7 +107,7 @@ export default function SeriesEvaluation({navigation}) {
                   source={star_red}
                   style={{width: 10, height: 10, marginRight: 8}}
                 />
-                <Text>{item.rating?.toFixed(0)}/10</Text>
+                <Text style={{color:'#fff'}}>{item.rating?.toFixed(0)}/10</Text>
               </View>
             </View>
           )}
