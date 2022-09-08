@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     top: 9,
     marginLeft: 5,
     color: '#ffff',
+    fontFamily: 'OpenSans-Regular',
   },
   areButtonDrop: {
     flex: 3,
@@ -62,6 +63,7 @@ const styles = StyleSheet.create({
     color: '#000',
     textTransform: 'uppercase',
     fontWeight: 'bold',
+    fontFamily: 'OpenSans-Regular',
   },
   ButtonAvalueteOk: {
     backgroundColor: '#8BE0EC',
@@ -77,6 +79,7 @@ const styles = StyleSheet.create({
     color: '#000',
     textTransform: 'uppercase',
     fontWeight: 'bold',
+    fontFamily: 'OpenSans-Regular',
   },
   iconPincel: {
     position: 'absolute',

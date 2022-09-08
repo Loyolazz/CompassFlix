@@ -94,35 +94,20 @@ export default function MovieList({ route, navigation }) {
                 }}>
                 {!movieButtonFocused ? (
                   <View
-                    style={{
-                      width: 60,
-                      height: 40,
-                      borderRadius: 100,
-                      backgroundColor: '#E9A6A6',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}>
+                    style={styles.ViewPencilIconOne}>
                     <Icon
                       name="pencil"
                       size={35}
                       color="#fff"
-                      style={styles.Icon}
                     />
                   </View>
                 ) : (
                   <View
-                    style={{
-                      width: 65,
-                      height: 40,
-                      borderRadius: 20,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}>
+                    style={styles.ViewPencilIconTwo}>
                     <Icon
                       name="pencil"
                       size={35}
                       color="#000"
-                      style={styles.Icon}
                     />
                   </View>
                 )}
@@ -133,23 +118,19 @@ export default function MovieList({ route, navigation }) {
       </View>
       <View style={{ paddingBottom: 10, alignItems: 'center' }}>
         <View>
-          <Text style={{ color: '#E9A6A6', paddingTop: 40 }}>
+          <Text style={styles.TextName}>
             {listMovieDetails.name}
           </Text>
         </View>
         <View>
-          <Text style={{ color: '#FFFFFF', paddingTop: 30 }}>
+          <Text style={styles.TextDescp}>
             {listMovieDetails.description}
           </Text>
         </View>
       </View>
       {movieButtonFocused ? (
         <View
-          style={{
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            marginBottom: 10,
-          }}>
+          style={styles.ViewPreFlat}>
           <FlatList
             data={listMovie}
             keyExtractor={(item, index) => `${index}`}
@@ -158,19 +139,8 @@ export default function MovieList({ route, navigation }) {
               const poster = `${item.poster_path}`;
               const id = `${item.id}`;
               return (
-                <View style={{
-                  width: 95,
-                  marginTop: 15,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                  <View
-                    style={{
-                      justifyContent: 'space-between',
-                      width: 95,
-                      marginTop: 15,
-                      alignItems: 'center',
-                    }}>
+                <View style={styles.ViewInFlat}>
+                  <View style={styles.ViewOrganizationOff}>
                     <Image
                       style={styles.Image}
                       source={{ uri: `http://image.tmdb.org/t/p/w185/${poster}` }}
@@ -186,12 +156,7 @@ export default function MovieList({ route, navigation }) {
           />
         </View>
       ) : (
-        <View
-          style={{
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            marginBottom: 10,
-          }}>
+        <View style={styles.ViewPreFlat}>
           <FlatList
             data={listMovie}
             keyExtractor={(item, index) => `${index}`}
@@ -200,20 +165,8 @@ export default function MovieList({ route, navigation }) {
               const poster = `${item.poster_path}`;
               const id = `${item.id}`;
               return (
-                <View style={{
-                  width: 95,
-                  marginTop: 15,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                  <View
-                    style={{
-                      justifyContent: 'space-between',
-                      width: 95,
-                      marginTop: 15,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}>
+                <View style={styles.ViewInFlat}>
+                  <View style={styles.ViewOrganizationOn}>
                     <Image
                       style={styles.Image}
                       source={{ uri: `http://image.tmdb.org/t/p/w185/${poster}` }}
@@ -225,15 +178,7 @@ export default function MovieList({ route, navigation }) {
                     <>
                       <View style={{ position: 'absolute', width: '90%', height: 20, alignItems: 'flex-end', top: -10 }}>
                         <TouchableOpacity
-                          style={{
-                            width: 20,
-                            height: 20,
-                            backgroundColor: '#fff',
-                            borderRadius: 20,
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            position: 'absolute',
-                          }}
+                          style={styles.TouchableButton}
                           onPress={() => {
                             setIdMovie(item.id);
                             setVisibleModalExit(!modalVisibleExit);

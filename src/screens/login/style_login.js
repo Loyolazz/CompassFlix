@@ -27,12 +27,15 @@ const styles = StyleSheet.create({
   loginText: {
     fontSize: 24,
     fontWeight: 'bold',
+    fontFamily: 'OpenSans-Regular',
     alignSelf: 'center',
     paddingBottom: 8,
     paddingTop:30
   },
   descriptionText: {
     fontSize: 13,
+    fontFamily: 'OpenSans-Regular',
+    fontWeight: '400',
     alignSelf: 'center',
     paddingBottom: 28,
   },

@@ -34,7 +34,8 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     backgroundColor: 'rgba(196, 196, 196, 0.35)', 
     height: 26,
-    color: '#000000'
+    color: '#000000',
+    fontFamily: 'OpenSans-Regular',
   },
   icon: {
     position: 'absolute',
