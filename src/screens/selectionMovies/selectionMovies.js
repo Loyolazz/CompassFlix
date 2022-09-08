@@ -27,7 +27,6 @@ export function SelectionMovies({ navigation }) {
     const response = await getMovies(page);
     setMovies([...movies, ...response.data.results]);
     setPage(page + 1);
-    console.log(sessionId)
   };
 
   useEffect(() => {
