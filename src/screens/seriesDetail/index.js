@@ -7,8 +7,10 @@ import {
   ScrollView,
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
-import {HeaderDetails} from '../../Components/movieDetailsComp/header/index';
-import {SinopseDetails} from '../../Components/movieDetailsComp/sinopse/sinopse';
+import { HeaderDetails } from '../../Components/SeriesDetailsComp/Header';
+//import {HeaderDetails} from '../../Components/movieDetailsComp/header/index';
+import { SinopseDetails } from '../../Components/SeriesDetailsComp/Sinopse';
+//import {SinopseDetails} from '../../Components/movieDetailsComp/sinopse/sinopse';
 import Api, {getAccountStates} from '../../services/api';
 import BtnGoback from '../../../node_modules/react-native-vector-icons/Ionicons';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';

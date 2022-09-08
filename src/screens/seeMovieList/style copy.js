@@ -42,7 +42,7 @@ export default StyleSheet.create({
         borderRadius: 20, 
         marginHorizontal: '10%', 
         marginVertical: '80%', 
-        alignItems: 'center' 
+        alignItems: 'center',
     },
     viewTitle:{
         width: '100%', 
@@ -69,11 +69,12 @@ export default StyleSheet.create({
     styleInpuListName:{
         backgroundColor: '#d7d8d7', 
         width: 280, 
-        height: 31, 
+        height: 35, 
         borderRadius: 5, 
         fontSize: 12, 
         justifyContent: 'flex-end',
-        color: '#000000'
+        color: '#000000',
+        marginBottom: 5
     },
     styleInpuListInput:{
         backgroundColor: '#d7d8d7', 
