@@ -13,6 +13,7 @@ import {styles} from './style_movieList';
 import * as Animatable from 'react-native-animatable';
 import {Context} from '../../context';
 import ModalExitAccount from '../../Components/ModalExitAccount';
+import Load from '../../Components/Load'
 
 export default function MovieList({route,navigation}) {
   const [movieButtonFocused, setMovieButtonFocused] = useState(true);
@@ -46,7 +47,7 @@ export default function MovieList({route,navigation}) {
      setEvaluation(!evaluation);
   };
 
-  return (
+  return listMovie && listMovieDetails ? (
     <View style={{flex: 1, backgroundColor: 'black'}}>
    
       <View
@@ -264,5 +265,7 @@ export default function MovieList({route,navigation}) {
         </View>
       )}
     </View>
-  );
+  ) : (
+    <Load />
+  )
 }

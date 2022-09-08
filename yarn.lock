@@ -1638,8 +1638,7 @@
     "warn-once" "^0.1.0"
 
 "@rneui/base-edge@github:react-native-elements/react-native-elements#base":
-  "integrity" "sha512-pN29qDVf4NgBL87jnZa5I0VGEbrHAzx87SxrbhnCQsLfKknSq27N4a8OdVS+aTffiU8v5cWhq8CeTcSodXscKA=="
-  "resolved" "https://codeload.github.com/react-native-elements/react-native-elements/tar.gz/9e64545c38652e7b99fce5313c82f45881c2c7e9"
+  "resolved" "git+ssh://git@github.com/react-native-elements/react-native-elements.git#9e64545c38652e7b99fce5313c82f45881c2c7e9"
   "version" "4.0.0-rc.6"
   dependencies:
     "@types/react-native-vector-icons" "^6.4.10"
@@ -1657,8 +1656,7 @@
     "@rneui/base-edge" "github:react-native-elements/react-native-elements#base"
 
 "@rneui/themed-edge@github:react-native-elements/react-native-elements#themed":
-  "integrity" "sha512-ycyE6FeWMay+d/XcmwhVaw0ZkNGyL+LwKJugT6VwNbjdn5lQZX1Iol1DiRC8HnaqRg+qGyDv8xdkzl2X6ySZlg=="
-  "resolved" "https://codeload.github.com/react-native-elements/react-native-elements/tar.gz/732877ca712ea3699af50ec6b36f85391f7a1572"
+  "resolved" "git+ssh://git@github.com/react-native-elements/react-native-elements.git#732877ca712ea3699af50ec6b36f85391f7a1572"
   "version" "4.0.0-rc.6"
 
 "@rneui/themed@^0.0.0-edge.2":

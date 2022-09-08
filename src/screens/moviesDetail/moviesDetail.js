@@ -154,6 +154,9 @@ const MoviesDetail = ({route, navigation}) => {
 
   return details.poster_path && details.backdrop_path ? (
     <View style={styles.container}>
+
+      <View style={styles.containerModal}>
+              
       <Modal
         animationType="slide"
         transparent={true}
@@ -208,6 +211,11 @@ const MoviesDetail = ({route, navigation}) => {
           </TouchableOpacity>
         </View>
       </Modal>
+
+
+      </View>
+
+
 
       <ImageBackground
         source={{uri: Banner}}
