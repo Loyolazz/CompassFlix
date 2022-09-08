@@ -26,7 +26,7 @@ export default StyleSheet.create({
     containerInfoFilm: {
         width: '50%',
         height: '50%',
-        paddingVertical: 10,
+        paddingVertical: 4,
         paddingHorizontal: 10,
         flexDirection: 'column',
         marginLeft:10
@@ -55,7 +55,7 @@ export default StyleSheet.create({
     },
     containerIconAndNote:{
         flexDirection: 'row', 
-        marginTop: 13,
+        marginTop: 5,
         paddingHorizontal:10
     },
     containerYearAndDuration:{

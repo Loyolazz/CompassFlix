@@ -92,79 +92,102 @@ const styles = StyleSheet.create({
     padding: 10,
     alignItems: 'center',
   },
-  containerModalAddList:{
-    backgroundColor: '#fff', 
-    height: '35%', 
-    justifyContent: 'flex-start', 
-    borderTopLeftRadius: 23, 
-    borderTopRightRadius: 23, 
-    marginTop: 600, 
-    alignItems: 'center' 
+  containerModalAddList: {
+    backgroundColor: '#fff',
+    height: '35%',
+    justifyContent: 'flex-start',
+    borderTopLeftRadius: 23,
+    borderTopRightRadius: 23,
+    marginTop: 600,
+    alignItems: 'center',
   },
-  viewTitleAndBtnExitModal:{
+  viewTitleAndBtnExitModal: {
     justifyContent: 'space-between',
-     width: '100%', 
-     flexDirection: 'row', 
-     marginTop: 12,
-    paddingHorizontal: 15, 
-    height: 23
+    width: '100%',
+    flexDirection: 'row',
+    marginTop: 12,
+    paddingHorizontal: 15,
+    height: 23,
   },
-  styleTxtTitleModal:{
-    color: '#000', 
-    fontWeight: 'bold'
+  styleTxtTitleModal: {
+    color: '#000',
+    fontWeight: 'bold',
   },
-  txtExit:{
-    color: '#000', 
-    fontSize: 20 
+  txtExit: {
+    color: '#000',
+    fontSize: 20,
   },
-  containerAddMovieList:{
-    borderBottomWidth: 1, 
-    borderColor: 'grey', 
-    width: '100%', 
-    height: 14, 
-    marginBottom: 10
+  containerAddMovieList: {
+    borderBottomWidth: 1,
+    borderColor: 'grey',
+    width: '100%',
+    height: 14,
+    marginBottom: 10,
   },
-  viewFlatlistAddMovie:{
-    flexDirection: 'row', 
-    width: '100%', 
-    height: 180, 
-    paddingHorizontal: 10, 
-    justifyContent: 'center', 
-    alignItems: 'center' 
+  viewFlatlistAddMovie: {
+    flexDirection: 'row',
+    width: '100%',
+    height: 180,
+    paddingHorizontal: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  containerItemAddMovie:{
-    width: '100%', 
-    flexDirection: 'row'
+  containerItemAddMovie: {
+    width: '100%',
+    flexDirection: 'row',
   },
-  viewCircleSelection:{
-    backgroundColor: '#fff', 
-    marginBottom: 10, 
-    height: 25, 
-    width: 25, 
-    borderRadius: 23, 
-    borderWidth: 2, 
-    borderColor: '#000', 
-    alignItems: 'center', 
-    justifyContent: 'center'
+  viewCircleSelection: {
+    backgroundColor: '#fff',
+    marginBottom: 10,
+    height: 25,
+    width: 25,
+    borderRadius: 23,
+    borderWidth: 2,
+    borderColor: '#000',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  circleSelection:{   
-    height: 17, 
-    width: 17, 
-    borderRadius: 20 
+  circleSelection: {
+    height: 17,
+    width: 17,
+    borderRadius: 20,
   },
-  viewBtnSaveAddMovie:{
-    width: 100, 
-    backgroundColor: '#000', 
-    alignItems: 'center', 
-    height: 25, 
-    borderRadius: 5, 
-    justifyContent: 'center', 
-    marginBottom: 40 
+  viewBtnSaveAddMovie: {
+    width: 100,
+    backgroundColor: '#000',
+    alignItems: 'center',
+    height: 25,
+    borderRadius: 5,
+    justifyContent: 'center',
+    marginBottom: 40,
   },
-  txtBtnSaveAddMovie:{
-    color: '#fff', 
-    fontSize: 12
-  }
+  txtBtnSaveAddMovie: {
+    color: '#fff',
+    fontSize: 12,
+  },
+  containerButtons: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  buttonAddList: {
+    backgroundColor: '#C4C4C4',
+    marginHorizontal: 20,
+    borderRadius: 20,
+    width: '38%',
+    flexDirection: 'row',
+    textAlign: 'center',
+  },
+  textAddList: {
+    color: '#000',
+    fontSize: 12,
+    marginHorizontal: 10,
+    marginTop: 2
+
+  },
+  containerIconPlus: {
+    backgroundColor: '#fff',
+    borderRadius: 20,
+  },
 });
 
 export default styles;
