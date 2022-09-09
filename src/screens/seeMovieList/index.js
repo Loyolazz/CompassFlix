@@ -8,6 +8,7 @@ import {getAccount, getList, deleteList, createList} from '../../services/api';
 import {Context} from '../../context';
 import Load from '../../Components/Load';
 import ModalExitAccount from '../../Components/ModalExitAccount';
+import ModalConfirmationAddList from '../../Components/ModalConfirmationAddList';
 
 export default function SeeMovieList({navigation}) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -15,7 +16,8 @@ export default function SeeMovieList({navigation}) {
   const [nameList, setNameList] = useState('');
   const [dataUser, setDataUser] = useState('');
   const [list, setList] = useState({});
-  const [del, setDel] = useState('');
+  const [visibleError, setVisibleError] = useState(false);
+ 
   const {sessionId, evaluation, setEvaluation} = useContext(Context);
   const [visibleBtnDel, setVisibileBtnDel] = useState(false);
   const [idItem, setIdItem] = useState();
@@ -44,7 +46,7 @@ export default function SeeMovieList({navigation}) {
 
   const postCreateList = async (name, description) => {
     if(!nameList) {
-      return alert("Dê um nome a lista!")
+      return setVisibleError(!visibleError)
     }
 
     await createList(sessionId, name, description);
@@ -167,6 +169,14 @@ export default function SeeMovieList({navigation}) {
           <Text style={{color: '#000', fontSize: 40}}>+</Text>
         </TouchableOpacity>
       </View>
+
+      <ModalConfirmationAddList
+        modalVisible={visibleError}
+        onPress={() => setVisibleError(!visibleError)}
+        title="Erro! Adicione um nome a lita.."
+        icon='block-helper'
+        colorIcon={'red'}
+      />
       </View>
 
   
