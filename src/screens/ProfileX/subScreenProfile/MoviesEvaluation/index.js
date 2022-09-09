@@ -4,7 +4,7 @@ import { Context } from '../../../../context';
 import styles from './styles';
 import { getAccount, EvaluationSeries } from '../../../../services/api';
 import star_red from '../../../../assets/star_red.png';
-import BtnGoBack from '../../../../Components/ProfileComp/btnGoBack/btn';
+import BtnGoBack from '../../../../Components/ProfileComp2/btnGoBack/btn';
 import BlockIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 export default function   MoviesEvaluation({navigation}) {

@@ -3,9 +3,8 @@ import {View, Text, TouchableOpacity, FlatList, Image} from 'react-native';
 import styles from './styles';
 import {Context} from '../../../../context';
 import {getAccount, getMoviesFavorites} from '../../../../services/api';
-import Api from '../../../../services/api';
 import star_red from '../../../../assets/star_red.png';
-import BtnGoBack from '../../../../Components/ProfileComp/btnGoBack/btn';
+import BtnGoBack from '../../../../Components/ProfileComp2/btnGoBack/btn';
 import BlockIcon from 'react-native-vector-icons/MaterialIcons'
 
 export default function SeriesFavorites({navigation}) {
@@ -58,9 +57,7 @@ export default function SeriesFavorites({navigation}) {
         renderItem={({item}) => (
           <View
             style={{
-              justifyContent: 'space-between',
               alignItems: 'flex-start',
-              flex: 1,
               flexDirection: 'column',
               marginBottom: 20,
               paddingHorizontal: 10,
