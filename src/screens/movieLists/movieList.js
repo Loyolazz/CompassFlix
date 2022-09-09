@@ -47,7 +47,7 @@ export default function MovieList({ route, navigation }) {
   };
 
   return listMovie && listMovieDetails ? (
-    <View style={{flex: 1, backgroundColor: 'black'}}>
+    <View style={{ flex: 1, backgroundColor: 'black' }}>
       <View
         style={styles.ContainerTop}>
         <TouchableOpacity
@@ -104,9 +104,7 @@ export default function MovieList({ route, navigation }) {
                   </View>
                 ) : (
                   <View
-
                     style={styles.ViewPencilIconTwo}>
-
                     <Icon
                       name="pencil"
                       size={35}
@@ -121,14 +119,11 @@ export default function MovieList({ route, navigation }) {
       </View>
       <View style={{ paddingBottom: 10, alignItems: 'center' }}>
         <View>
-
           <Text style={styles.TextName}>
-
             {listMovieDetails.name}
           </Text>
         </View>
         <View>
-
           <Text style={styles.TextDescp}>
             {listMovieDetails.description}
           </Text>
@@ -140,24 +135,22 @@ export default function MovieList({ route, navigation }) {
           <FlatList
             data={listMovie}
             keyExtractor={(item, index) => `${index}`}
+            ListEmptyComponent={<Text style={styles.TextEmpty}>Você não adicionou nenhum item a lista ainda, por favor vá ate a selecão de filmes e faça sua escolha.</Text>}
             numColumns={4}
             renderItem={({ item }) => {
               const poster = `${item.poster_path}`;
               const id = `${item.id}`;
               return (
-
                 <View style={styles.ViewInFlat}>
-                  <TouchableOpacity 
-                  
-                  onPress={() => {
-                        setSelectedId(id);
-                        navigation.navigate('MoviesDetail', { item });
-                      }}
-                  style={styles.ViewOrganizationOff}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setSelectedId(id);
+                      navigation.navigate('MoviesDetail', { item });
+                    }}
+                    style={styles.ViewOrganizationOff}>
                     <Image
                       style={styles.Image}
                       source={{ uri: `http://image.tmdb.org/t/p/w185/${poster}` }}
-                      
                     />
                   </TouchableOpacity>
                 </View>
@@ -165,11 +158,10 @@ export default function MovieList({ route, navigation }) {
             }}
           />
         </View>
-      
+
       ) : (
 
         <View style={styles.ViewPreFlat}>
-
           <FlatList
             data={listMovie}
             keyExtractor={(item, index) => `${index}`}
@@ -181,9 +173,6 @@ export default function MovieList({ route, navigation }) {
 
                 <View style={styles.ViewInFlat}>
                   <View style={styles.ViewOrganizationOn}>
-                  
-
-                  
                     <Image
                       style={styles.Image}
                       source={{ uri: `http://image.tmdb.org/t/p/w185/${poster}` }}
@@ -191,8 +180,7 @@ export default function MovieList({ route, navigation }) {
                         setSelectedId(id);
                         navigation.navigate('MoviesDetail', { item });
                       }}
-                    /> 
-                  
+                    />
                     <>
                       <View style={{ position: 'absolute', width: '90%', height: 20, alignItems: 'flex-end', top: -10 }}>
                         <TouchableOpacity
@@ -206,15 +194,7 @@ export default function MovieList({ route, navigation }) {
                       </View>
                     </>
                   </View>
-
                 </View>
-                
-             
-
-
-              
-
-
               );
             }}
           />

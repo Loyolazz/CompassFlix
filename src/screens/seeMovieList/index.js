@@ -132,6 +132,7 @@ export default function SeeMovieList({navigation}) {
         <View style={styles.mainList}>
           <FlatList
             data={list}
+            ListEmptyComponent={<Text style={styles.TextEmptyList}>Você não criou nenhuma lista ainda, por favor clique no "+" para criar uma!</Text>}
             keyExtractor={(item, index) => `${index}`}
             renderItem={({item}) => {
               return (

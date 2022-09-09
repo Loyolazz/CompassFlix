@@ -105,6 +105,15 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    TextEmpty: {
+        fontFamily: 'OpenSans-Regular',
+        fontWeight: '600',
+        fontSize: 20,
+        textAlign: 'center',
+        lineHeight: 25,
+        color: 'white',
+        paddingTop: 30,
+    },
     TouchableButton: {
         width: 20,
         height: 20,

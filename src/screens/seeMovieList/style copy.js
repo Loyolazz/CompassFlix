@@ -117,6 +117,15 @@ export default StyleSheet.create({
         justifyContent: 'center', 
         borderRadius: 5
     },
+    TextEmptyList: {  
+        fontFamily: 'OpenSans-Regular',
+        fontWeight: '600',
+        fontSize: 20,
+        textAlign: 'center',
+        lineHeight: 25,
+        color: 'white',
+        paddingTop: 30,
+     },
     textSave:{
         color: '#fff', 
         fontSize: 12, 

@@ -203,7 +203,6 @@ const MoviesDetail = ({route, navigation}) => {
             style={styles.viewBtnSaveAddMovie}
             onPress={() => {
               setModalVisibleTeste(!modalVisibleTeste);
-              handleAddMovieList();
               selectedId ?  handleAddMovieList() : alert('Erro! nunhuma lista selecionada');
             }}>
             <Text style={styles.txtBtnSaveAddMovie}>Salvar</Text>
