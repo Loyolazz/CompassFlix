@@ -148,7 +148,7 @@ const MoviesDetail = ({route, navigation}) => {
 
   const handleAddMovieList = async () => {
     await AddMovieList(selectedId, sessionId, details.id);
-
+    console.log(selectedId);
     setIsVisible(!isVisivle);
   };
 
@@ -167,12 +167,10 @@ const MoviesDetail = ({route, navigation}) => {
         <View style={styles.containerModalAddList}>
           <View style={styles.viewTitleAndBtnExitModal}>
             <Text style={styles.styleTxtTitleModal}>Salvar filmes em...</Text>
-
             <Pressable onPress={() => setModalVisibleTeste(!modalVisibleTeste)}>
               <Text style={styles.txtExit}>X</Text>
             </Pressable>
           </View>
-
           <View style={styles.containerAddMovieList} />
           <View style={styles.viewFlatlistAddMovie}>
             <FlatList
@@ -206,6 +204,7 @@ const MoviesDetail = ({route, navigation}) => {
             onPress={() => {
               setModalVisibleTeste(!modalVisibleTeste);
               handleAddMovieList();
+              selectedId ?  handleAddMovieList() : alert('Erro! nunhuma lista selecionada');
             }}>
             <Text style={styles.txtBtnSaveAddMovie}>Salvar</Text>
           </TouchableOpacity>

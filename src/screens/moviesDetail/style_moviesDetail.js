@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     borderTopLeftRadius: 23,
     borderTopRightRadius: 23,
-    marginTop: 600,
+    marginTop: 560,
     alignItems: 'center',
   },
   viewTitleAndBtnExitModal: {
