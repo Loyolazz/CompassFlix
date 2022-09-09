@@ -29,7 +29,8 @@ const styles = StyleSheet.create({
   },
   elencoText: {
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#fff',   
+    fontFamily: 'OpenSans-Regular',
   },
   elenco: {
     color: '#FFFFFF',
@@ -58,6 +59,7 @@ const styles = StyleSheet.create({
     color: '#000',
     textTransform: 'uppercase',
     fontWeight: 'bold',
+    fontFamily: 'OpenSans-Regular',
   },
   ButtonAvalueteOk: {
     backgroundColor: '#8BE0EC',
@@ -73,6 +75,7 @@ const styles = StyleSheet.create({
     color: '#000',
     textTransform: 'uppercase',
     fontWeight: 'bold',
+    fontFamily: 'OpenSans-Regular',
   },
   iconPincel: {
     position: 'absolute',
@@ -112,10 +115,13 @@ const styles = StyleSheet.create({
   styleTxtTitleModal: {
     color: '#000',
     fontWeight: 'bold',
+    fontFamily: 'OpenSans-Regular',
   },
   txtExit: {
     color: '#000',
     fontSize: 20,
+    fontFamily: 'OpenSans-Regular',
+    fontWeight: '400',
   },
   containerAddMovieList: {
     borderBottomWidth: 1,
@@ -164,6 +170,8 @@ const styles = StyleSheet.create({
   txtBtnSaveAddMovie: {
     color: '#fff',
     fontSize: 12,
+    fontFamily: 'OpenSans-Regular',
+    fontWeight: '400',
   },
   containerButtons: {
     flexDirection: 'row',
@@ -180,6 +188,8 @@ const styles = StyleSheet.create({
   textAddList: {
     color: '#000',
     fontSize: 12,
+    fontFamily: 'OpenSans-Regular',
+    fontWeight: '400',
     marginHorizontal: 10,
     marginTop: 2
 

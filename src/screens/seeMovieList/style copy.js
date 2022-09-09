@@ -16,7 +16,8 @@ export default StyleSheet.create({
     txtTitle:{
         color:'#fff', 
         fontSize:25, 
-        fontWeight:'bold'
+        fontWeight:'bold',
+        fontFamily: 'OpenSans-Regular',
     },
     footerBtnCreateList:{
         width:'100%', 
@@ -53,7 +54,8 @@ export default StyleSheet.create({
     },
     title:{
         color: '#000', 
-        fontWeight: 'bold' 
+        fontWeight: 'bold', 
+        fontFamily: 'OpenSans-Regular',
     },
     containerModal:{
         width: '100%', 
@@ -76,14 +78,16 @@ export default StyleSheet.create({
         fontSize: 12, 
         justifyContent: 'flex-end',
         color: '#000000',
-        marginBottom: 5
+        marginBottom: 5,
+        fontFamily: 'OpenSans-Regular',
     },
     styleInpuListInput:{
         backgroundColor: '#d7d8d7', 
         width: 280, height: 50, 
         borderRadius: 5, 
         fontSize: 12,
-        color: '#000000'
+        color: '#000000',
+        fontFamily: 'OpenSans-Regular',
     },
     containerBtnModal:{
         width: '60%', 
@@ -102,7 +106,8 @@ export default StyleSheet.create({
     textCancel:{
         color: '#000', 
         fontSize: 12, 
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        fontFamily: 'OpenSans-Regular',
     },
     btnSave:{
         backgroundColor: '#000', 
@@ -114,7 +119,8 @@ export default StyleSheet.create({
     textSave:{
         color: '#fff', 
         fontSize: 12, 
-        fontWeight: 'bold' 
+        fontWeight: 'bold',
+        fontFamily: 'OpenSans-Regular', 
     },
     btnCreatList:{
         width: 60, 
