@@ -94,7 +94,10 @@ export default function SeeMovieList({navigation}) {
               <TouchableOpacity
                 style={styles.btnCancel}
                 onPress={() => {
+
                   setModalVisible(!modalVisible);
+              
+
                 }}>
                 <Text style={styles.textCancel}>Cancelar</Text>
               </TouchableOpacity>
@@ -155,12 +158,16 @@ export default function SeeMovieList({navigation}) {
       )}
 
       <View style={styles.footerBtnCreateList}>
+
         <TouchableOpacity
           onPress={() => setModalVisible(true)}
           style={styles.btnCreatList}>
           <Text style={{color: '#000', fontSize: 40}}>+</Text>
         </TouchableOpacity>
       </View>
+      </View>
+
+  
     </View>
   );
 }

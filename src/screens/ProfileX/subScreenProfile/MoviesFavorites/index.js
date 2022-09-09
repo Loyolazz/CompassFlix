@@ -4,7 +4,7 @@ import {Context} from '../../../../context';
 import styles from './styles copy';
 import {getAccount, getMoviesFavorites} from '../../../../services/api';
 import star_red from '../../../../assets/star_red.png';
-import BtnGoBack from '../../../../Components/ProfileComp/btnGoBack/btn';
+import BtnGoBack from '../../../../Components/ProfileComp2/btnGoBack/btn';
 
 import BlockIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 export default function   MoviesFavorites({navigation}) {
