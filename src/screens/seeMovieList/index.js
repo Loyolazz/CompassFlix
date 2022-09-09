@@ -6,6 +6,7 @@ import BtnGoBack from '../../Components/ProfileComp2/btnGoBack/btn';
 import {TextInput} from 'react-native-gesture-handler';
 import {getAccount, getList, deleteList, createList} from '../../services/api';
 import {Context} from '../../context';
+import Load from '../../Components/Load';
 import ModalExitAccount from '../../Components/ModalExitAccount';
 
 export default function SeeMovieList({navigation}) {
@@ -41,13 +42,11 @@ export default function SeeMovieList({navigation}) {
     setEvaluation(!evaluation);
   };
 
-
   const postCreateList = async (name, description) => {
     await createList(sessionId, name, description);
     setEvaluation(!evaluation);
-    setModalVisible(!modalVisible)
+    setModalVisible(!modalVisible);
   };
-
 
   return (
     <View style={styles.container}>
@@ -58,7 +57,6 @@ export default function SeeMovieList({navigation}) {
           onPress={() => setVisibileBtnDel(false)}
           logout={() => delIdList(idItem)}
         />
-
 
         <Modal
           animationType="slide"
@@ -80,43 +78,42 @@ export default function SeeMovieList({navigation}) {
                   placeholderTextColor={'#8E8E8E'}
                   style={styles.styleInpuListName}
                   value={nameList}
-                  onChangeText={setNameList}/>
+                  onChangeText={setNameList}
+                />
 
                 <TextInput
                   placeholder="Descrição"
                   placeholderTextColor={'#8E8E8E'}
                   style={styles.styleInpuListInput}
                   value={description}
-                  onChangeText={setDescription}/>
+                  onChangeText={setDescription}
+                />
               </View>
             </View>
             <View style={styles.containerBtnModal}>
               <TouchableOpacity
                 style={styles.btnCancel}
                 onPress={() => {
-                  setModalVisible(!modalVisible) 
+
+                  setModalVisible(!modalVisible);
               
+
                 }}>
                 <Text style={styles.textCancel}>Cancelar</Text>
               </TouchableOpacity>
 
-              <TouchableOpacity 
+              <TouchableOpacity
                 style={styles.btnSave}
                 onPress={() => {
                   postCreateList(nameList, description),
-                  setDescription(''),
-                  setNameList('');
-                }}
-              >
+                    setDescription(''),
+                    setNameList('');
+                }}>
                 <Text style={styles.textSave}>Salvar</Text>
               </TouchableOpacity>
             </View>
           </View>
         </Modal>
-
-
-
-
       </View>
 
       <View style={{marginTop: 20}}>
@@ -131,29 +128,37 @@ export default function SeeMovieList({navigation}) {
         <Text style={styles.txtTitle}>Minhas listas</Text>
       </View>
 
-      <View style={styles.mainList}>
-        <FlatList
-          data={list}
-          keyExtractor={(item, index) => `${index}`}
-          renderItem={({item}) => {
-            return (
-              <View style={{flex:1, width:'100%', alignItems:'center'}}>
-                <CardList
-                  nameList={item.name}
-                  qtdFilms={item.item_count}
-                  pressCard={() => { setIdItem(item.id),navigation.navigate('MovieList',{ item })} }
-                  deletelListPress={() => {
-                    setVisibileBtnDel(!visibleBtnDel);
-                    setIdItem(item.id);
-                  }}
-                />
+      {list ? (
+        <View style={styles.mainList}>
+          <FlatList
+            data={list}
+            keyExtractor={(item, index) => `${index}`}
+            renderItem={({item}) => {
+              return (
+                <>
+                  <CardList
+                    nameList={item.name}
+                    qtdFilms={item.item_count}
+                    pressCard={() => {
+                      setIdItem(item.id),
+                        navigation.navigate('MovieList', {item});
+                    }}
+                    deletelListPress={() => {
+                      setVisibileBtnDel(!visibleBtnDel);
+                      setIdItem(item.id);
+                    }}
+                  />
+                </>
+              );
+            }}
+          />
+        </View>
+      ) : (
+        <Load />
+      )}
 
-                
-              </View>
-            );
-          }}
-        />
-            <View style={styles.footerBtnCreateList}>
+      <View style={styles.footerBtnCreateList}>
+
         <TouchableOpacity
           onPress={() => setModalVisible(true)}
           style={styles.btnCreatList}>

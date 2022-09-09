@@ -15,11 +15,11 @@ const ModalConfirmationAddList = ({modalVisible, onPress}) => {
             style={styles.title}
           />
 
-          <Text style={{color: '#000', fontWeight: 'bold'}}>Lista atualizada com sucesso!</Text>
+          <Text style={{color: '#000', fontWeight: 'bold', marginTop: 15}}>Lista atualizada com sucesso!</Text>
 
 
-          <View style={{marginTop: 22, marginBottom: 10, alignItems: 'center'}}>
-            <View style={{flexDirection: 'row', marginBottom: 10}}></View>
+          <View style={{marginTop: 20, marginBottom: 8, alignItems: 'center'}}>
+          
           </View>
 
           <View style={styles.buttons}>

@@ -65,7 +65,7 @@ const ModalAvaluate = ({modalVisible, onPress, rate, rating, setRating}) => {
             <TouchableOpacity
               style={styles.btnOk}
               onPress={() => {
-                if (rating >= 0.5 && rating <= 10 && rating % 0.5 === 0) {
+                if (rating >= 0.5 && rating <= 10) {
                   rate(rating);
                   setEvaluation(rating);
                   setInvalido(false);

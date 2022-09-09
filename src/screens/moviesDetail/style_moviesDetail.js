@@ -48,9 +48,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#E9A6A6',
     alignItems: 'center',
     justifyContent: 'center',
-    width: 116,
+    width: 117,
     height: 22,
-    marginLeft: 20,
+    marginLeft: 19,
     marginTop: -4,
   },
   textModal: {

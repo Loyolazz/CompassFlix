@@ -75,13 +75,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 5,
-    backgroundColor: '#000000'
+    backgroundColor: '#000000',
   },
   textOk: {
     textTransform: 'uppercase',
     fontSize: 10,
     fontFamily: 'OpenSans-Bold',
-    color: '#FFFFFF'
+    color: '#FFFFFF',
   }
 });
 
