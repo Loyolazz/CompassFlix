@@ -29,10 +29,10 @@ export default function HeaderMoviesDefault({nameUser,photoUser,onPress }) {
 
             </View>
             <Text style={styles.description}>
-                Reveja ou acompanhe os séries que você assistiu...
+                Reveja ou acompanhe os filmes que você assistiu...
             </Text>
-            <Text style={styles.popularSeries}>
-                Séries populares este mês
+            <Text style={styles.popularMovies}>
+                Filmes populares este mês
             </Text>
         </View>
     )

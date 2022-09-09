@@ -198,6 +198,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 20,
   },
+  TextEmptyList: {
+    fontFamily: 'OpenSans-Regular',
+    fontWeight: '600',
+    fontSize: 20,
+    textAlign: 'center',
+    lineHeight: 25,
+    paddingTop: 10,
+    color: '#000',
+  },
 });
 
 export default styles;

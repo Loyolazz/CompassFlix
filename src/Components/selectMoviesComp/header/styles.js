@@ -1,11 +1,11 @@
 import { StyleSheet } from "react-native"
 
 const styles = StyleSheet.create({
-   
+
     header: {
         marginTop: 20,
-        alignItems:'flex-start',
-        paddingHorizontal:10,
+        alignItems: 'flex-start',
+        paddingHorizontal: 10,
     },
     text: {
         fontSize: 20,
@@ -13,13 +13,14 @@ const styles = StyleSheet.create({
     },
     containerRow: {
         flexDirection: 'row',
-        width:'90%',
+        //width:'90%',
     },
     title: {
         fontSize: 22,
         fontWeight: '700',
         lineHeight: 25,
-        color: '#FFF'
+        color: '#FFF',
+        fontFamily: 'OpenSans-Regular',
     },
     label: {
         fontSize: 22,
@@ -33,7 +34,8 @@ const styles = StyleSheet.create({
         fontWeight: '400',
         lineHeight: 25,
         color: '#FFF',
-        marginTop: 8
+        marginTop: 8,
+        fontFamily: 'OpenSans-Regular',
     },
     popularMovies: {
         fontSize: 16,
@@ -42,29 +44,29 @@ const styles = StyleSheet.create({
         marginTop: 30,
         marginBottom: 40
     },
-    viewNameUser:{
-        width:'100%', 
-        justifyContent:'space-between', 
-        flexDirection:'row'
+    viewNameUser: {
+        width: '100%',
+        justifyContent: 'space-between',
+        flexDirection: 'row'
     },
-    containerNameUser:{
-        width: '100%', 
-        marginHorizontal: 20, 
+    containerNameUser: {
+        width: '100%',
+        marginHorizontal: 20,
         alignItems: 'flex-start'
-   },
-   containerText:{
-    flexDirection: 'row', 
-    justifyContent: 'center'
-   },
-   viewPhoto:{
-    width: '100%', 
-    alignItems: 'flex-end' 
-   },
-   stylePhoto:{
-    width: 50, 
-    height: 50, 
-    borderRadius: 60
-   }
+    },
+    containerText: {
+        flexDirection: 'row',
+        justifyContent: 'center'
+    },
+    viewPhoto: {
+        width: '100%',
+        alignItems: 'flex-end'
+    },
+    stylePhoto: {
+        width: 50,
+        height: 50,
+        borderRadius: 60
+    }
 })
 
 export default styles

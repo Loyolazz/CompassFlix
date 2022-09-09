@@ -175,6 +175,7 @@ const MoviesDetail = ({route, navigation}) => {
           <View style={styles.viewFlatlistAddMovie}>
             <FlatList
               data={list}
+              ListEmptyComponent={<Text style={styles.TextEmptyList}>Você não criou nenhuma lista ainda, vá até a tela de perfil e crie uma!</Text>}
               keyExtractor={item => String(item.id)}
               renderItem={({item}) => {
                 const backgroundColor =
@@ -209,12 +210,7 @@ const MoviesDetail = ({route, navigation}) => {
           </TouchableOpacity>
         </View>
       </Modal>
-
-
       </View>
-
-
-
       <ImageBackground
         source={{uri: Banner}}
         style={styles.ImgBackground}></ImageBackground>

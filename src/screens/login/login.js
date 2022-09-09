@@ -138,7 +138,7 @@ const Login = () => {
               onChangeText={value => SetPassword(value)}
             />
 
-            <View style={{ position: 'absolute', marginLeft: 210, marginTop: 8 }}>
+            <View style={{ position: 'absolute', marginLeft: 230, marginTop: 8 }}>
               <TouchableOpacity
                 onPress={() => setSecureTextEntryIcon(!secureTextEntryIcon)}>
                 {secureTextEntryIcon == true ? (
