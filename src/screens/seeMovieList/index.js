@@ -43,10 +43,14 @@ export default function SeeMovieList({navigation}) {
   };
 
   const postCreateList = async (name, description) => {
+    if(!nameList) {
+      return alert("Dê um nome a lista!")
+    }
+
     await createList(sessionId, name, description);
     setEvaluation(!evaluation);
     setModalVisible(!modalVisible);
-  };
+  }
 
   return (
     <View style={styles.container}>
@@ -94,10 +98,7 @@ export default function SeeMovieList({navigation}) {
               <TouchableOpacity
                 style={styles.btnCancel}
                 onPress={() => {
-
                   setModalVisible(!modalVisible);
-              
-
                 }}>
                 <Text style={styles.textCancel}>Cancelar</Text>
               </TouchableOpacity>

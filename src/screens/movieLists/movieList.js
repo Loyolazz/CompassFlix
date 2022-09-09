@@ -164,6 +164,7 @@ export default function MovieList({ route, navigation }) {
         <View style={styles.ViewPreFlat}>
           <FlatList
             data={listMovie}
+            ListEmptyComponent={<Text style={styles.TextEmpty}>Você não adicionou nenhum item a lista ainda, por favor vá ate a selecão de filmes e faça sua escolha.</Text>}
             keyExtractor={(item, index) => `${index}`}
             numColumns={4}
             renderItem={({ item }) => {
