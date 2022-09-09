@@ -80,15 +80,17 @@ export const styles = StyleSheet.create({
         lineHeight: 15,
     },
     ViewPreFlat: {
-        alignItems: 'center',
-        justifyContent: 'space-between',
+        alignItems: 'flex-start',
+        justifyContent: 'flex-end',
         marginBottom: 10,
+        flex:1,
+        paddingHorizontal:20,
     },
     ViewInFlat: {
         width: 95,
         marginTop: 15,
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'center',                
     },
     ViewOrganizationOff: {
         justifyContent: 'space-between',

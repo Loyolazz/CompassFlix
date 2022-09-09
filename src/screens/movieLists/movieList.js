@@ -20,6 +20,7 @@ export default function MovieList({ route, navigation }) {
   const [listMovieDetails, setListMovieDetails] = useState([]);
   const [listMovie, setListMovie] = useState([]);
   const [idMovie, setIdMovie] = useState();
+  const [selectedId, setSelectedId] = useState();
   const [modalVisibleExit, setVisibleModalExit] = useState(false);
   const { item } = route?.params || {};
   const id = `${item.id}`;
@@ -146,16 +147,19 @@ export default function MovieList({ route, navigation }) {
               return (
 
                 <View style={styles.ViewInFlat}>
-                  <View style={styles.ViewOrganizationOff}>
-                    <Image
-                      style={styles.Image}
-                      source={{ uri: `http://image.tmdb.org/t/p/w185/${poster}` }}
-                      onPress={() => {
+                  <TouchableOpacity 
+                  
+                  onPress={() => {
                         setSelectedId(id);
                         navigation.navigate('MoviesDetail', { item });
                       }}
+                  style={styles.ViewOrganizationOff}>
+                    <Image
+                      style={styles.Image}
+                      source={{ uri: `http://image.tmdb.org/t/p/w185/${poster}` }}
+                      
                     />
-                  </View>
+                  </TouchableOpacity>
                 </View>
               );
             }}
@@ -177,7 +181,9 @@ export default function MovieList({ route, navigation }) {
 
                 <View style={styles.ViewInFlat}>
                   <View style={styles.ViewOrganizationOn}>
+                  
 
+                  
                     <Image
                       style={styles.Image}
                       source={{ uri: `http://image.tmdb.org/t/p/w185/${poster}` }}
@@ -185,7 +191,8 @@ export default function MovieList({ route, navigation }) {
                         setSelectedId(id);
                         navigation.navigate('MoviesDetail', { item });
                       }}
-                    />
+                    /> 
+                  
                     <>
                       <View style={{ position: 'absolute', width: '90%', height: 20, alignItems: 'flex-end', top: -10 }}>
                         <TouchableOpacity
@@ -202,10 +209,10 @@ export default function MovieList({ route, navigation }) {
 
                 </View>
                 
-                  </View>
+             
 
 
-                </View>
+              
 
 
               );

@@ -135,7 +135,7 @@ export default function SeeMovieList({navigation}) {
             keyExtractor={(item, index) => `${index}`}
             renderItem={({item}) => {
               return (
-                <>
+                <View  style={{flex:1, width:'100%', alignItems:'center'}}>
                   <CardList
                     nameList={item.name}
                     qtdFilms={item.item_count}
@@ -148,7 +148,7 @@ export default function SeeMovieList({navigation}) {
                       setIdItem(item.id);
                     }}
                   />
-                </>
+                </View>
               );
             }}
           />
@@ -168,6 +168,6 @@ export default function SeeMovieList({navigation}) {
       </View>
 
   
-    </View>
+
   );
 }
