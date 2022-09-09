@@ -27,12 +27,11 @@ export default StyleSheet.create({
         borderRadius: 10,  
     },
     viewListFavorites: {
-        flexDirection: 'row',
-        width: '100%',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginTop: 20,
+        alignItems: 'flex-start',
+        flexDirection: 'column',
         marginBottom: 20,
+        paddingHorizontal: 10,
+        marginTop: 5,
       
     },
     containerMoviesEmpty:{

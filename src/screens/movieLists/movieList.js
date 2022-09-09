@@ -13,6 +13,7 @@ import { styles } from './style_movieList';
 import * as Animatable from 'react-native-animatable';
 import { Context } from '../../context';
 import ModalExitAccount from '../../Components/ModalExitAccount';
+import Load from '../../Components/Load'
 
 export default function MovieList({ route, navigation }) {
   const [movieButtonFocused, setMovieButtonFocused] = useState(true);
@@ -44,9 +45,8 @@ export default function MovieList({ route, navigation }) {
     setEvaluation(!evaluation);
   };
 
-  return (
-    <View style={{ flex: 1, backgroundColor: 'black' }}>
-
+  return listMovie && listMovieDetails ? (
+    <View style={{flex: 1, backgroundColor: 'black'}}>
       <View
         style={styles.ContainerTop}>
         <TouchableOpacity
@@ -103,7 +103,9 @@ export default function MovieList({ route, navigation }) {
                   </View>
                 ) : (
                   <View
+
                     style={styles.ViewPencilIconTwo}>
+
                     <Icon
                       name="pencil"
                       size={35}
@@ -118,11 +120,14 @@ export default function MovieList({ route, navigation }) {
       </View>
       <View style={{ paddingBottom: 10, alignItems: 'center' }}>
         <View>
+
           <Text style={styles.TextName}>
+
             {listMovieDetails.name}
           </Text>
         </View>
         <View>
+
           <Text style={styles.TextDescp}>
             {listMovieDetails.description}
           </Text>
@@ -139,6 +144,7 @@ export default function MovieList({ route, navigation }) {
               const poster = `${item.poster_path}`;
               const id = `${item.id}`;
               return (
+
                 <View style={styles.ViewInFlat}>
                   <View style={styles.ViewOrganizationOff}>
                     <Image
@@ -155,8 +161,11 @@ export default function MovieList({ route, navigation }) {
             }}
           />
         </View>
+      
       ) : (
+
         <View style={styles.ViewPreFlat}>
+
           <FlatList
             data={listMovie}
             keyExtractor={(item, index) => `${index}`}
@@ -165,8 +174,10 @@ export default function MovieList({ route, navigation }) {
               const poster = `${item.poster_path}`;
               const id = `${item.id}`;
               return (
+
                 <View style={styles.ViewInFlat}>
                   <View style={styles.ViewOrganizationOn}>
+
                     <Image
                       style={styles.Image}
                       source={{ uri: `http://image.tmdb.org/t/p/w185/${poster}` }}
@@ -188,7 +199,15 @@ export default function MovieList({ route, navigation }) {
                       </View>
                     </>
                   </View>
+
                 </View>
+                
+                  </View>
+
+
+                </View>
+
+
               );
             }}
           />
@@ -201,5 +220,7 @@ export default function MovieList({ route, navigation }) {
         </View>
       )}
     </View>
-  );
+  ) : (
+    <Load />
+  )
 }

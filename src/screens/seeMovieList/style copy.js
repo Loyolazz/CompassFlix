@@ -21,20 +21,22 @@ export default StyleSheet.create({
     },
     footerBtnCreateList:{
         width:'100%', 
-        height:90, 
-        justifyContent:'center', 
+        position:'absolute',
+        justifyContent:'flex-end', 
         alignItems:'flex-end', 
-        marginTop:30,
+        height:'95%',
+        flexDirection:'column',
+        flex:1,
   
     },
     mainList:{
         width:'100%', 
-        height:550, 
+        height:'100%', 
         justifyContent:'flex-start', 
         alignItems:'center', 
         marginTop:30,
-        paddingVertical:20,
-        flex:1
+        flex:1,
+
     },
     containerMyList:{
         backgroundColor: '#fff', 

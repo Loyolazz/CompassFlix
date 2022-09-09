@@ -36,9 +36,7 @@ export default StyleSheet.create({
       
     },
     containerCard:{
-        justifyContent: 'space-between',
         alignItems: 'flex-start',
-        flex: 1,
         flexDirection: 'column',
         marginBottom: 20,
         paddingHorizontal: 10,
