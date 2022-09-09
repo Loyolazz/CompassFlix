@@ -4,7 +4,8 @@ export default StyleSheet.create({
     container:{
         backgroundColor:'#000',
         flex:1,
-        paddingHorizontal:20
+        paddingHorizontal:12,
+      
     },
     viewTitle:{
         width:'100%', 
