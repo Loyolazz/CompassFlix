@@ -29,7 +29,7 @@ Aplicativo totalmente funcional de gerenciamento de filmes, feito totalmente em 
 **Disponivel Para Android**
 
 <p align="center">
-  <img src = "./src/assets/readme/animation.gif" width=350>
+  <img src = "./src/assets/readme/login1.jpg" width=200>
 </p>
 
 ## Recursos
@@ -41,20 +41,15 @@ Algumas das coisas que você pode fazer com o CompassFlix:
 * Adicionar Filmes ou Series aos seus favoritos
 * Dar suas propia nota ao Filme ou Series
 * Pode ver o elenco Principal do Filmes
-* 
 
 <p align="center">
-  <img src = "./src/assets/readme/login1" width=700>
-</p>
-
-<p align="center">
-  <img src = "./src/assets/readme/perfil1" width=700>
+  <img src = "./src/assets/readme/animation.gif" width=350>
 </p>
 
 ## Contribuidores
 
 <p align="center">
-  <img src = "./src/assets/readme/capa" width=900>
+  <img src = "./src/assets/readme/capa.jpg" width=900>
 </p>
 
 ## Build Process
