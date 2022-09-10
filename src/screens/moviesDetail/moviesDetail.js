@@ -42,6 +42,7 @@ const MoviesDetail = ({route, navigation}) => {
   const [rating, setRating] = useState(0);
   const [rated, setRated] = useState();
   const [list, setList] = useState({});
+  const [visibleError, setVisibleError] = useState(false);
 
   const [dataUser, setDataUser] = useState();
   const [favoriteMovies, setFavoriteMovies] = useState();
@@ -204,7 +205,7 @@ const MoviesDetail = ({route, navigation}) => {
             style={styles.viewBtnSaveAddMovie}
             onPress={() => {
               setModalVisibleTeste(!modalVisibleTeste);
-              selectedId ?  handleAddMovieList() : alert('Erro! nunhuma lista selecionada');
+              selectedId ?  handleAddMovieList() : setVisibleError(!visibleError)
             }}>
             <Text style={styles.txtBtnSaveAddMovie}>Salvar</Text>
           </TouchableOpacity>
@@ -247,9 +248,21 @@ const MoviesDetail = ({route, navigation}) => {
       />
 
       <ModalConfirmationAddList
+        modalVisible={visibleError}
+        onPress={() => setVisibleError(!visibleError)}
+        title="Erro! Nenhuma lista selecionada."
+        icon='block-helper'
+        colorIcon={'red'}
+      />
+      <ModalConfirmationAddList
         modalVisible={isVisivle}
         onPress={() => setIsVisible(!isVisivle)}
+        title="Lista atualizada com sucesso!"
+        icon='check-circle-outline'
+        colorIcon={'#0000'}
       />
+
+      
 
       <View style={styles.containerButtons}>
         {rated ? (

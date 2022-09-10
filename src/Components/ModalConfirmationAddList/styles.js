@@ -17,7 +17,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 25,
     fontFamily: 'OpenSans-Bold',
-    color: '#000000'
   },
   ratingbody: {
     flexDirection: 'row',

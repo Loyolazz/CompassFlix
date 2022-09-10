@@ -4,18 +4,18 @@ import styles from './styles'
 
 import IconCheck from 'react-native-vector-icons/MaterialCommunityIcons'
 
-const ModalConfirmationAddList = ({modalVisible, onPress}) => {
+const ModalConfirmationAddList = ({modalVisible, onPress, title, icon, colorIcon}) => {
   return (
     <Modal transparent={true} visible={modalVisible} onRequestClose={onPress}>
       <View style={styles.background}>
         <View style={styles.body}>
           <IconCheck
-            name='check-circle-outline'
-            color={'#000'}
+            name={icon}
+            color={colorIcon}
             style={styles.title}
           />
 
-          <Text style={{color: '#000', fontWeight: 'bold', marginTop: 15}}>Lista atualizada com sucesso!</Text>
+          <Text style={{color: '#000', fontWeight: 'bold', marginTop: 15}}>{title}</Text>
 
 
           <View style={{marginTop: 20, marginBottom: 8, alignItems: 'center'}}>
