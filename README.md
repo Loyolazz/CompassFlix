@@ -1,15 +1,14 @@
 <h1 align="center"> CompassFlix </h1> <br>
 <p align="center">
-    <img alt="CompassFlix" title="CompassFlix" src="../../../assets/login_imagens/logo.png'" width="450">
+    <img alt="CompassFlix" title="CompassFlix" src="../../../assets/login_imagens/logo.png" width="450">
   </a>
 </p>
 
 <p align="center">
-  GitHub in your pocket. Built with React Native.
+  Projeto Feito Pelo Time 1 da Compasso.Uol de React Native de Junho - Setembro de 2022
 </p>
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
 ## Table of Contents
 
 - [Introduction](#introduction)
