@@ -1,6 +1,6 @@
 <h1 align="center"> CompassFlix </h1> <br>
 <p align="center">
-    <img alt="CompassFlix" title="CompassFlix" src="../../../assets/login_imagens/logo.png" width="450">
+    <img alt="CompassFlix" title="CompassFlix" src="./src/assets/login_imagens/logo.png" width="450">
   </a>
 </p>
 
