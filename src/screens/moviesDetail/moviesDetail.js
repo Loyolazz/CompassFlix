@@ -259,7 +259,7 @@ const MoviesDetail = ({route, navigation}) => {
         onPress={() => setIsVisible(!isVisivle)}
         title="Lista atualizada com sucesso!"
         icon='check-circle-outline'
-        colorIcon={'#0000'}
+        colorIcon={'green'}
       />
 
       

@@ -17,7 +17,7 @@ export default function SeeMovieList({navigation}) {
   const [dataUser, setDataUser] = useState('');
   const [list, setList] = useState({});
   const [visibleError, setVisibleError] = useState(false);
- 
+
   const {sessionId, evaluation, setEvaluation} = useContext(Context);
   const [visibleBtnDel, setVisibileBtnDel] = useState(false);
   const [idItem, setIdItem] = useState();
@@ -45,14 +45,14 @@ export default function SeeMovieList({navigation}) {
   };
 
   const postCreateList = async (name, description) => {
-    if(!nameList) {
-      return setVisibleError(!visibleError)
+    if (!nameList) {
+      return setVisibleError(!visibleError);
     }
 
     await createList(sessionId, name, description);
     setEvaluation(!evaluation);
     setModalVisible(!modalVisible);
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -135,11 +135,10 @@ export default function SeeMovieList({navigation}) {
         <View style={styles.mainList}>
           <FlatList
             data={list}
-            ListEmptyComponent={<Text style={styles.TextEmptyList}>Você não criou nenhuma lista ainda, por favor clique no "+" para criar uma!</Text>}
             keyExtractor={(item, index) => `${index}`}
             renderItem={({item}) => {
               return (
-                <View  style={{flex:1, width:'100%', alignItems:'center'}}>
+                <View style={{flex: 1, width: '100%', alignItems: 'center'}}>
                   <CardList
                     nameList={item.name}
                     qtdFilms={item.item_count}
@@ -151,10 +150,16 @@ export default function SeeMovieList({navigation}) {
                       setVisibileBtnDel(!visibleBtnDel);
                       setIdItem(item.id);
                     }}
-                  />
+                    />
                 </View>
               );
             }}
+            ListEmptyComponent={
+              <Text style={styles.TextEmptyList}>
+                Você não criou nenhuma lista ainda, por favor clique no
+                "+" para criar uma!
+              </Text>
+            }
           />
         </View>
       ) : (
@@ -162,7 +167,6 @@ export default function SeeMovieList({navigation}) {
       )}
 
       <View style={styles.footerBtnCreateList}>
-
         <TouchableOpacity
           onPress={() => setModalVisible(true)}
           style={styles.btnCreatList}>
@@ -173,13 +177,10 @@ export default function SeeMovieList({navigation}) {
       <ModalConfirmationAddList
         modalVisible={visibleError}
         onPress={() => setVisibleError(!visibleError)}
-        title="Erro! Adicione um nome a lita.."
-        icon='block-helper'
+        title="Erro! Adicione um nome a lista.."
+        icon="block-helper"
         colorIcon={'red'}
       />
-      </View>
-
-  
-
+    </View>
   );
 }

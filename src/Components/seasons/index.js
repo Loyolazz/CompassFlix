@@ -1,8 +1,9 @@
-import React, { useState, useEffect, memo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import { getTvShowSeason } from '../../services/api';
 import * as Animatable from 'react-native-animatable';
+
 import styles from './styles';
 
 export default function seasons({

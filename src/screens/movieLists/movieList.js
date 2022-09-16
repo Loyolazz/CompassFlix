@@ -10,7 +10,6 @@ import Icon from 'react-native-vector-icons/EvilIcons';
 import Arrow from 'react-native-vector-icons/Feather';
 import { removeItem, getMoviesList } from '../../services/api';
 import { styles } from './style_movieList';
-import * as Animatable from 'react-native-animatable';
 import { Context } from '../../context';
 import ModalExitAccount from '../../Components/ModalExitAccount';
 import Load from '../../Components/Load'
@@ -135,7 +134,6 @@ export default function MovieList({ route, navigation }) {
           <FlatList
             data={listMovie}
             keyExtractor={(item, index) => `${index}`}
-            ListEmptyComponent={<Text style={styles.TextEmpty}>Você não adicionou nenhum item a lista ainda, por favor vá ate a selecão de filmes e faça sua escolha.</Text>}
             numColumns={4}
             renderItem={({ item }) => {
               const poster = `${item.poster_path}`;
@@ -156,6 +154,7 @@ export default function MovieList({ route, navigation }) {
                 </View>
               );
             }}
+            ListEmptyComponent={<Text style={styles.TextEmpty}>Você não adicionou nenhum item a lista ainda, por favor vá ate a selecão de filmes e faça sua escolha.</Text>}
           />
         </View>
 
@@ -164,7 +163,6 @@ export default function MovieList({ route, navigation }) {
         <View style={styles.ViewPreFlat}>
           <FlatList
             data={listMovie}
-            ListEmptyComponent={<Text style={styles.TextEmpty}>Você não adicionou nenhum item a lista ainda, por favor vá ate a selecão de filmes e faça sua escolha.</Text>}
             keyExtractor={(item, index) => `${index}`}
             numColumns={4}
             renderItem={({ item }) => {
@@ -198,6 +196,7 @@ export default function MovieList({ route, navigation }) {
                 </View>
               );
             }}
+            ListEmptyComponent={<Text style={styles.TextEmpty}>Você não adicionou nenhum item a lista ainda, por favor vá ate a selecão de filmes e faça sua escolha.</Text>}
           />
           <ModalExitAccount
             title="Deseja mesmo remover o filme ?"

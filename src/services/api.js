@@ -37,13 +37,15 @@ export const validateToken = async (email, password, token) => {
       request_token: token,
     },
   )
-    .then(response =>
+    .then(async response =>
       Api.post(`/authentication/session/new?api_key=${apiKey}`, {
         request_token: response.data.request_token,
       }),
     )
     .catch(error => {
-      console.log(error);
+      if (error?.response?.status === 401) {
+        console.log(error);
+      }
     });
 };
 

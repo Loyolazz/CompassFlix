@@ -65,7 +65,9 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingHorizontal: 30,
     borderRadius: 30,
-    marginTop:20,
+    marginTop:10,
+    height: 40,
+    width: 100,
   },
   buttonText: {
     fontFamily: 'OpenSans-Bold',

@@ -94,7 +94,7 @@ export default function   MoviesEvaluation({navigation}) {
                 style={{ width: 10, height: 10, marginRight: 8 }}
               />
               <Text style={{color: '#fff', fontSize: 13}}>
-                {item.rating?.toFixed(0)}/10
+                {item.rating}/10
               </Text>
             </View>
           </View>

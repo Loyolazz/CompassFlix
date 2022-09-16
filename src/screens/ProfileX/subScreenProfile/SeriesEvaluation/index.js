@@ -107,7 +107,7 @@ export default function SeriesEvaluation({navigation}) {
                   source={star_red}
                   style={{width: 10, height: 10, marginRight: 8}}
                 />
-                <Text style={{color:'#fff'}}>{item.rating?.toFixed(0)}/10</Text>
+                <Text style={{color:'#fff'}}>{item.rating}/10</Text>
               </View>
             </View>
           )}
